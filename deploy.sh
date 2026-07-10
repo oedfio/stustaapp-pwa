@@ -7,7 +7,7 @@ pip install -r backend/requirements.txt
 cd backend
 alembic upgrade head
 cd ../frontend
-npm install
+npm ci
 npm run build
 cd ..
 sudo chown -R stustaapp:stustaapp /srv/stustaapp
