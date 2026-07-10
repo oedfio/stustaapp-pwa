@@ -5,9 +5,10 @@ from uuid import UUID
 import os
 import time
 
+from app.config import settings
 from app.database import get_db
 from app.dependencies import get_current_user, require_dev_admin, require_boss_admin
-from app.uploads import read_validated_image
+from app.uploads import read_validated_image, save_image
 from app.models.organization import Organization
 from app.models.membership import OrgMembership
 from app.models.user import User
@@ -20,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/organizations", tags=["organizations"])
 
-LOGO_DIR = "/srv/stustaapp/media/logos"
+LOGO_DIR = os.path.join(settings.media_root, "logos")
 
 
 @router.get("", response_model=list[OrganizationResponse])
@@ -144,8 +145,7 @@ async def upload_logo(
     filename = f"{org_id}_{int(time.time())}.{extension}"
     filepath = os.path.join(LOGO_DIR, filename)
 
-    with open(filepath, "wb") as buffer:
-        buffer.write(data)
+    await save_image(filepath, data)
 
     # Store the path in the database
     org.logo_url = f"/media/logos/{filename}"
@@ -160,20 +160,8 @@ async def upload_logo(
 async def get_org_memberships(
     org_id: UUID,
     db: AsyncSession = Depends(get_db),
-    user: User = Depends(get_current_user),
+    user: User = Depends(require_boss_admin),
 ):
-    # Boss admins and dev admins can see the list of admins
-    if not user.is_dev_admin:
-        result = await db.execute(
-            select(OrgMembership).where(
-                OrgMembership.user_id == user.id,
-                OrgMembership.org_id == org_id,
-                OrgMembership.role == MembershipRole.boss_admin,
-            )
-        )
-        if result.scalar_one_or_none() is None:
-            raise HTTPException(status_code=403, detail="Boss admin access required")
-
     # Join memberships with users to get full user details
     result = await db.execute(
         select(OrgMembership, User)
@@ -200,7 +188,7 @@ async def invite_admin(
     email: str,
     role: str = "org_admin",
     db: AsyncSession = Depends(get_db),
-    user: User = Depends(get_current_user),
+    user: User = Depends(require_boss_admin),
 ):
     from app.models.membership import MembershipRole
 
@@ -211,19 +199,6 @@ async def invite_admin(
     # Only dev admins can assign boss_admin role
     if role == "boss_admin" and not user.is_dev_admin:
         raise HTTPException(status_code=403, detail="Only dev admins can assign boss admin role")
-
-    # Boss admins can only invite org_admins to their OWN org
-    if not user.is_dev_admin:
-        result = await db.execute(
-            select(OrgMembership).where(
-                OrgMembership.user_id == user.id,
-                OrgMembership.org_id == org_id,
-                OrgMembership.role == MembershipRole.boss_admin,
-            )
-        )
-        membership = result.scalar_one_or_none()
-        if membership is None:
-            raise HTTPException(status_code=403, detail="Boss admin access required for this organisation")
 
     # Find the user by email
     result = await db.execute(select(User).where(User.email == email))
@@ -272,16 +247,17 @@ async def remove_admin(
     )
     membership = result.scalar_one_or_none()
 
-    target_user = await db.execute(select(User).where(User.id == user_id))
-    target_user = target_user.scalar()
-
     if membership is None:
         raise HTTPException(status_code=404, detail="Membership not found")
+
+    target_user = await db.execute(select(User).where(User.id == user_id))
+    target_user = target_user.scalar()
+    target_email = target_user.email if target_user else str(user_id)
 
     await db.delete(membership)
     await db.commit()
 
-    logger.info(f"Admin removed: {target_user.email} from organization {org_id} by {user.email}")
+    logger.info(f"Admin removed: {target_email} from organization {org_id} by {user.email}")
     return {"message": "Admin removed successfully"}
 
 @router.post("/{org_id}/follow", status_code=201)

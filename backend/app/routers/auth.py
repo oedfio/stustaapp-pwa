@@ -106,9 +106,12 @@ async def send_otp(
 @router.post("/verify-otp", response_model=TokenResponse)
 async def verify_otp(
     request: VerifyOtpRequest,
+    http_request: Request,
     redis_client: redis.Redis = Depends(get_redis),
     db: AsyncSession = Depends(get_db),
 ):
+    client_ip = get_client_ip(http_request)
+
     # Brute force protection — tracks failed verify attempts
     attempts_key = f"otp_attempts:{request.email}"
 

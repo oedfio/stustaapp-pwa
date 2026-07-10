@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getOrgEvents, deleteEvent } from '../../api/events'
+import { getOrgEventsForManage, deleteEvent } from '../../api/events'
 import EventForm from './EventForm'
 import PhotoUploader from './PhotoUploader'
 import { styles } from './styles'
@@ -18,7 +18,7 @@ export default function EventsManager({ membership }) {
 
     const loadEvents = async () => {
         try {
-            const res = await getOrgEvents(membership.org_id)
+            const res = await getOrgEventsForManage(membership.org_id)
             setEvents(res.data)
         } catch {
             setError('Failed to load events.')
@@ -73,7 +73,7 @@ export default function EventsManager({ membership }) {
             {loading ? (
                 <p style={styles.hint}>Loading events...</p>
             ) : events.length === 0 ? (
-                <p style={styles.hint}>No upcoming events this week.</p>
+                <p style={styles.hint}>No events yet.</p>
             ) : (
                 <div style={styles.eventsList}>
                     {events.map((event) => (

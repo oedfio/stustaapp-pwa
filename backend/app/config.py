@@ -27,6 +27,9 @@ class Settings(BaseSettings):
     # Logging
     log_path: str = "logs/app.log"
 
+    # Uploaded media (org logos, event photos)
+    media_root: str = "/srv/stustaapp/media"
+
     class Config:
         env_file = (".env", ".env.local")
 

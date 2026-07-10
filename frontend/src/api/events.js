@@ -9,6 +9,11 @@ export const getEvent = (id) =>
 export const getOrgEvents = (orgId) =>
     client.get(`/api/organizations/${orgId}/events`)
 
+// Admin-only: returns all of the org's events, not just the next 7 days,
+// so events further out (e.g. monthly recurrence) or in the past can be edited.
+export const getOrgEventsForManage = (orgId) =>
+    client.get(`/api/organizations/${orgId}/events/manage`)
+
 export const createEvent = (orgId, data) =>
     client.post(`/api/organizations/${orgId}/events`, data)
 

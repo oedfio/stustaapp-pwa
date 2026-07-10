@@ -1,6 +1,7 @@
 import os
 import logging
 from sqlalchemy import select, text
+from app.config import settings
 from app.database import AsyncSessionLocal
 from datetime import datetime, timezone
 from sqlalchemy import select
@@ -11,8 +12,8 @@ from app.routers.notifications import send_push_to_all
 logger = logging.getLogger(__name__)
 
 MEDIA_DIRS = {
-    "logos": "/srv/stustaapp/media/logos",
-    "events": "/srv/stustaapp/media/events",
+    "logos": os.path.join(settings.media_root, "logos"),
+    "events": os.path.join(settings.media_root, "events"),
 }
 
 

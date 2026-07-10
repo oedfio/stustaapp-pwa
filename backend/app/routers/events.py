@@ -6,9 +6,10 @@ from datetime import datetime, timezone, timedelta
 import os
 import time
 
+from app.config import settings
 from app.database import get_db
 from app.dependencies import get_current_user, require_org_admin
-from app.uploads import read_validated_image
+from app.uploads import read_validated_image, save_image
 from app.models.event import Event
 from app.models.organization import Organization
 from app.models.user import User
@@ -22,7 +23,7 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api", tags=["events"])
 
-EVENTS_MEDIA_DIR = "/srv/stustaapp/media/events"
+EVENTS_MEDIA_DIR = os.path.join(settings.media_root, "events")
 
 
 @router.get("/events", response_model=list[EventWithOrgResponse])
@@ -129,6 +130,24 @@ async def list_org_events(
     )
     return result.scalars().all()
 
+
+@router.get("/organizations/{org_id}/events/manage", response_model=list[EventResponse])
+async def list_org_events_for_management(
+    org_id: UUID,
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(require_org_admin),
+):
+    # Org admin only — unfiltered by date, so admins can find and edit
+    # events outside the "next 7 days" window used by the public listing
+    # (e.g. a monthly-recurring event scheduled further out, or a past event).
+    result = await db.execute(
+        select(Event)
+        .where(Event.org_id == org_id)
+        .order_by(Event.starts_at.desc())
+    )
+    return result.scalars().all()
+
+
 @router.post("/organizations/{org_id}/events", response_model=EventResponse, status_code=201)
 async def create_event(
     org_id: UUID,
@@ -234,8 +253,7 @@ async def upload_event_photo(
     filename = f"{event_id}_{int(time.time())}.{extension}"
     filepath = os.path.join(EVENTS_MEDIA_DIR, filename)
 
-    with open(filepath, "wb") as buffer:
-        buffer.write(data)
+    await save_image(filepath, data)
 
     event.photo_url = f"/media/events/{filename}"
     await db.commit()

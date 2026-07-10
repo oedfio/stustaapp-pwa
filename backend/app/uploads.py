@@ -1,3 +1,4 @@
+import asyncio
 from fastapi import HTTPException, UploadFile
 
 ALLOWED_IMAGE_TYPES = {
@@ -25,3 +26,13 @@ async def read_validated_image(file: UploadFile) -> tuple[bytes, str]:
         raise HTTPException(status_code=413, detail="Image must be 5MB or smaller")
 
     return data, extension
+
+
+def _write_file(filepath: str, data: bytes) -> None:
+    with open(filepath, "wb") as buffer:
+        buffer.write(data)
+
+
+async def save_image(filepath: str, data: bytes) -> None:
+    """Write validated image bytes to disk without blocking the event loop."""
+    await asyncio.to_thread(_write_file, filepath, data)
