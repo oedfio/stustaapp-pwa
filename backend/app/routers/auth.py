@@ -91,8 +91,13 @@ async def send_otp(
     await redis_client.incr(ip_rate_key)
     await redis_client.expire(ip_rate_key, 600)
 
-    # Send the raw code to the user's email
-    await send_otp_email(request.email, code)
+    # Send the raw code to the user's email.
+    # Locally there's no route to the stusta.de mail relay, so just log the
+    # code instead of trying (and failing) to send a real email.
+    if settings.environment == "local":
+        logger.info(f"[local] OTP code for {request.email}: {code}")
+    else:
+        await send_otp_email(request.email, code)
 
     logger.info(f"OTP sent to {request.email} from IP {client_ip}")
     return {"message": "If that email is registered, a code has been sent."}

@@ -3,6 +3,11 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8000',
+    },
+  },
   plugins: [
     react(),
     VitePWA({
@@ -11,6 +16,10 @@ export default defineConfig({
       srcDir: 'src',
       filename: 'sw.js',
       includeAssets: ['pwa-192x192.png', 'pwa-512x512.png'],
+      devOptions: {
+        enabled: true,
+        type: 'module',
+      },
       manifest: {
         name: 'StuStaApp',
         short_name: 'StuStaApp',

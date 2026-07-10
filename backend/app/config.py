@@ -2,6 +2,9 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
+    # "local" skips sending real emails (see auth.py); anything else behaves as production
+    environment: str = "production"
+
     # Database
     database_url: str
 
