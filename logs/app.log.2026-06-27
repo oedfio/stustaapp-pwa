@@ -1,0 +1,864 @@
+2026-06-27 00:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:07:08 CEST)" (scheduled at 2026-06-27 00:02:08.884074+02:00)
+2026-06-27 00:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 00:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:07:08 CEST)" executed successfully
+2026-06-27 00:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:12:08 CEST)" (scheduled at 2026-06-27 00:07:08.884074+02:00)
+2026-06-27 00:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 00:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:12:08 CEST)" executed successfully
+2026-06-27 00:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:17:08 CEST)" (scheduled at 2026-06-27 00:12:08.884074+02:00)
+2026-06-27 00:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 00:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:17:08 CEST)" executed successfully
+2026-06-27 00:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:22:08 CEST)" (scheduled at 2026-06-27 00:17:08.884074+02:00)
+2026-06-27 00:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 00:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:22:08 CEST)" executed successfully
+2026-06-27 00:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:27:08 CEST)" (scheduled at 2026-06-27 00:22:08.884074+02:00)
+2026-06-27 00:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 00:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:27:08 CEST)" executed successfully
+2026-06-27 00:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:32:08 CEST)" (scheduled at 2026-06-27 00:27:08.884074+02:00)
+2026-06-27 00:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 00:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:32:08 CEST)" executed successfully
+2026-06-27 00:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:37:08 CEST)" (scheduled at 2026-06-27 00:32:08.884074+02:00)
+2026-06-27 00:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 00:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:37:08 CEST)" executed successfully
+2026-06-27 00:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:42:08 CEST)" (scheduled at 2026-06-27 00:37:08.884074+02:00)
+2026-06-27 00:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 00:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:42:08 CEST)" executed successfully
+2026-06-27 00:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:47:08 CEST)" (scheduled at 2026-06-27 00:42:08.884074+02:00)
+2026-06-27 00:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 00:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:47:08 CEST)" executed successfully
+2026-06-27 00:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:52:08 CEST)" (scheduled at 2026-06-27 00:47:08.884074+02:00)
+2026-06-27 00:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 00:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:52:08 CEST)" executed successfully
+2026-06-27 00:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:57:08 CEST)" (scheduled at 2026-06-27 00:52:08.884074+02:00)
+2026-06-27 00:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 00:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 00:57:08 CEST)" executed successfully
+2026-06-27 00:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:02:08 CEST)" (scheduled at 2026-06-27 00:57:08.884074+02:00)
+2026-06-27 00:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 00:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:02:08 CEST)" executed successfully
+2026-06-27 01:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:07:08 CEST)" (scheduled at 2026-06-27 01:02:08.884074+02:00)
+2026-06-27 01:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 01:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:07:08 CEST)" executed successfully
+2026-06-27 01:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:12:08 CEST)" (scheduled at 2026-06-27 01:07:08.884074+02:00)
+2026-06-27 01:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 01:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:12:08 CEST)" executed successfully
+2026-06-27 01:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:17:08 CEST)" (scheduled at 2026-06-27 01:12:08.884074+02:00)
+2026-06-27 01:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 01:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:17:08 CEST)" executed successfully
+2026-06-27 01:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:22:08 CEST)" (scheduled at 2026-06-27 01:17:08.884074+02:00)
+2026-06-27 01:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 01:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:22:08 CEST)" executed successfully
+2026-06-27 01:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:27:08 CEST)" (scheduled at 2026-06-27 01:22:08.884074+02:00)
+2026-06-27 01:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 01:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:27:08 CEST)" executed successfully
+2026-06-27 01:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:32:08 CEST)" (scheduled at 2026-06-27 01:27:08.884074+02:00)
+2026-06-27 01:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 01:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:32:08 CEST)" executed successfully
+2026-06-27 01:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:37:08 CEST)" (scheduled at 2026-06-27 01:32:08.884074+02:00)
+2026-06-27 01:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 01:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:37:08 CEST)" executed successfully
+2026-06-27 01:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:42:08 CEST)" (scheduled at 2026-06-27 01:37:08.884074+02:00)
+2026-06-27 01:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 01:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:42:08 CEST)" executed successfully
+2026-06-27 01:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:47:08 CEST)" (scheduled at 2026-06-27 01:42:08.884074+02:00)
+2026-06-27 01:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 01:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:47:08 CEST)" executed successfully
+2026-06-27 01:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:52:08 CEST)" (scheduled at 2026-06-27 01:47:08.884074+02:00)
+2026-06-27 01:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 01:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:52:08 CEST)" executed successfully
+2026-06-27 01:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:57:08 CEST)" (scheduled at 2026-06-27 01:52:08.884074+02:00)
+2026-06-27 01:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 01:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 01:57:08 CEST)" executed successfully
+2026-06-27 01:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:02:08 CEST)" (scheduled at 2026-06-27 01:57:08.884074+02:00)
+2026-06-27 01:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 01:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:02:08 CEST)" executed successfully
+2026-06-27 02:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:07:08 CEST)" (scheduled at 2026-06-27 02:02:08.884074+02:00)
+2026-06-27 02:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 02:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:07:08 CEST)" executed successfully
+2026-06-27 02:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:12:08 CEST)" (scheduled at 2026-06-27 02:07:08.884074+02:00)
+2026-06-27 02:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 02:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:12:08 CEST)" executed successfully
+2026-06-27 02:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:17:08 CEST)" (scheduled at 2026-06-27 02:12:08.884074+02:00)
+2026-06-27 02:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 02:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:17:08 CEST)" executed successfully
+2026-06-27 02:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:22:08 CEST)" (scheduled at 2026-06-27 02:17:08.884074+02:00)
+2026-06-27 02:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 02:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:22:08 CEST)" executed successfully
+2026-06-27 02:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:27:08 CEST)" (scheduled at 2026-06-27 02:22:08.884074+02:00)
+2026-06-27 02:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 02:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:27:08 CEST)" executed successfully
+2026-06-27 02:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:32:08 CEST)" (scheduled at 2026-06-27 02:27:08.884074+02:00)
+2026-06-27 02:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 02:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:32:08 CEST)" executed successfully
+2026-06-27 02:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:37:08 CEST)" (scheduled at 2026-06-27 02:32:08.884074+02:00)
+2026-06-27 02:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 02:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:37:08 CEST)" executed successfully
+2026-06-27 02:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:42:08 CEST)" (scheduled at 2026-06-27 02:37:08.884074+02:00)
+2026-06-27 02:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 02:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:42:08 CEST)" executed successfully
+2026-06-27 02:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:47:08 CEST)" (scheduled at 2026-06-27 02:42:08.884074+02:00)
+2026-06-27 02:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 02:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:47:08 CEST)" executed successfully
+2026-06-27 02:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:52:08 CEST)" (scheduled at 2026-06-27 02:47:08.884074+02:00)
+2026-06-27 02:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 02:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:52:08 CEST)" executed successfully
+2026-06-27 02:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:57:08 CEST)" (scheduled at 2026-06-27 02:52:08.884074+02:00)
+2026-06-27 02:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 02:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 02:57:08 CEST)" executed successfully
+2026-06-27 02:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:02:08 CEST)" (scheduled at 2026-06-27 02:57:08.884074+02:00)
+2026-06-27 02:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 02:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:02:08 CEST)" executed successfully
+2026-06-27 03:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:07:08 CEST)" (scheduled at 2026-06-27 03:02:08.884074+02:00)
+2026-06-27 03:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 03:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:07:08 CEST)" executed successfully
+2026-06-27 03:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:12:08 CEST)" (scheduled at 2026-06-27 03:07:08.884074+02:00)
+2026-06-27 03:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 03:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:12:08 CEST)" executed successfully
+2026-06-27 03:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:17:08 CEST)" (scheduled at 2026-06-27 03:12:08.884074+02:00)
+2026-06-27 03:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 03:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:17:08 CEST)" executed successfully
+2026-06-27 03:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:22:08 CEST)" (scheduled at 2026-06-27 03:17:08.884074+02:00)
+2026-06-27 03:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 03:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:22:08 CEST)" executed successfully
+2026-06-27 03:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:27:08 CEST)" (scheduled at 2026-06-27 03:22:08.884074+02:00)
+2026-06-27 03:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 03:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:27:08 CEST)" executed successfully
+2026-06-27 03:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:32:08 CEST)" (scheduled at 2026-06-27 03:27:08.884074+02:00)
+2026-06-27 03:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 03:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:32:08 CEST)" executed successfully
+2026-06-27 03:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:37:08 CEST)" (scheduled at 2026-06-27 03:32:08.884074+02:00)
+2026-06-27 03:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 03:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:37:08 CEST)" executed successfully
+2026-06-27 03:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:42:08 CEST)" (scheduled at 2026-06-27 03:37:08.884074+02:00)
+2026-06-27 03:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 03:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:42:08 CEST)" executed successfully
+2026-06-27 03:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:47:08 CEST)" (scheduled at 2026-06-27 03:42:08.884074+02:00)
+2026-06-27 03:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 03:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:47:08 CEST)" executed successfully
+2026-06-27 03:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:52:08 CEST)" (scheduled at 2026-06-27 03:47:08.884074+02:00)
+2026-06-27 03:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 03:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:52:08 CEST)" executed successfully
+2026-06-27 03:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:57:08 CEST)" (scheduled at 2026-06-27 03:52:08.884074+02:00)
+2026-06-27 03:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 03:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 03:57:08 CEST)" executed successfully
+2026-06-27 03:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:02:08 CEST)" (scheduled at 2026-06-27 03:57:08.884074+02:00)
+2026-06-27 03:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 03:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:02:08 CEST)" executed successfully
+2026-06-27 04:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:07:08 CEST)" (scheduled at 2026-06-27 04:02:08.884074+02:00)
+2026-06-27 04:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 04:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:07:08 CEST)" executed successfully
+2026-06-27 04:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:12:08 CEST)" (scheduled at 2026-06-27 04:07:08.884074+02:00)
+2026-06-27 04:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 04:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:12:08 CEST)" executed successfully
+2026-06-27 04:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:17:08 CEST)" (scheduled at 2026-06-27 04:12:08.884074+02:00)
+2026-06-27 04:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 04:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:17:08 CEST)" executed successfully
+2026-06-27 04:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:22:08 CEST)" (scheduled at 2026-06-27 04:17:08.884074+02:00)
+2026-06-27 04:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 04:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:22:08 CEST)" executed successfully
+2026-06-27 04:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:27:08 CEST)" (scheduled at 2026-06-27 04:22:08.884074+02:00)
+2026-06-27 04:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 04:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:27:08 CEST)" executed successfully
+2026-06-27 04:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:32:08 CEST)" (scheduled at 2026-06-27 04:27:08.884074+02:00)
+2026-06-27 04:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 04:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:32:08 CEST)" executed successfully
+2026-06-27 04:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:37:08 CEST)" (scheduled at 2026-06-27 04:32:08.884074+02:00)
+2026-06-27 04:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 04:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:37:08 CEST)" executed successfully
+2026-06-27 04:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:42:08 CEST)" (scheduled at 2026-06-27 04:37:08.884074+02:00)
+2026-06-27 04:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 04:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:42:08 CEST)" executed successfully
+2026-06-27 04:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:47:08 CEST)" (scheduled at 2026-06-27 04:42:08.884074+02:00)
+2026-06-27 04:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 04:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:47:08 CEST)" executed successfully
+2026-06-27 04:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:52:08 CEST)" (scheduled at 2026-06-27 04:47:08.884074+02:00)
+2026-06-27 04:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 04:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:52:08 CEST)" executed successfully
+2026-06-27 04:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:57:08 CEST)" (scheduled at 2026-06-27 04:52:08.884074+02:00)
+2026-06-27 04:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 04:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 04:57:08 CEST)" executed successfully
+2026-06-27 04:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:02:08 CEST)" (scheduled at 2026-06-27 04:57:08.884074+02:00)
+2026-06-27 04:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 04:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:02:08 CEST)" executed successfully
+2026-06-27 05:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:07:08 CEST)" (scheduled at 2026-06-27 05:02:08.884074+02:00)
+2026-06-27 05:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 05:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:07:08 CEST)" executed successfully
+2026-06-27 05:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:12:08 CEST)" (scheduled at 2026-06-27 05:07:08.884074+02:00)
+2026-06-27 05:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 05:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:12:08 CEST)" executed successfully
+2026-06-27 05:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:17:08 CEST)" (scheduled at 2026-06-27 05:12:08.884074+02:00)
+2026-06-27 05:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 05:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:17:08 CEST)" executed successfully
+2026-06-27 05:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:22:08 CEST)" (scheduled at 2026-06-27 05:17:08.884074+02:00)
+2026-06-27 05:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 05:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:22:08 CEST)" executed successfully
+2026-06-27 05:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:27:08 CEST)" (scheduled at 2026-06-27 05:22:08.884074+02:00)
+2026-06-27 05:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 05:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:27:08 CEST)" executed successfully
+2026-06-27 05:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:32:08 CEST)" (scheduled at 2026-06-27 05:27:08.884074+02:00)
+2026-06-27 05:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 05:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:32:08 CEST)" executed successfully
+2026-06-27 05:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:37:08 CEST)" (scheduled at 2026-06-27 05:32:08.884074+02:00)
+2026-06-27 05:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 05:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:37:08 CEST)" executed successfully
+2026-06-27 05:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:42:08 CEST)" (scheduled at 2026-06-27 05:37:08.884074+02:00)
+2026-06-27 05:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 05:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:42:08 CEST)" executed successfully
+2026-06-27 05:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:47:08 CEST)" (scheduled at 2026-06-27 05:42:08.884074+02:00)
+2026-06-27 05:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 05:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:47:08 CEST)" executed successfully
+2026-06-27 05:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:52:08 CEST)" (scheduled at 2026-06-27 05:47:08.884074+02:00)
+2026-06-27 05:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 05:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:52:08 CEST)" executed successfully
+2026-06-27 05:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:57:08 CEST)" (scheduled at 2026-06-27 05:52:08.884074+02:00)
+2026-06-27 05:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 05:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 05:57:08 CEST)" executed successfully
+2026-06-27 05:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:02:08 CEST)" (scheduled at 2026-06-27 05:57:08.884074+02:00)
+2026-06-27 05:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 05:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:02:08 CEST)" executed successfully
+2026-06-27 06:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:07:08 CEST)" (scheduled at 2026-06-27 06:02:08.884074+02:00)
+2026-06-27 06:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 06:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:07:08 CEST)" executed successfully
+2026-06-27 06:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:12:08 CEST)" (scheduled at 2026-06-27 06:07:08.884074+02:00)
+2026-06-27 06:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 06:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:12:08 CEST)" executed successfully
+2026-06-27 06:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:17:08 CEST)" (scheduled at 2026-06-27 06:12:08.884074+02:00)
+2026-06-27 06:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 06:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:17:08 CEST)" executed successfully
+2026-06-27 06:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:22:08 CEST)" (scheduled at 2026-06-27 06:17:08.884074+02:00)
+2026-06-27 06:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 06:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:22:08 CEST)" executed successfully
+2026-06-27 06:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:27:08 CEST)" (scheduled at 2026-06-27 06:22:08.884074+02:00)
+2026-06-27 06:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 06:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:27:08 CEST)" executed successfully
+2026-06-27 06:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:32:08 CEST)" (scheduled at 2026-06-27 06:27:08.884074+02:00)
+2026-06-27 06:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 06:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:32:08 CEST)" executed successfully
+2026-06-27 06:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:37:08 CEST)" (scheduled at 2026-06-27 06:32:08.884074+02:00)
+2026-06-27 06:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 06:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:37:08 CEST)" executed successfully
+2026-06-27 06:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:42:08 CEST)" (scheduled at 2026-06-27 06:37:08.884074+02:00)
+2026-06-27 06:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 06:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:42:08 CEST)" executed successfully
+2026-06-27 06:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:47:08 CEST)" (scheduled at 2026-06-27 06:42:08.884074+02:00)
+2026-06-27 06:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 06:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:47:08 CEST)" executed successfully
+2026-06-27 06:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:52:08 CEST)" (scheduled at 2026-06-27 06:47:08.884074+02:00)
+2026-06-27 06:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 06:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:52:08 CEST)" executed successfully
+2026-06-27 06:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:57:08 CEST)" (scheduled at 2026-06-27 06:52:08.884074+02:00)
+2026-06-27 06:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 06:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 06:57:08 CEST)" executed successfully
+2026-06-27 06:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:02:08 CEST)" (scheduled at 2026-06-27 06:57:08.884074+02:00)
+2026-06-27 06:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 06:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:02:08 CEST)" executed successfully
+2026-06-27 07:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:07:08 CEST)" (scheduled at 2026-06-27 07:02:08.884074+02:00)
+2026-06-27 07:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 07:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:07:08 CEST)" executed successfully
+2026-06-27 07:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:12:08 CEST)" (scheduled at 2026-06-27 07:07:08.884074+02:00)
+2026-06-27 07:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 07:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:12:08 CEST)" executed successfully
+2026-06-27 07:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:17:08 CEST)" (scheduled at 2026-06-27 07:12:08.884074+02:00)
+2026-06-27 07:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 07:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:17:08 CEST)" executed successfully
+2026-06-27 07:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:22:08 CEST)" (scheduled at 2026-06-27 07:17:08.884074+02:00)
+2026-06-27 07:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 07:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:22:08 CEST)" executed successfully
+2026-06-27 07:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:27:08 CEST)" (scheduled at 2026-06-27 07:22:08.884074+02:00)
+2026-06-27 07:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 07:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:27:08 CEST)" executed successfully
+2026-06-27 07:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:32:08 CEST)" (scheduled at 2026-06-27 07:27:08.884074+02:00)
+2026-06-27 07:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 07:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:32:08 CEST)" executed successfully
+2026-06-27 07:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:37:08 CEST)" (scheduled at 2026-06-27 07:32:08.884074+02:00)
+2026-06-27 07:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 07:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:37:08 CEST)" executed successfully
+2026-06-27 07:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:42:08 CEST)" (scheduled at 2026-06-27 07:37:08.884074+02:00)
+2026-06-27 07:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 07:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:42:08 CEST)" executed successfully
+2026-06-27 07:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:47:08 CEST)" (scheduled at 2026-06-27 07:42:08.884074+02:00)
+2026-06-27 07:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 07:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:47:08 CEST)" executed successfully
+2026-06-27 07:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:52:08 CEST)" (scheduled at 2026-06-27 07:47:08.884074+02:00)
+2026-06-27 07:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 07:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:52:08 CEST)" executed successfully
+2026-06-27 07:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:57:08 CEST)" (scheduled at 2026-06-27 07:52:08.884074+02:00)
+2026-06-27 07:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 07:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 07:57:08 CEST)" executed successfully
+2026-06-27 07:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:02:08 CEST)" (scheduled at 2026-06-27 07:57:08.884074+02:00)
+2026-06-27 07:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 07:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:02:08 CEST)" executed successfully
+2026-06-27 08:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:07:08 CEST)" (scheduled at 2026-06-27 08:02:08.884074+02:00)
+2026-06-27 08:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 08:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:07:08 CEST)" executed successfully
+2026-06-27 08:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:12:08 CEST)" (scheduled at 2026-06-27 08:07:08.884074+02:00)
+2026-06-27 08:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 08:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:12:08 CEST)" executed successfully
+2026-06-27 08:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:17:08 CEST)" (scheduled at 2026-06-27 08:12:08.884074+02:00)
+2026-06-27 08:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 08:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:17:08 CEST)" executed successfully
+2026-06-27 08:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:22:08 CEST)" (scheduled at 2026-06-27 08:17:08.884074+02:00)
+2026-06-27 08:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 08:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:22:08 CEST)" executed successfully
+2026-06-27 08:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:27:08 CEST)" (scheduled at 2026-06-27 08:22:08.884074+02:00)
+2026-06-27 08:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 08:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:27:08 CEST)" executed successfully
+2026-06-27 08:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:32:08 CEST)" (scheduled at 2026-06-27 08:27:08.884074+02:00)
+2026-06-27 08:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 08:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:32:08 CEST)" executed successfully
+2026-06-27 08:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:37:08 CEST)" (scheduled at 2026-06-27 08:32:08.884074+02:00)
+2026-06-27 08:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 08:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:37:08 CEST)" executed successfully
+2026-06-27 08:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:42:08 CEST)" (scheduled at 2026-06-27 08:37:08.884074+02:00)
+2026-06-27 08:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 08:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:42:08 CEST)" executed successfully
+2026-06-27 08:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:47:08 CEST)" (scheduled at 2026-06-27 08:42:08.884074+02:00)
+2026-06-27 08:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 08:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:47:08 CEST)" executed successfully
+2026-06-27 08:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:52:08 CEST)" (scheduled at 2026-06-27 08:47:08.884074+02:00)
+2026-06-27 08:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 08:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:52:08 CEST)" executed successfully
+2026-06-27 08:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:57:08 CEST)" (scheduled at 2026-06-27 08:52:08.884074+02:00)
+2026-06-27 08:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 08:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 08:57:08 CEST)" executed successfully
+2026-06-27 08:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:02:08 CEST)" (scheduled at 2026-06-27 08:57:08.884074+02:00)
+2026-06-27 08:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 08:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:02:08 CEST)" executed successfully
+2026-06-27 09:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:07:08 CEST)" (scheduled at 2026-06-27 09:02:08.884074+02:00)
+2026-06-27 09:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 09:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:07:08 CEST)" executed successfully
+2026-06-27 09:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:12:08 CEST)" (scheduled at 2026-06-27 09:07:08.884074+02:00)
+2026-06-27 09:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 09:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:12:08 CEST)" executed successfully
+2026-06-27 09:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:17:08 CEST)" (scheduled at 2026-06-27 09:12:08.884074+02:00)
+2026-06-27 09:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 09:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:17:08 CEST)" executed successfully
+2026-06-27 09:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:22:08 CEST)" (scheduled at 2026-06-27 09:17:08.884074+02:00)
+2026-06-27 09:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 09:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:22:08 CEST)" executed successfully
+2026-06-27 09:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:27:08 CEST)" (scheduled at 2026-06-27 09:22:08.884074+02:00)
+2026-06-27 09:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 09:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:27:08 CEST)" executed successfully
+2026-06-27 09:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:32:08 CEST)" (scheduled at 2026-06-27 09:27:08.884074+02:00)
+2026-06-27 09:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 09:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:32:08 CEST)" executed successfully
+2026-06-27 09:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:37:08 CEST)" (scheduled at 2026-06-27 09:32:08.884074+02:00)
+2026-06-27 09:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 09:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:37:08 CEST)" executed successfully
+2026-06-27 09:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:42:08 CEST)" (scheduled at 2026-06-27 09:37:08.884074+02:00)
+2026-06-27 09:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 09:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:42:08 CEST)" executed successfully
+2026-06-27 09:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:47:08 CEST)" (scheduled at 2026-06-27 09:42:08.884074+02:00)
+2026-06-27 09:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 09:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:47:08 CEST)" executed successfully
+2026-06-27 09:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:52:08 CEST)" (scheduled at 2026-06-27 09:47:08.884074+02:00)
+2026-06-27 09:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 09:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:52:08 CEST)" executed successfully
+2026-06-27 09:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:57:08 CEST)" (scheduled at 2026-06-27 09:52:08.884074+02:00)
+2026-06-27 09:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 09:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 09:57:08 CEST)" executed successfully
+2026-06-27 09:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:02:08 CEST)" (scheduled at 2026-06-27 09:57:08.884074+02:00)
+2026-06-27 09:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 09:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:02:08 CEST)" executed successfully
+2026-06-27 10:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:07:08 CEST)" (scheduled at 2026-06-27 10:02:08.884074+02:00)
+2026-06-27 10:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 10:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:07:08 CEST)" executed successfully
+2026-06-27 10:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:12:08 CEST)" (scheduled at 2026-06-27 10:07:08.884074+02:00)
+2026-06-27 10:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 10:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:12:08 CEST)" executed successfully
+2026-06-27 10:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:17:08 CEST)" (scheduled at 2026-06-27 10:12:08.884074+02:00)
+2026-06-27 10:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 10:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:17:08 CEST)" executed successfully
+2026-06-27 10:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:22:08 CEST)" (scheduled at 2026-06-27 10:17:08.884074+02:00)
+2026-06-27 10:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 10:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:22:08 CEST)" executed successfully
+2026-06-27 10:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:27:08 CEST)" (scheduled at 2026-06-27 10:22:08.884074+02:00)
+2026-06-27 10:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 10:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:27:08 CEST)" executed successfully
+2026-06-27 10:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:32:08 CEST)" (scheduled at 2026-06-27 10:27:08.884074+02:00)
+2026-06-27 10:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 10:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:32:08 CEST)" executed successfully
+2026-06-27 10:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:37:08 CEST)" (scheduled at 2026-06-27 10:32:08.884074+02:00)
+2026-06-27 10:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 10:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:37:08 CEST)" executed successfully
+2026-06-27 10:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:42:08 CEST)" (scheduled at 2026-06-27 10:37:08.884074+02:00)
+2026-06-27 10:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 10:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:42:08 CEST)" executed successfully
+2026-06-27 10:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:47:08 CEST)" (scheduled at 2026-06-27 10:42:08.884074+02:00)
+2026-06-27 10:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 10:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:47:08 CEST)" executed successfully
+2026-06-27 10:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:52:08 CEST)" (scheduled at 2026-06-27 10:47:08.884074+02:00)
+2026-06-27 10:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 10:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:52:08 CEST)" executed successfully
+2026-06-27 10:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:57:08 CEST)" (scheduled at 2026-06-27 10:52:08.884074+02:00)
+2026-06-27 10:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 10:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 10:57:08 CEST)" executed successfully
+2026-06-27 10:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:02:08 CEST)" (scheduled at 2026-06-27 10:57:08.884074+02:00)
+2026-06-27 10:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 10:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:02:08 CEST)" executed successfully
+2026-06-27 11:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:07:08 CEST)" (scheduled at 2026-06-27 11:02:08.884074+02:00)
+2026-06-27 11:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 11:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:07:08 CEST)" executed successfully
+2026-06-27 11:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:12:08 CEST)" (scheduled at 2026-06-27 11:07:08.884074+02:00)
+2026-06-27 11:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 11:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:12:08 CEST)" executed successfully
+2026-06-27 11:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:17:08 CEST)" (scheduled at 2026-06-27 11:12:08.884074+02:00)
+2026-06-27 11:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 11:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:17:08 CEST)" executed successfully
+2026-06-27 11:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:22:08 CEST)" (scheduled at 2026-06-27 11:17:08.884074+02:00)
+2026-06-27 11:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 11:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:22:08 CEST)" executed successfully
+2026-06-27 11:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:27:08 CEST)" (scheduled at 2026-06-27 11:22:08.884074+02:00)
+2026-06-27 11:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 11:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:27:08 CEST)" executed successfully
+2026-06-27 11:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:32:08 CEST)" (scheduled at 2026-06-27 11:27:08.884074+02:00)
+2026-06-27 11:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 11:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:32:08 CEST)" executed successfully
+2026-06-27 11:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:37:08 CEST)" (scheduled at 2026-06-27 11:32:08.884074+02:00)
+2026-06-27 11:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 11:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:37:08 CEST)" executed successfully
+2026-06-27 11:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:42:08 CEST)" (scheduled at 2026-06-27 11:37:08.884074+02:00)
+2026-06-27 11:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 11:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:42:08 CEST)" executed successfully
+2026-06-27 11:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:47:08 CEST)" (scheduled at 2026-06-27 11:42:08.884074+02:00)
+2026-06-27 11:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 11:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:47:08 CEST)" executed successfully
+2026-06-27 11:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:52:08 CEST)" (scheduled at 2026-06-27 11:47:08.884074+02:00)
+2026-06-27 11:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 11:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:52:08 CEST)" executed successfully
+2026-06-27 11:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:57:08 CEST)" (scheduled at 2026-06-27 11:52:08.884074+02:00)
+2026-06-27 11:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 11:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 11:57:08 CEST)" executed successfully
+2026-06-27 11:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:02:08 CEST)" (scheduled at 2026-06-27 11:57:08.884074+02:00)
+2026-06-27 11:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 11:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:02:08 CEST)" executed successfully
+2026-06-27 12:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:07:08 CEST)" (scheduled at 2026-06-27 12:02:08.884074+02:00)
+2026-06-27 12:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 12:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:07:08 CEST)" executed successfully
+2026-06-27 12:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:12:08 CEST)" (scheduled at 2026-06-27 12:07:08.884074+02:00)
+2026-06-27 12:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 12:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:12:08 CEST)" executed successfully
+2026-06-27 12:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:17:08 CEST)" (scheduled at 2026-06-27 12:12:08.884074+02:00)
+2026-06-27 12:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 12:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:17:08 CEST)" executed successfully
+2026-06-27 12:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:22:08 CEST)" (scheduled at 2026-06-27 12:17:08.884074+02:00)
+2026-06-27 12:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 12:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:22:08 CEST)" executed successfully
+2026-06-27 12:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:27:08 CEST)" (scheduled at 2026-06-27 12:22:08.884074+02:00)
+2026-06-27 12:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 12:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:27:08 CEST)" executed successfully
+2026-06-27 12:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:32:08 CEST)" (scheduled at 2026-06-27 12:27:08.884074+02:00)
+2026-06-27 12:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 12:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:32:08 CEST)" executed successfully
+2026-06-27 12:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:37:08 CEST)" (scheduled at 2026-06-27 12:32:08.884074+02:00)
+2026-06-27 12:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 12:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:37:08 CEST)" executed successfully
+2026-06-27 12:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:42:08 CEST)" (scheduled at 2026-06-27 12:37:08.884074+02:00)
+2026-06-27 12:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 12:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:42:08 CEST)" executed successfully
+2026-06-27 12:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:47:08 CEST)" (scheduled at 2026-06-27 12:42:08.884074+02:00)
+2026-06-27 12:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 12:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:47:08 CEST)" executed successfully
+2026-06-27 12:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:52:08 CEST)" (scheduled at 2026-06-27 12:47:08.884074+02:00)
+2026-06-27 12:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 12:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:52:08 CEST)" executed successfully
+2026-06-27 12:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:57:08 CEST)" (scheduled at 2026-06-27 12:52:08.884074+02:00)
+2026-06-27 12:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 12:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 12:57:08 CEST)" executed successfully
+2026-06-27 12:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:02:08 CEST)" (scheduled at 2026-06-27 12:57:08.884074+02:00)
+2026-06-27 12:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 12:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:02:08 CEST)" executed successfully
+2026-06-27 13:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:07:08 CEST)" (scheduled at 2026-06-27 13:02:08.884074+02:00)
+2026-06-27 13:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 13:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:07:08 CEST)" executed successfully
+2026-06-27 13:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:12:08 CEST)" (scheduled at 2026-06-27 13:07:08.884074+02:00)
+2026-06-27 13:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 13:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:12:08 CEST)" executed successfully
+2026-06-27 13:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:17:08 CEST)" (scheduled at 2026-06-27 13:12:08.884074+02:00)
+2026-06-27 13:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 13:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:17:08 CEST)" executed successfully
+2026-06-27 13:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:22:08 CEST)" (scheduled at 2026-06-27 13:17:08.884074+02:00)
+2026-06-27 13:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 13:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:22:08 CEST)" executed successfully
+2026-06-27 13:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:27:08 CEST)" (scheduled at 2026-06-27 13:22:08.884074+02:00)
+2026-06-27 13:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 13:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:27:08 CEST)" executed successfully
+2026-06-27 13:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:32:08 CEST)" (scheduled at 2026-06-27 13:27:08.884074+02:00)
+2026-06-27 13:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 13:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:32:08 CEST)" executed successfully
+2026-06-27 13:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:37:08 CEST)" (scheduled at 2026-06-27 13:32:08.884074+02:00)
+2026-06-27 13:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 13:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:37:08 CEST)" executed successfully
+2026-06-27 13:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:42:08 CEST)" (scheduled at 2026-06-27 13:37:08.884074+02:00)
+2026-06-27 13:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 13:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:42:08 CEST)" executed successfully
+2026-06-27 13:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:47:08 CEST)" (scheduled at 2026-06-27 13:42:08.884074+02:00)
+2026-06-27 13:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 13:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:47:08 CEST)" executed successfully
+2026-06-27 13:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:52:08 CEST)" (scheduled at 2026-06-27 13:47:08.884074+02:00)
+2026-06-27 13:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 13:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:52:08 CEST)" executed successfully
+2026-06-27 13:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:57:08 CEST)" (scheduled at 2026-06-27 13:52:08.884074+02:00)
+2026-06-27 13:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 13:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 13:57:08 CEST)" executed successfully
+2026-06-27 13:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:02:08 CEST)" (scheduled at 2026-06-27 13:57:08.884074+02:00)
+2026-06-27 13:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 13:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:02:08 CEST)" executed successfully
+2026-06-27 14:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:07:08 CEST)" (scheduled at 2026-06-27 14:02:08.884074+02:00)
+2026-06-27 14:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 14:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:07:08 CEST)" executed successfully
+2026-06-27 14:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:12:08 CEST)" (scheduled at 2026-06-27 14:07:08.884074+02:00)
+2026-06-27 14:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 14:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:12:08 CEST)" executed successfully
+2026-06-27 14:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:17:08 CEST)" (scheduled at 2026-06-27 14:12:08.884074+02:00)
+2026-06-27 14:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 14:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:17:08 CEST)" executed successfully
+2026-06-27 14:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:22:08 CEST)" (scheduled at 2026-06-27 14:17:08.884074+02:00)
+2026-06-27 14:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 14:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:22:08 CEST)" executed successfully
+2026-06-27 14:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:27:08 CEST)" (scheduled at 2026-06-27 14:22:08.884074+02:00)
+2026-06-27 14:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 14:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:27:08 CEST)" executed successfully
+2026-06-27 14:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:32:08 CEST)" (scheduled at 2026-06-27 14:27:08.884074+02:00)
+2026-06-27 14:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 14:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:32:08 CEST)" executed successfully
+2026-06-27 14:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:37:08 CEST)" (scheduled at 2026-06-27 14:32:08.884074+02:00)
+2026-06-27 14:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 14:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:37:08 CEST)" executed successfully
+2026-06-27 14:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:42:08 CEST)" (scheduled at 2026-06-27 14:37:08.884074+02:00)
+2026-06-27 14:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 14:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:42:08 CEST)" executed successfully
+2026-06-27 14:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:47:08 CEST)" (scheduled at 2026-06-27 14:42:08.884074+02:00)
+2026-06-27 14:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 14:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:47:08 CEST)" executed successfully
+2026-06-27 14:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:52:08 CEST)" (scheduled at 2026-06-27 14:47:08.884074+02:00)
+2026-06-27 14:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 14:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:52:08 CEST)" executed successfully
+2026-06-27 14:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:57:08 CEST)" (scheduled at 2026-06-27 14:52:08.884074+02:00)
+2026-06-27 14:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 14:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 14:57:08 CEST)" executed successfully
+2026-06-27 14:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:02:08 CEST)" (scheduled at 2026-06-27 14:57:08.884074+02:00)
+2026-06-27 14:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 14:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:02:08 CEST)" executed successfully
+2026-06-27 15:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:07:08 CEST)" (scheduled at 2026-06-27 15:02:08.884074+02:00)
+2026-06-27 15:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 15:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:07:08 CEST)" executed successfully
+2026-06-27 15:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:12:08 CEST)" (scheduled at 2026-06-27 15:07:08.884074+02:00)
+2026-06-27 15:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 15:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:12:08 CEST)" executed successfully
+2026-06-27 15:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:17:08 CEST)" (scheduled at 2026-06-27 15:12:08.884074+02:00)
+2026-06-27 15:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 15:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:17:08 CEST)" executed successfully
+2026-06-27 15:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:22:08 CEST)" (scheduled at 2026-06-27 15:17:08.884074+02:00)
+2026-06-27 15:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 15:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:22:08 CEST)" executed successfully
+2026-06-27 15:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:27:08 CEST)" (scheduled at 2026-06-27 15:22:08.884074+02:00)
+2026-06-27 15:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 15:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:27:08 CEST)" executed successfully
+2026-06-27 15:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:32:08 CEST)" (scheduled at 2026-06-27 15:27:08.884074+02:00)
+2026-06-27 15:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 15:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:32:08 CEST)" executed successfully
+2026-06-27 15:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:37:08 CEST)" (scheduled at 2026-06-27 15:32:08.884074+02:00)
+2026-06-27 15:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 15:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:37:08 CEST)" executed successfully
+2026-06-27 15:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:42:08 CEST)" (scheduled at 2026-06-27 15:37:08.884074+02:00)
+2026-06-27 15:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 15:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:42:08 CEST)" executed successfully
+2026-06-27 15:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:47:08 CEST)" (scheduled at 2026-06-27 15:42:08.884074+02:00)
+2026-06-27 15:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 15:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:47:08 CEST)" executed successfully
+2026-06-27 15:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:52:08 CEST)" (scheduled at 2026-06-27 15:47:08.884074+02:00)
+2026-06-27 15:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 15:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:52:08 CEST)" executed successfully
+2026-06-27 15:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:57:08 CEST)" (scheduled at 2026-06-27 15:52:08.884074+02:00)
+2026-06-27 15:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 15:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 15:57:08 CEST)" executed successfully
+2026-06-27 15:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:02:08 CEST)" (scheduled at 2026-06-27 15:57:08.884074+02:00)
+2026-06-27 15:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 15:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:02:08 CEST)" executed successfully
+2026-06-27 16:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:07:08 CEST)" (scheduled at 2026-06-27 16:02:08.884074+02:00)
+2026-06-27 16:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 16:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:07:08 CEST)" executed successfully
+2026-06-27 16:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:12:08 CEST)" (scheduled at 2026-06-27 16:07:08.884074+02:00)
+2026-06-27 16:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 16:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:12:08 CEST)" executed successfully
+2026-06-27 16:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:17:08 CEST)" (scheduled at 2026-06-27 16:12:08.884074+02:00)
+2026-06-27 16:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 16:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:17:08 CEST)" executed successfully
+2026-06-27 16:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:22:08 CEST)" (scheduled at 2026-06-27 16:17:08.884074+02:00)
+2026-06-27 16:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 16:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:22:08 CEST)" executed successfully
+2026-06-27 16:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:27:08 CEST)" (scheduled at 2026-06-27 16:22:08.884074+02:00)
+2026-06-27 16:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 16:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:27:08 CEST)" executed successfully
+2026-06-27 16:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:32:08 CEST)" (scheduled at 2026-06-27 16:27:08.884074+02:00)
+2026-06-27 16:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 16:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:32:08 CEST)" executed successfully
+2026-06-27 16:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:37:08 CEST)" (scheduled at 2026-06-27 16:32:08.884074+02:00)
+2026-06-27 16:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 16:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:37:08 CEST)" executed successfully
+2026-06-27 16:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:42:08 CEST)" (scheduled at 2026-06-27 16:37:08.884074+02:00)
+2026-06-27 16:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 16:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:42:08 CEST)" executed successfully
+2026-06-27 16:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:47:08 CEST)" (scheduled at 2026-06-27 16:42:08.884074+02:00)
+2026-06-27 16:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 16:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:47:08 CEST)" executed successfully
+2026-06-27 16:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:52:08 CEST)" (scheduled at 2026-06-27 16:47:08.884074+02:00)
+2026-06-27 16:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 16:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:52:08 CEST)" executed successfully
+2026-06-27 16:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:57:08 CEST)" (scheduled at 2026-06-27 16:52:08.884074+02:00)
+2026-06-27 16:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 16:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 16:57:08 CEST)" executed successfully
+2026-06-27 16:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:02:08 CEST)" (scheduled at 2026-06-27 16:57:08.884074+02:00)
+2026-06-27 16:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 16:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:02:08 CEST)" executed successfully
+2026-06-27 17:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:07:08 CEST)" (scheduled at 2026-06-27 17:02:08.884074+02:00)
+2026-06-27 17:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 17:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:07:08 CEST)" executed successfully
+2026-06-27 17:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:12:08 CEST)" (scheduled at 2026-06-27 17:07:08.884074+02:00)
+2026-06-27 17:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 17:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:12:08 CEST)" executed successfully
+2026-06-27 17:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:17:08 CEST)" (scheduled at 2026-06-27 17:12:08.884074+02:00)
+2026-06-27 17:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 17:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:17:08 CEST)" executed successfully
+2026-06-27 17:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:22:08 CEST)" (scheduled at 2026-06-27 17:17:08.884074+02:00)
+2026-06-27 17:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 17:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:22:08 CEST)" executed successfully
+2026-06-27 17:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:27:08 CEST)" (scheduled at 2026-06-27 17:22:08.884074+02:00)
+2026-06-27 17:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 17:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:27:08 CEST)" executed successfully
+2026-06-27 17:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:32:08 CEST)" (scheduled at 2026-06-27 17:27:08.884074+02:00)
+2026-06-27 17:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 17:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:32:08 CEST)" executed successfully
+2026-06-27 17:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:37:08 CEST)" (scheduled at 2026-06-27 17:32:08.884074+02:00)
+2026-06-27 17:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 17:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:37:08 CEST)" executed successfully
+2026-06-27 17:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:42:08 CEST)" (scheduled at 2026-06-27 17:37:08.884074+02:00)
+2026-06-27 17:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 17:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:42:08 CEST)" executed successfully
+2026-06-27 17:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:47:08 CEST)" (scheduled at 2026-06-27 17:42:08.884074+02:00)
+2026-06-27 17:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 17:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:47:08 CEST)" executed successfully
+2026-06-27 17:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:52:08 CEST)" (scheduled at 2026-06-27 17:47:08.884074+02:00)
+2026-06-27 17:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 17:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:52:08 CEST)" executed successfully
+2026-06-27 17:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:57:08 CEST)" (scheduled at 2026-06-27 17:52:08.884074+02:00)
+2026-06-27 17:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 17:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 17:57:08 CEST)" executed successfully
+2026-06-27 17:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:02:08 CEST)" (scheduled at 2026-06-27 17:57:08.884074+02:00)
+2026-06-27 17:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 17:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:02:08 CEST)" executed successfully
+2026-06-27 18:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:07:08 CEST)" (scheduled at 2026-06-27 18:02:08.884074+02:00)
+2026-06-27 18:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 18:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:07:08 CEST)" executed successfully
+2026-06-27 18:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:12:08 CEST)" (scheduled at 2026-06-27 18:07:08.884074+02:00)
+2026-06-27 18:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 18:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:12:08 CEST)" executed successfully
+2026-06-27 18:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:17:08 CEST)" (scheduled at 2026-06-27 18:12:08.884074+02:00)
+2026-06-27 18:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 18:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:17:08 CEST)" executed successfully
+2026-06-27 18:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:22:08 CEST)" (scheduled at 2026-06-27 18:17:08.884074+02:00)
+2026-06-27 18:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 18:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:22:08 CEST)" executed successfully
+2026-06-27 18:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:27:08 CEST)" (scheduled at 2026-06-27 18:22:08.884074+02:00)
+2026-06-27 18:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 18:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:27:08 CEST)" executed successfully
+2026-06-27 18:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:32:08 CEST)" (scheduled at 2026-06-27 18:27:08.884074+02:00)
+2026-06-27 18:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 18:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:32:08 CEST)" executed successfully
+2026-06-27 18:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:37:08 CEST)" (scheduled at 2026-06-27 18:32:08.884074+02:00)
+2026-06-27 18:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 18:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:37:08 CEST)" executed successfully
+2026-06-27 18:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:42:08 CEST)" (scheduled at 2026-06-27 18:37:08.884074+02:00)
+2026-06-27 18:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 18:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:42:08 CEST)" executed successfully
+2026-06-27 18:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:47:08 CEST)" (scheduled at 2026-06-27 18:42:08.884074+02:00)
+2026-06-27 18:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 18:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:47:08 CEST)" executed successfully
+2026-06-27 18:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:52:08 CEST)" (scheduled at 2026-06-27 18:47:08.884074+02:00)
+2026-06-27 18:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 18:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:52:08 CEST)" executed successfully
+2026-06-27 18:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:57:08 CEST)" (scheduled at 2026-06-27 18:52:08.884074+02:00)
+2026-06-27 18:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 18:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 18:57:08 CEST)" executed successfully
+2026-06-27 18:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:02:08 CEST)" (scheduled at 2026-06-27 18:57:08.884074+02:00)
+2026-06-27 18:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 18:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:02:08 CEST)" executed successfully
+2026-06-27 19:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:07:08 CEST)" (scheduled at 2026-06-27 19:02:08.884074+02:00)
+2026-06-27 19:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 19:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:07:08 CEST)" executed successfully
+2026-06-27 19:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:12:08 CEST)" (scheduled at 2026-06-27 19:07:08.884074+02:00)
+2026-06-27 19:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 19:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:12:08 CEST)" executed successfully
+2026-06-27 19:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:17:08 CEST)" (scheduled at 2026-06-27 19:12:08.884074+02:00)
+2026-06-27 19:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 19:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:17:08 CEST)" executed successfully
+2026-06-27 19:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:22:08 CEST)" (scheduled at 2026-06-27 19:17:08.884074+02:00)
+2026-06-27 19:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 19:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:22:08 CEST)" executed successfully
+2026-06-27 19:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:27:08 CEST)" (scheduled at 2026-06-27 19:22:08.884074+02:00)
+2026-06-27 19:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 19:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:27:08 CEST)" executed successfully
+2026-06-27 19:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:32:08 CEST)" (scheduled at 2026-06-27 19:27:08.884074+02:00)
+2026-06-27 19:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 19:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:32:08 CEST)" executed successfully
+2026-06-27 19:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:37:08 CEST)" (scheduled at 2026-06-27 19:32:08.884074+02:00)
+2026-06-27 19:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 19:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:37:08 CEST)" executed successfully
+2026-06-27 19:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:42:08 CEST)" (scheduled at 2026-06-27 19:37:08.884074+02:00)
+2026-06-27 19:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 19:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:42:08 CEST)" executed successfully
+2026-06-27 19:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:47:08 CEST)" (scheduled at 2026-06-27 19:42:08.884074+02:00)
+2026-06-27 19:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 19:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:47:08 CEST)" executed successfully
+2026-06-27 19:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:52:08 CEST)" (scheduled at 2026-06-27 19:47:08.884074+02:00)
+2026-06-27 19:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 19:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:52:08 CEST)" executed successfully
+2026-06-27 19:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:57:08 CEST)" (scheduled at 2026-06-27 19:52:08.884074+02:00)
+2026-06-27 19:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 19:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 19:57:08 CEST)" executed successfully
+2026-06-27 19:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:02:08 CEST)" (scheduled at 2026-06-27 19:57:08.884074+02:00)
+2026-06-27 19:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 19:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:02:08 CEST)" executed successfully
+2026-06-27 20:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:07:08 CEST)" (scheduled at 2026-06-27 20:02:08.884074+02:00)
+2026-06-27 20:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 20:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:07:08 CEST)" executed successfully
+2026-06-27 20:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:12:08 CEST)" (scheduled at 2026-06-27 20:07:08.884074+02:00)
+2026-06-27 20:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 20:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:12:08 CEST)" executed successfully
+2026-06-27 20:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:17:08 CEST)" (scheduled at 2026-06-27 20:12:08.884074+02:00)
+2026-06-27 20:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 20:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:17:08 CEST)" executed successfully
+2026-06-27 20:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:22:08 CEST)" (scheduled at 2026-06-27 20:17:08.884074+02:00)
+2026-06-27 20:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 20:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:22:08 CEST)" executed successfully
+2026-06-27 20:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:27:08 CEST)" (scheduled at 2026-06-27 20:22:08.884074+02:00)
+2026-06-27 20:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 20:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:27:08 CEST)" executed successfully
+2026-06-27 20:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:32:08 CEST)" (scheduled at 2026-06-27 20:27:08.884074+02:00)
+2026-06-27 20:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 20:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:32:08 CEST)" executed successfully
+2026-06-27 20:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:37:08 CEST)" (scheduled at 2026-06-27 20:32:08.884074+02:00)
+2026-06-27 20:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 20:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:37:08 CEST)" executed successfully
+2026-06-27 20:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:42:08 CEST)" (scheduled at 2026-06-27 20:37:08.884074+02:00)
+2026-06-27 20:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 20:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:42:08 CEST)" executed successfully
+2026-06-27 20:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:47:08 CEST)" (scheduled at 2026-06-27 20:42:08.884074+02:00)
+2026-06-27 20:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 20:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:47:08 CEST)" executed successfully
+2026-06-27 20:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:52:08 CEST)" (scheduled at 2026-06-27 20:47:08.884074+02:00)
+2026-06-27 20:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 20:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:52:08 CEST)" executed successfully
+2026-06-27 20:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:57:08 CEST)" (scheduled at 2026-06-27 20:52:08.884074+02:00)
+2026-06-27 20:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 20:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 20:57:08 CEST)" executed successfully
+2026-06-27 20:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:02:08 CEST)" (scheduled at 2026-06-27 20:57:08.884074+02:00)
+2026-06-27 20:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 20:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:02:08 CEST)" executed successfully
+2026-06-27 21:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:07:08 CEST)" (scheduled at 2026-06-27 21:02:08.884074+02:00)
+2026-06-27 21:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 21:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:07:08 CEST)" executed successfully
+2026-06-27 21:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:12:08 CEST)" (scheduled at 2026-06-27 21:07:08.884074+02:00)
+2026-06-27 21:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 21:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:12:08 CEST)" executed successfully
+2026-06-27 21:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:17:08 CEST)" (scheduled at 2026-06-27 21:12:08.884074+02:00)
+2026-06-27 21:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 21:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:17:08 CEST)" executed successfully
+2026-06-27 21:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:22:08 CEST)" (scheduled at 2026-06-27 21:17:08.884074+02:00)
+2026-06-27 21:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 21:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:22:08 CEST)" executed successfully
+2026-06-27 21:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:27:08 CEST)" (scheduled at 2026-06-27 21:22:08.884074+02:00)
+2026-06-27 21:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 21:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:27:08 CEST)" executed successfully
+2026-06-27 21:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:32:08 CEST)" (scheduled at 2026-06-27 21:27:08.884074+02:00)
+2026-06-27 21:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 21:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:32:08 CEST)" executed successfully
+2026-06-27 21:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:37:08 CEST)" (scheduled at 2026-06-27 21:32:08.884074+02:00)
+2026-06-27 21:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 21:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:37:08 CEST)" executed successfully
+2026-06-27 21:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:42:08 CEST)" (scheduled at 2026-06-27 21:37:08.884074+02:00)
+2026-06-27 21:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 21:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:42:08 CEST)" executed successfully
+2026-06-27 21:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:47:08 CEST)" (scheduled at 2026-06-27 21:42:08.884074+02:00)
+2026-06-27 21:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 21:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:47:08 CEST)" executed successfully
+2026-06-27 21:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:52:08 CEST)" (scheduled at 2026-06-27 21:47:08.884074+02:00)
+2026-06-27 21:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 21:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:52:08 CEST)" executed successfully
+2026-06-27 21:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:57:08 CEST)" (scheduled at 2026-06-27 21:52:08.884074+02:00)
+2026-06-27 21:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 21:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 21:57:08 CEST)" executed successfully
+2026-06-27 21:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:02:08 CEST)" (scheduled at 2026-06-27 21:57:08.884074+02:00)
+2026-06-27 21:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 21:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:02:08 CEST)" executed successfully
+2026-06-27 22:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:07:08 CEST)" (scheduled at 2026-06-27 22:02:08.884074+02:00)
+2026-06-27 22:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 22:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:07:08 CEST)" executed successfully
+2026-06-27 22:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:12:08 CEST)" (scheduled at 2026-06-27 22:07:08.884074+02:00)
+2026-06-27 22:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 22:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:12:08 CEST)" executed successfully
+2026-06-27 22:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:17:08 CEST)" (scheduled at 2026-06-27 22:12:08.884074+02:00)
+2026-06-27 22:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 22:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:17:08 CEST)" executed successfully
+2026-06-27 22:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:22:08 CEST)" (scheduled at 2026-06-27 22:17:08.884074+02:00)
+2026-06-27 22:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 22:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:22:08 CEST)" executed successfully
+2026-06-27 22:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:27:08 CEST)" (scheduled at 2026-06-27 22:22:08.884074+02:00)
+2026-06-27 22:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 22:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:27:08 CEST)" executed successfully
+2026-06-27 22:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:32:08 CEST)" (scheduled at 2026-06-27 22:27:08.884074+02:00)
+2026-06-27 22:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 22:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:32:08 CEST)" executed successfully
+2026-06-27 22:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:37:08 CEST)" (scheduled at 2026-06-27 22:32:08.884074+02:00)
+2026-06-27 22:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 22:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:37:08 CEST)" executed successfully
+2026-06-27 22:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:42:08 CEST)" (scheduled at 2026-06-27 22:37:08.884074+02:00)
+2026-06-27 22:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 22:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:42:08 CEST)" executed successfully
+2026-06-27 22:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:47:08 CEST)" (scheduled at 2026-06-27 22:42:08.884074+02:00)
+2026-06-27 22:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 22:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:47:08 CEST)" executed successfully
+2026-06-27 22:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:52:08 CEST)" (scheduled at 2026-06-27 22:47:08.884074+02:00)
+2026-06-27 22:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 22:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:52:08 CEST)" executed successfully
+2026-06-27 22:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:57:08 CEST)" (scheduled at 2026-06-27 22:52:08.884074+02:00)
+2026-06-27 22:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 22:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 22:57:08 CEST)" executed successfully
+2026-06-27 22:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:02:08 CEST)" (scheduled at 2026-06-27 22:57:08.884074+02:00)
+2026-06-27 22:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 22:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:02:08 CEST)" executed successfully
+2026-06-27 23:02:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:07:08 CEST)" (scheduled at 2026-06-27 23:02:08.884074+02:00)
+2026-06-27 23:02:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 23:02:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:07:08 CEST)" executed successfully
+2026-06-27 23:07:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:12:08 CEST)" (scheduled at 2026-06-27 23:07:08.884074+02:00)
+2026-06-27 23:07:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 23:07:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:12:08 CEST)" executed successfully
+2026-06-27 23:12:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:17:08 CEST)" (scheduled at 2026-06-27 23:12:08.884074+02:00)
+2026-06-27 23:12:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 23:12:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:17:08 CEST)" executed successfully
+2026-06-27 23:17:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:22:08 CEST)" (scheduled at 2026-06-27 23:17:08.884074+02:00)
+2026-06-27 23:17:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 23:17:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:22:08 CEST)" executed successfully
+2026-06-27 23:22:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:27:08 CEST)" (scheduled at 2026-06-27 23:22:08.884074+02:00)
+2026-06-27 23:22:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 23:22:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:27:08 CEST)" executed successfully
+2026-06-27 23:27:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:32:08 CEST)" (scheduled at 2026-06-27 23:27:08.884074+02:00)
+2026-06-27 23:27:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 23:27:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:32:08 CEST)" executed successfully
+2026-06-27 23:32:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:37:08 CEST)" (scheduled at 2026-06-27 23:32:08.884074+02:00)
+2026-06-27 23:32:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 23:32:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:37:08 CEST)" executed successfully
+2026-06-27 23:37:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:42:08 CEST)" (scheduled at 2026-06-27 23:37:08.884074+02:00)
+2026-06-27 23:37:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 23:37:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:42:08 CEST)" executed successfully
+2026-06-27 23:42:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:47:08 CEST)" (scheduled at 2026-06-27 23:42:08.884074+02:00)
+2026-06-27 23:42:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 23:42:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:47:08 CEST)" executed successfully
+2026-06-27 23:47:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:52:08 CEST)" (scheduled at 2026-06-27 23:47:08.884074+02:00)
+2026-06-27 23:47:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 23:47:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:52:08 CEST)" executed successfully
+2026-06-27 23:52:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:57:08 CEST)" (scheduled at 2026-06-27 23:52:08.884074+02:00)
+2026-06-27 23:52:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 23:52:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-27 23:57:08 CEST)" executed successfully
+2026-06-27 23:57:08 [INFO] apscheduler.executors.default: Running job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-28 00:02:08 CEST)" (scheduled at 2026-06-27 23:57:08.884074+02:00)
+2026-06-27 23:57:08 [INFO] app.tasks: Checking for events starting now
+2026-06-27 23:57:08 [INFO] apscheduler.executors.default: Job "send_event_start_notifications (trigger: interval[0:05:00], next run at: 2026-06-28 00:02:08 CEST)" executed successfully

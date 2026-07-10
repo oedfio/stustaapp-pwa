@@ -1,0 +1,21 @@
+2026-06-16 08:31:46 [INFO] app.routers.organizations: Organization created: Egon's Underground by mykyta.hrebeniuk@gmail.com
+2026-06-16 08:31:55 [INFO] app.routers.organizations: Admin invited: mykyta.hrebeniuk@gmail.com as boss_admin in organization 187e0336-5281-4456-af1b-57187837e5ee by mykyta.hrebeniuk@gmail.com
+2026-06-16 08:33:17 [INFO] app.routers.events: Event created: Bar night! by mykyta.hrebeniuk@gmail.com in the organization Egon's Underground
+2026-06-16 08:33:17 [INFO] app.routers.notifications: send_push_to_all called: title=New event: Bar night!, org_id=187e0336-5281-4456-af1b-57187837e5ee
+2026-06-16 08:33:17 [INFO] app.routers.notifications: Found 0 subscriptions to notify
+2026-06-16 12:53:43 [INFO] app.routers.events: Event photo uploaded: Alice in Glow Up Land by mykyta.hrebeniuk@gmail.com in the organization 94f5cc62-994f-4166-8ec0-01881241dec6
+2026-06-16 19:45:08 [INFO] app.routers.organizations: Admin invited: wladiseifert9@gmail.com as boss_admin in organization 65c8b7fe-8509-490e-a8c9-072cce220bfb by mykyta.hrebeniuk@gmail.com
+2026-06-16 21:41:16 [INFO] app.routers.organizations: Organization updated: 5th Floor MKH by mykyta.hrebeniuk@gmail.com
+2026-06-16 22:46:07 [INFO] app.routers.auth: OTP sent to alice-anna.koppenwallner@stusta.de from IP 80.187.81.118
+2026-06-16 22:46:52 [INFO] app.routers.auth: User logged in: leopold.haerdle@gmail.com
+2026-06-16 22:46:56 [INFO] app.routers.users: User updated: alice-anna.koppenwallner@stusta.de. New values: {'first_name': 'Aly', 'last_name': 'K'}
+2026-06-16 22:47:48 [INFO] app.routers.users: User updated: ilja.velicenko@gmx.de. New values: {'first_name': 'Ilja', 'last_name': 'Velicenko '}
+2026-06-16 22:47:48 [INFO] app.routers.users: User updated: christine.t.ebert@gmail.com. New values: {'first_name': 'Christine ', 'last_name': 'Ebert'}
+2026-06-16 22:54:22 [INFO] app.routers.organizations: Organization created: Paradise Number Six by mykyta.hrebeniuk@gmail.com
+2026-06-16 22:54:51 [INFO] app.routers.auth: OTP sent to akashmurugesan25@gmail.com from IP 172.225.189.133
+2026-06-16 22:55:12 [INFO] app.routers.auth: User logged in: akashmurugesan25@gmail.com
+2026-06-16 22:58:24 [INFO] app.routers.organizations: Admin invited: mykyta.hrebeniuk@gmail.com as boss_admin in organization 08ae9fae-2649-4ba2-8da6-e50155e12eca by mykyta.hrebeniuk@gmail.com
+2026-06-16 22:58:47 [INFO] app.routers.organizations: Organization updated: Paradise Number Six by mykyta.hrebeniuk@gmail.com
+2026-06-16 22:58:53 [INFO] app.routers.organizations: Organization updated: Paradise Number Six by mykyta.hrebeniuk@gmail.com
+2026-06-16 23:00:29 [INFO] app.routers.organizations: Organization logo uploaded: Paradise Number Six by akashmurugesan25@gmail.com
+2026-06-16 23:00:31 [INFO] app.routers.organizations: Organization updated: Paradise Number Six by akashmurugesan25@gmail.com

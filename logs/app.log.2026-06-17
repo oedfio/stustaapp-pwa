@@ -1,0 +1,5 @@
+2026-06-17 15:01:15 [INFO] app.routers.auth: OTP sent to mykyta.hrebeniuk@gmail.com from IP 131.159.0.2
+2026-06-17 15:02:30 [INFO] app.routers.organizations: Organization updated: EWH by mykyta.hrebeniuk@gmail.com
+2026-06-17 15:15:03 [INFO] app.routers.auth: OTP sent to ilja.velicenko@gmx.de from IP 10.143.2.156
+2026-06-17 15:35:13 [INFO] app.routers.organizations: Organization created: VKL - Verein Kulturleben in der Studentenstadt by mykyta.hrebeniuk@gmail.com
+2026-06-17 15:35:31 [INFO] app.routers.organizations: Admin invited: ilja.velicenko@gmx.de as boss_admin in organization 20ea6495-7184-4424-9db8-0364e9129972 by mykyta.hrebeniuk@gmail.com

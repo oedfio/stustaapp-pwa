@@ -1,0 +1,4 @@
+2026-06-04 21:18:22 [INFO] apscheduler.executors.default: Running job "cleanup_unused_media (trigger: interval[7 days, 0:00:00], next run at: 2026-06-11 21:18:22 CEST)" (scheduled at 2026-06-04 21:18:22.883025+02:00)
+2026-06-04 21:18:22 [INFO] app.tasks: Starting weekly media cleanup task
+2026-06-04 21:18:22 [INFO] app.tasks: Media cleanup complete — 0 files deleted
+2026-06-04 21:18:22 [INFO] apscheduler.executors.default: Job "cleanup_unused_media (trigger: interval[7 days, 0:00:00], next run at: 2026-06-11 21:18:22 CEST)" executed successfully
