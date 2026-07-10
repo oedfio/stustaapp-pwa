@@ -6,6 +6,9 @@ from app.tasks import cleanup_unused_media, send_event_start_notifications
 import logging
 import logging.handlers
 from app.routers import auth, organizations, users, events, notifications
+from app.config import settings
+
+LOG_PATH = settings.log_path
 
 # ── Logging setup ─────────────────────────────────────────────────────────────
 
@@ -21,7 +24,7 @@ def setup_logging():
 
     # File handler — rotates daily, keeps 30 days of logs
     file_handler = logging.handlers.TimedRotatingFileHandler(
-        "/srv/stustaapp/logs/app.log",
+        LOG_PATH,
         when="midnight",
         interval=1,
         backupCount=30,

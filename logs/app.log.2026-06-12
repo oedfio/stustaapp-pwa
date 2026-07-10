@@ -1,7 +1,0 @@
-2026-06-12 06:44:58 [INFO] app.routers.auth: OTP sent to 47nikgr@gmail.com from IP 10.143.4.5
-2026-06-12 06:45:14 [INFO] app.routers.auth: User logged in: 47nikgr@gmail.com
-2026-06-12 11:00:22 [INFO] app.routers.events: Event created: check by mykyta.hrebeniuk@gmail.com in the organization Der Vierte
-2026-06-12 12:39:50 [INFO] app.routers.auth: OTP sent to mykyta.hrebeniuk@gmail.com from IP 131.159.194.49
-2026-06-12 12:40:00 [INFO] app.routers.auth: User logged in: mykyta.hrebeniuk@gmail.com
-2026-06-12 12:40:31 [INFO] app.routers.auth: User logged in: assainzh@gmail.com
-2026-06-12 12:41:34 [INFO] app.routers.events: Event created: Mensa  by mykyta.hrebeniuk@gmail.com in the organization Black Tulip

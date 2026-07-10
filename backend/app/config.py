@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     # Database
     database_url: str
 
-    # Redis: default value because it doesn't contain any specific information in it. for example, database usl had password, user, etc.
+    # Redis
     redis_url: str = "redis://localhost:6379"
 
     # JWT
@@ -21,8 +21,11 @@ class Settings(BaseSettings):
     vapid_public_key: str
     vapid_claim_email: str
 
+    # Logging
+    log_path: str = "logs/app.log"
+
     class Config:
-        env_file = ".env"
+        env_file = (".env", ".env.local")
 
 
 settings = Settings()
