@@ -3,12 +3,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from uuid import UUID
 from datetime import datetime, timezone, timedelta
-import shutil
 import os
 import time
 
 from app.database import get_db
 from app.dependencies import get_current_user, require_org_admin
+from app.uploads import read_validated_image
 from app.models.event import Event
 from app.models.organization import Organization
 from app.models.user import User
@@ -16,7 +16,7 @@ from app.schemas.event import EventCreate, EventUpdate, EventResponse, EventWith
 from app.routers.notifications import send_push_to_all
 
 import logging
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 
 logger = logging.getLogger(__name__)
 
@@ -31,21 +31,19 @@ async def list_events(
 ):
     now = datetime.now(timezone.utc)
     week_end = now + timedelta(days=7)
+    no_end_grace = now - timedelta(hours=24)
 
     result = await db.execute(
         select(Event, Organization)
         .join(Organization, Event.org_id == Organization.id)
         .where(
             Event.starts_at <= week_end,
-            # Show event if ends_at is not set and starts_at >= now
-            # OR if ends_at is set and ends_at >= now
+            # Show the event while it hasn't ended yet. Events without an
+            # explicit end time are treated as lasting 24h from their start
+            # so they don't vanish the instant starts_at passes.
             or_(
                 Event.ends_at >= now,
-                Event.ends_at == None,
-            ),
-            or_(
-                Event.starts_at >= now,
-                Event.ends_at >= now,
+                and_(Event.ends_at == None, Event.starts_at >= no_end_grace),
             ),
         )
         .order_by(Event.starts_at.asc())
@@ -115,6 +113,7 @@ async def list_org_events(
 ):
     now = datetime.now(timezone.utc)
     week_end = now + timedelta(days=7)
+    no_end_grace = now - timedelta(hours=24)
 
     result = await db.execute(
         select(Event)
@@ -123,11 +122,7 @@ async def list_org_events(
             Event.starts_at <= week_end,
             or_(
                 Event.ends_at >= now,
-                Event.ends_at == None,
-            ),
-            or_(
-                Event.starts_at >= now,
-                Event.ends_at >= now,
+                and_(Event.ends_at == None, Event.starts_at >= no_end_grace),
             ),
         )
         .order_by(Event.starts_at.asc())
@@ -233,17 +228,14 @@ async def upload_event_photo(
     if event is None:
         raise HTTPException(status_code=404, detail="Event not found")
 
-    if file.content_type not in ("image/jpeg", "image/png", "image/webp"):
-        raise HTTPException(status_code=400, detail="Only JPEG, PNG and WebP images are allowed")
-
+    data, extension = await read_validated_image(file)
 
     # Save file to disk using event ID + timestamp as filename
-    extension = file.filename.split(".")[-1]
     filename = f"{event_id}_{int(time.time())}.{extension}"
     filepath = os.path.join(EVENTS_MEDIA_DIR, filename)
 
     with open(filepath, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
+        buffer.write(data)
 
     event.photo_url = f"/media/events/{filename}"
     await db.commit()

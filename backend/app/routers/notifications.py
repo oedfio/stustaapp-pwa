@@ -8,7 +8,7 @@ import json
 import asyncio
 
 from app.database import get_db, AsyncSessionLocal
-from app.dependencies import get_current_user
+from app.dependencies import get_current_user, require_dev_admin
 from app.models.user import User
 from app.models.push_subscription import PushSubscription
 from app.models.org_follow import OrgFollow
@@ -144,7 +144,7 @@ async def send_push_to_all(title: str, body: str, url: str = "/", org_id=None):
             await db.commit()
 
 @router.post("/debug-send")
-async def debug_send(user: User = Depends(get_current_user)):
+async def debug_send(user: User = Depends(require_dev_admin)):
     await send_push_to_all(
         title="Debug test",
         body="Direct call test",

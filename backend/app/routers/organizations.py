@@ -2,12 +2,12 @@ from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from uuid import UUID
-import shutil
 import os
 import time
 
 from app.database import get_db
 from app.dependencies import get_current_user, require_dev_admin, require_boss_admin
+from app.uploads import read_validated_image
 from app.models.organization import Organization
 from app.models.membership import OrgMembership
 from app.models.user import User
@@ -105,6 +105,11 @@ async def delete_organization(
         OrgMembership.__table__.delete().where(OrgMembership.org_id == org_id)
     )
 
+    # Delete all follows for this org
+    await db.execute(
+        OrgFollow.__table__.delete().where(OrgFollow.org_id == org_id)
+    )
+
     # Delete all events for this org
     await db.execute(
         Event.__table__.delete().where(Event.org_id == org_id)
@@ -132,17 +137,15 @@ async def upload_logo(
     if org is None:
         raise HTTPException(status_code=404, detail="Organisation not found")
 
-    # Validate file type
-    if file.content_type not in ("image/jpeg", "image/png", "image/webp"):
-        raise HTTPException(status_code=400, detail="Only JPEG, PNG and WebP images are allowed")
+    # Validate type/size and derive a safe extension from the content type
+    data, extension = await read_validated_image(file)
 
     # Save the file to disk using org ID + timestamp as filename
-    extension = file.filename.split(".")[-1]
     filename = f"{org_id}_{int(time.time())}.{extension}"
     filepath = os.path.join(LOGO_DIR, filename)
 
     with open(filepath, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
+        buffer.write(data)
 
     # Store the path in the database
     org.logo_url = f"/media/logos/{filename}"
