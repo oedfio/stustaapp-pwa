@@ -196,9 +196,8 @@ async def invite_admin(
     if role not in ("org_admin", "boss_admin"):
         raise HTTPException(status_code=400, detail="Role must be org_admin or boss_admin")
 
-    # Only dev admins can assign boss_admin role
-    if role == "boss_admin" and not user.is_dev_admin:
-        raise HTTPException(status_code=403, detail="Only dev admins can assign boss admin role")
+    # require_boss_admin already confirms `user` is either a dev admin or a
+    # boss admin of this specific org, so they may assign either role here.
 
     # Find the user by email
     result = await db.execute(select(User).where(User.email == email))

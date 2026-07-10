@@ -12,22 +12,21 @@ export default function AdminManager({ membership }) {
     const [message, setMessage] = useState(null)
     const [error, setError] = useState(null)
 
-    // FUTURE UPDATE
-    // const toggleAdmins = async () => {
-    //     if (!adminsVisible && admins.length === 0) {
-    //         // Only fetch when opening for the first time
-    //         setLoadingAdmins(true)
-    //         try {
-    //             const res = await getOrgMemberships(membership.org_id)
-    //             setAdmins(res.data)
-    //         } catch {
-    //             setError('Failed to load admins.')
-    //         } finally {
-    //             setLoadingAdmins(false)
-    //         }
-    //     }
-    //     setAdminsVisible(!adminsVisible)
-    // }
+    const toggleAdmins = async () => {
+        if (!adminsVisible && admins.length === 0) {
+            // Only fetch when opening for the first time
+            setLoadingAdmins(true)
+            try {
+                const res = await getOrgMemberships(membership.org_id)
+                setAdmins(res.data)
+            } catch {
+                setError('Failed to load admins.')
+            } finally {
+                setLoadingAdmins(false)
+            }
+        }
+        setAdminsVisible(!adminsVisible)
+    }
 
     const handleInvite = async (e) => {
         e.preventDefault()
