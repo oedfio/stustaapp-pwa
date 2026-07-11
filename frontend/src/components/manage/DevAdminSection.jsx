@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { createOrganization, updateOrganization, uploadLogo, inviteAdmin, removeAdmin, getOrganizations, getOrgMemberships, deleteOrganization } from '../../api/organizations'
+import { broadcastNotification } from '../../api/notifications'
 import { styles } from './styles'
 
 export default function DevAdminSection() {
@@ -68,6 +69,8 @@ export default function DevAdminSection() {
                 <span style={styles.sectionTitle}>All Organisations</span>
                 <span style={styles.roleBadge}>Dev Admin</span>
             </div>
+
+            <BroadcastForm />
 
             <div style={styles.subSection}>
                 <div style={styles.subSectionHeader}>
@@ -153,6 +156,86 @@ export default function DevAdminSection() {
                     </div>
                 )}
             </div>
+        </div>
+    )
+}
+
+function BroadcastForm() {
+    const [showForm, setShowForm] = useState(false)
+    const [title, setTitle] = useState('')
+    const [body, setBody] = useState('')
+    const [url, setUrl] = useState('/')
+    const [loading, setLoading] = useState(false)
+    const [message, setMessage] = useState(null)
+    const [error, setError] = useState(null)
+
+    const handleSend = async (e) => {
+        e.preventDefault()
+        if (!window.confirm('Send this notification to every user?')) return
+        setLoading(true)
+        setError(null)
+        setMessage(null)
+        try {
+            await broadcastNotification({ title, body, url: url || '/' })
+            setMessage('Broadcast queued — it will reach everyone shortly.')
+            setTitle('')
+            setBody('')
+            setUrl('/')
+        } catch {
+            setError('Failed to send broadcast.')
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    return (
+        <div style={styles.subSection}>
+            <div style={styles.subSectionHeader}>
+                <h3 style={styles.subHeading}>Broadcast Notification</h3>
+                <button
+                    style={styles.smallButton}
+                    onClick={() => setShowForm(!showForm)}
+                >
+                    {showForm ? 'Cancel' : '+ New Broadcast'}
+                </button>
+            </div>
+
+            {showForm && (
+                <div style={styles.formBox}>
+                    <p style={styles.hint}>
+                        Sends an in-app notification (and a push, for anyone with
+                        notifications enabled) to every user — use sparingly.
+                    </p>
+                    <form onSubmit={handleSend} style={styles.form}>
+                        <input
+                            style={styles.input}
+                            placeholder="Title *"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            required
+                        />
+                        <textarea
+                            style={styles.textarea}
+                            placeholder="Message *"
+                            value={body}
+                            onChange={(e) => setBody(e.target.value)}
+                            rows={3}
+                            required
+                        />
+                        <input
+                            style={styles.input}
+                            placeholder="Link (optional, defaults to /)"
+                            value={url}
+                            onChange={(e) => setUrl(e.target.value)}
+                        />
+                        {error && <p style={styles.error}>{error}</p>}
+                        {message && <p style={styles.success}>{message}</p>}
+                        <button style={styles.button} type="submit" disabled={loading}>
+                            {loading ? 'Sending...' : 'Send to Everyone'}
+                        </button>
+                    </form>
+                </div>
+            )}
         </div>
     )
 }

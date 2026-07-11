@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime, timezone
 from uuid import UUID
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
@@ -30,6 +30,12 @@ class SubscriptionKeys(BaseModel):
 class SubscribeRequest(BaseModel):
     endpoint: str
     keys: SubscriptionKeys
+
+
+class BroadcastRequest(BaseModel):
+    title: str
+    body: str
+    url: str = "/"
 
 
 class NotificationResponse(BaseModel):
@@ -235,6 +241,25 @@ async def send_push_to_all(title: str, body: str, url: str = "/", org_id=None):
                 if obj:
                     await db.delete(obj)
             await db.commit()
+
+@router.post("/broadcast", status_code=202)
+async def broadcast_notification(
+    payload: BroadcastRequest,
+    background_tasks: BackgroundTasks,
+    user: User = Depends(require_dev_admin),
+):
+    # Dev admin only — sends an in-app notification (and a push, for
+    # anyone with a subscription) to every user in the system
+    background_tasks.add_task(
+        send_push_to_all,
+        title=payload.title,
+        body=payload.body,
+        url=payload.url,
+        org_id=None,
+    )
+    logger.info(f"Broadcast queued by {user.email}: {payload.title}")
+    return {"message": "Broadcast queued"}
+
 
 @router.post("/debug-send")
 async def debug_send(user: User = Depends(require_dev_admin)):

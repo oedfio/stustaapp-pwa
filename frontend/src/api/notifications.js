@@ -29,3 +29,6 @@ export const markNotificationRead = (id) =>
 
 export const markAllNotificationsRead = () =>
     client.post('/api/notifications/read-all')
+
+export const broadcastNotification = (data) =>
+    client.post('/api/notifications/broadcast', data)
