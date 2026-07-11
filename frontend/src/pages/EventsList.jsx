@@ -95,7 +95,7 @@ export default function EventsList() {
                 )}
                 {event.recurrence !== 'none' && (
                   <p style={styles.recurrence}>
-                    <Repeat size={12} style={{ verticalAlign: '-1px', marginRight: '4px' }} />
+                    <Repeat size={13} style={{ verticalAlign: '-2px', marginRight: '4px' }} />
                     {event.recurrence === 'weekly' ? 'Every week'
                       : event.recurrence === 'biweekly' ? 'Every two weeks'
                         : 'Every month'}
@@ -190,7 +190,7 @@ const styles = {
     margin: '0 0 2px 0',
   },
   recurrence: {
-    fontSize: '12px',
+    fontSize: '13px',
     color: '#9CA3AF',
     margin: '0',
   },
