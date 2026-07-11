@@ -154,10 +154,12 @@ const styles = {
     gap: '16px',
   },
   logo: {
-    width: '128px',
-    height: '128px',
+    maxWidth: '160px',
+    maxHeight: '160px',
+    width: 'auto',
+    height: 'auto',
     borderRadius: '20px',
-    objectFit: 'cover',
+    objectFit: 'contain',
     boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
   },
   name: {
