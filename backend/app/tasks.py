@@ -1,10 +1,9 @@
 import os
 import logging
-from sqlalchemy import select, text
+from sqlalchemy import select, text, func
 from app.config import settings
 from app.database import AsyncSessionLocal
-from datetime import datetime, timezone
-from sqlalchemy import select
+from datetime import datetime, timezone, timedelta
 from app.models.event import Event
 from app.models.organization import Organization
 from app.routers.notifications import send_push_to_all
@@ -16,13 +15,51 @@ MEDIA_DIRS = {
     "events": os.path.join(settings.media_root, "events"),
 }
 
+# How long a past event's photo stays around after the event is over.
+# Org logos have no equivalent — an org doesn't "end" the way an event does.
+EVENT_PHOTO_RETENTION = timedelta(days=30)
+
+
+async def purge_old_event_photos():
+    """
+    Deletes the photo file for any event that ended (or, if it has no
+    ends_at, started) more than EVENT_PHOTO_RETENTION ago, and clears
+    photo_url so the DB never points at a file that's no longer there.
+    """
+    cutoff = datetime.now(timezone.utc) - EVENT_PHOTO_RETENTION
+    purged_count = 0
+
+    async with AsyncSessionLocal() as db:
+        result = await db.execute(
+            select(Event).where(
+                Event.photo_url.is_not(None),
+                func.coalesce(Event.ends_at, Event.starts_at) < cutoff,
+            )
+        )
+        stale_events = result.scalars().all()
+
+        for event in stale_events:
+            full_path = os.path.join(settings.media_root, event.photo_url.removeprefix("/media/"))
+            if os.path.exists(full_path):
+                os.remove(full_path)
+            event.photo_url = None
+            purged_count += 1
+            logger.info(f"Purged photo for event past retention: {event.title}")
+
+        await db.commit()
+
+    logger.info(f"Old event photo purge complete — {purged_count} photos removed")
+
 
 async def cleanup_unused_media():
     """
-    Runs weekly. Deletes any image files in the media folders
-    that are no longer referenced in the database.
+    Runs weekly. First purges photos for events past their retention
+    window, then deletes any remaining image files in the media folders
+    that are no longer referenced in the database at all.
     """
     logger.info("Starting weekly media cleanup task")
+
+    await purge_old_event_photos()
 
     async with AsyncSessionLocal() as db:
         # Fetch all logo and photo URLs currently stored in the database
