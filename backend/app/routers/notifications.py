@@ -1,8 +1,10 @@
 import logging
+from datetime import datetime, timezone
+from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, func
 from pywebpush import webpush, WebPushException
 import json
 import asyncio
@@ -12,6 +14,7 @@ from app.dependencies import get_current_user, require_dev_admin
 from app.models.user import User
 from app.models.push_subscription import PushSubscription
 from app.models.org_follow import OrgFollow
+from app.models.notification import Notification
 from app.config import settings
 
 logger = logging.getLogger(__name__)
@@ -27,6 +30,17 @@ class SubscriptionKeys(BaseModel):
 class SubscribeRequest(BaseModel):
     endpoint: str
     keys: SubscriptionKeys
+
+
+class NotificationResponse(BaseModel):
+    id: UUID
+    title: str
+    body: str
+    url: str | None
+    created_at: datetime
+    read_at: datetime | None
+
+    model_config = {"from_attributes": True}
 
 
 @router.get("/vapid-public-key")
@@ -84,28 +98,107 @@ async def unsubscribe(
     return {"message": "Unsubscribed successfully"}
 
 
+@router.get("", response_model=list[NotificationResponse])
+async def list_notifications(
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
+    result = await db.execute(
+        select(Notification)
+        .where(Notification.user_id == user.id)
+        .order_by(Notification.created_at.desc())
+        .limit(50)
+    )
+    return result.scalars().all()
+
+
+@router.get("/unread-count")
+async def get_unread_count(
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
+    result = await db.execute(
+        select(func.count())
+        .select_from(Notification)
+        .where(Notification.user_id == user.id, Notification.read_at.is_(None))
+    )
+    return {"count": result.scalar_one()}
+
+
+@router.post("/{notification_id}/read", response_model=NotificationResponse)
+async def mark_notification_read(
+    notification_id: UUID,
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
+    result = await db.execute(
+        select(Notification).where(
+            Notification.id == notification_id,
+            Notification.user_id == user.id,
+        )
+    )
+    notification = result.scalar_one_or_none()
+    if notification is None:
+        raise HTTPException(status_code=404, detail="Notification not found")
+
+    if notification.read_at is None:
+        notification.read_at = datetime.now(timezone.utc)
+        await db.commit()
+        await db.refresh(notification)
+
+    return notification
+
+
+@router.post("/read-all")
+async def mark_all_notifications_read(
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
+    result = await db.execute(
+        select(Notification).where(
+            Notification.user_id == user.id,
+            Notification.read_at.is_(None),
+        )
+    )
+    now = datetime.now(timezone.utc)
+    for notification in result.scalars().all():
+        notification.read_at = now
+    await db.commit()
+    return {"message": "All notifications marked as read"}
+
+
 async def send_push_to_all(title: str, body: str, url: str = "/", org_id=None):
     logger.info(f"send_push_to_all called: title={title}, org_id={org_id}")
 
-    # Step 1 — fetch subscriptions and close the DB session
+    # Step 1 — resolve target users (org followers, or everyone), persist an
+    # in-app notification row for each of them, and fetch their push
+    # subscriptions. Users without a push subscription still get the in-app
+    # notification, just no OS-level push.
     async with AsyncSessionLocal() as db:
         if org_id is not None:
             result = await db.execute(
-                select(PushSubscription)
-                .join(OrgFollow, PushSubscription.user_id == OrgFollow.user_id)
-                .where(OrgFollow.org_id == org_id)
+                select(OrgFollow.user_id).where(OrgFollow.org_id == org_id)
             )
         else:
-            result = await db.execute(select(PushSubscription))
+            result = await db.execute(select(User.id))
+        target_user_ids = [row[0] for row in result.all()]
 
-        subscriptions = result.scalars().all()
-        # Extract plain data so we don't hold onto ORM objects bound to this session
-        sub_data = [
-            {"id": s.id, "endpoint": s.endpoint, "p256dh": s.p256dh, "auth": s.auth}
-            for s in subscriptions
-        ]
+        for user_id in target_user_ids:
+            db.add(Notification(user_id=user_id, title=title, body=body, url=url))
+        await db.commit()
 
-    logger.info(f"Found {len(sub_data)} subscriptions to notify")
+        sub_data = []
+        if target_user_ids:
+            result = await db.execute(
+                select(PushSubscription).where(PushSubscription.user_id.in_(target_user_ids))
+            )
+            # Extract plain data so we don't hold onto ORM objects bound to this session
+            sub_data = [
+                {"id": s.id, "endpoint": s.endpoint, "p256dh": s.p256dh, "auth": s.auth}
+                for s in result.scalars().all()
+            ]
+
+    logger.info(f"Notified {len(target_user_ids)} users, {len(sub_data)} with push subscriptions")
 
     # Step 2 — send pushes without holding a DB session open
     invalid_ids = []
