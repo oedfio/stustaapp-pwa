@@ -10,7 +10,7 @@ export default function TabBar() {
       <NavLink to="/places" style={navStyle}>
         {({ isActive }) => (
           <>
-            <MapPin size={20} color={isActive ? '#2563EB' : '#6B7280'} />
+            <MapPin size={20} color={isActive ? '#0064BC' : '#555555'} />
             <span style={styles.label}>Places</span>
           </>
         )}
@@ -19,7 +19,7 @@ export default function TabBar() {
       <NavLink to="/" style={navStyle} end>
         {({ isActive }) => (
           <>
-            <Calendar size={20} color={isActive ? '#2563EB' : '#6B7280'} />
+            <Calendar size={20} color={isActive ? '#0064BC' : '#555555'} />
             <span style={styles.label}>Events</span>
           </>
         )}
@@ -29,7 +29,7 @@ export default function TabBar() {
         <NavLink to="/manage" style={navStyle}>
           {({ isActive }) => (
             <>
-              <Settings size={20} color={isActive ? '#2563EB' : '#6B7280'} />
+              <Settings size={20} color={isActive ? '#0064BC' : '#555555'} />
               <span style={styles.label}>Manage</span>
             </>
           )}
@@ -39,7 +39,7 @@ export default function TabBar() {
       <NavLink to="/profile" style={navStyle}>
         {({ isActive }) => (
           <>
-            <User size={20} color={isActive ? '#2563EB' : '#6B7280'} />
+            <User size={20} color={isActive ? '#0064BC' : '#555555'} />
             <span style={styles.label}>Profile</span>
           </>
         )}
@@ -50,7 +50,7 @@ export default function TabBar() {
 
 const navStyle = ({ isActive }) => ({
   ...styles.link,
-  color: isActive ? '#2563EB' : '#6B7280',
+  color: isActive ? '#0064BC' : '#555555',
 })
 
 const styles = {
@@ -61,7 +61,7 @@ const styles = {
     right: 0,
     height: '60px',
     backgroundColor: '#ffffff',
-    borderTop: '1px solid #E5E7EB',
+    borderTop: '1px solid #E3E3E4',
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',

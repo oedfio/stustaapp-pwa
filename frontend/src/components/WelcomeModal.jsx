@@ -29,7 +29,7 @@ export default function WelcomeModal() {
     return (
         <div style={styles.overlay}>
             <div style={styles.modal}>
-                <PartyPopper size={40} color="#2563EB" />
+                <PartyPopper size={40} color="#0064BC" />
                 <h2 style={styles.title}>Welcome to StuStaApp!</h2>
                 <p style={styles.text}>
                     Browse events and organisations across Studentenstadt, follow
@@ -71,12 +71,12 @@ const styles = {
     title: {
         fontSize: '20px',
         fontWeight: '700',
-        color: '#1E2A3A',
+        color: '#1A1C1E',
         margin: '12px 0 8px 0',
     },
     text: {
         fontSize: '14px',
-        color: '#374151',
+        color: '#1A1C1E',
         lineHeight: '1.6',
         margin: '0 0 20px 0',
     },
@@ -86,7 +86,7 @@ const styles = {
         justifyContent: 'center',
     },
     primaryButton: {
-        backgroundColor: '#2563EB',
+        backgroundColor: '#0064BC',
         color: '#ffffff',
         border: 'none',
         borderRadius: '10px',
@@ -96,8 +96,8 @@ const styles = {
         cursor: 'pointer',
     },
     secondaryButton: {
-        backgroundColor: '#F3F4F6',
-        color: '#374151',
+        backgroundColor: '#F2F2F7',
+        color: '#1A1C1E',
         border: 'none',
         borderRadius: '10px',
         padding: '10px 16px',

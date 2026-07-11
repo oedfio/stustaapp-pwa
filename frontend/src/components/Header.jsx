@@ -44,7 +44,7 @@ export default function Header() {
                 onClick={() => navigate('/notifications')}
                 aria-label="Notifications"
             >
-                <Bell size={20} color="#374151" />
+                <Bell size={20} color="#1A1C1E" />
                 {unreadCount > 0 && (
                     <span style={styles.badge}>{unreadCount > 9 ? '9+' : unreadCount}</span>
                 )}
@@ -61,7 +61,7 @@ const styles = {
         right: 0,
         height: '48px',
         backgroundColor: '#ffffff',
-        borderBottom: '1px solid #E5E7EB',
+        borderBottom: '1px solid #E3E3E4',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -80,7 +80,7 @@ const styles = {
     appName: {
         fontSize: '15px',
         fontWeight: '600',
-        color: '#1E2A3A',
+        color: '#1A1C1E',
     },
     bellButton: {
         position: 'relative',

@@ -93,7 +93,7 @@ export default function EventDetail() {
 
         {/* Date */}
         <div style={styles.infoRow}>
-          <Calendar size={18} color="#6B7280" style={{ flexShrink: 0 }} />
+          <Calendar size={18} color="#555555" style={{ flexShrink: 0 }} />
           <div>
             <span style={styles.infoText}>{formattedDate}</span>
             {event.ends_at && (
@@ -118,7 +118,7 @@ export default function EventDetail() {
         {/* Location */}
         {event.location && (
           <div style={styles.infoRow}>
-            <MapPin size={18} color="#6B7280" style={{ flexShrink: 0 }} />
+            <MapPin size={18} color="#555555" style={{ flexShrink: 0 }} />
             {mapsUrl ? (
               <a
                 href={mapsUrl}
@@ -155,7 +155,7 @@ const styles = {
   backButton: {
     background: 'none',
     border: 'none',
-    color: '#2563EB',
+    color: '#0064BC',
     fontSize: '16px',
     cursor: 'pointer',
     padding: '16px',
@@ -164,7 +164,7 @@ const styles = {
   photo: {
     width: '100%',
     objectFit: 'contain',
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#F2F2F7',
   },
   content: {
     padding: '16px',
@@ -185,8 +185,8 @@ const styles = {
     width: '32px',
     height: '32px',
     borderRadius: '6px',
-    backgroundColor: '#EFF6FF',
-    color: '#2563EB',
+    backgroundColor: '#E5EFF9',
+    color: '#0064BC',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -195,21 +195,21 @@ const styles = {
   },
   orgName: {
     fontSize: '20px',
-    color: '#6B7280',
+    color: '#555555',
     textTransform: 'uppercase',
     letterSpacing: '0.5px',
   },
   title: {
     fontSize: '24px',
     fontWeight: '700',
-    color: '#1E2A3A',
+    color: '#1A1C1E',
     margin: '0 0 12px 0',
     lineHeight: '1.3',
   },
   badge: {
     display: 'inline-block',
-    backgroundColor: '#EFF6FF',
-    color: '#2563EB',
+    backgroundColor: '#E5EFF9',
+    color: '#0064BC',
     fontSize: '13px',
     padding: '4px 10px',
     borderRadius: '20px',
@@ -223,25 +223,25 @@ const styles = {
   },
   infoText: {
     fontSize: '15px',
-    color: '#374151',
+    color: '#1A1C1E',
     lineHeight: '1.5',
   },
   locationLink: {
     fontSize: '15px',
-    color: '#2563EB',
+    color: '#0064BC',
     textDecoration: 'none',
     lineHeight: '1.5',
   },
   descriptionBox: {
     marginTop: '20px',
     padding: '16px',
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#F2F2F7',
     borderRadius: '12px',
-    borderLeft: '4px solid #2563EB',
+    borderLeft: '4px solid #0064BC',
   },
   description: {
     fontSize: '15px',
-    color: '#374151',
+    color: '#1A1C1E',
     lineHeight: '1.7',
     margin: '0',
     whiteSpace: 'pre-wrap',
@@ -250,10 +250,10 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     padding: '40px 16px',
-    color: '#6B7280',
+    color: '#555555',
   },
   endDate: {
     fontSize: '14px',
-    color: '#6B7280',
+    color: '#555555',
   },
 }

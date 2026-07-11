@@ -38,12 +38,12 @@ const styles = {
         justifyContent: 'center',
         gap: '6px',
         padding: '24px 16px 80px 16px',
-        borderTop: '1px solid #E5E7EB',
+        borderTop: '1px solid #E3E3E4',
         marginTop: '32px',
     },
     link: {
         fontSize: '12px',
-        color: '#9CA3AF',
+        color: '#AAAAAA',
         textDecoration: 'none',
         background: 'none',
         border: 'none',
@@ -53,6 +53,6 @@ const styles = {
     },
     dot: {
         fontSize: '12px',
-        color: '#D1D5DB',
+        color: '#AAAAAA',
     },
 }

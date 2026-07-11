@@ -24,7 +24,7 @@ export default defineConfig({
         name: 'StuStaApp',
         short_name: 'StuStaApp',
         description: 'Events and places in Studentenstadt München',
-        theme_color: '#1E2A3A',
+        theme_color: '#1A1C1E',
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',

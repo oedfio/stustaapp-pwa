@@ -144,7 +144,7 @@ export default function Profile() {
       <div style={styles.container}>
         <h1 style={styles.heading}>Profile</h1>
         <div style={styles.loginPrompt}>
-          <LogIn size={48} color="#2563EB" style={{ marginBottom: '12px' }} />
+          <LogIn size={48} color="#0064BC" style={{ marginBottom: '12px' }} />
           <h2 style={styles.loginTitle}>Welcome to StuStaApp</h2>
           <p style={styles.loginText}>
             Log in to manage your profile, save your preferences,
@@ -307,7 +307,7 @@ const styles = {
   heading: {
     fontSize: '22px',
     fontWeight: '700',
-    color: '#1E2A3A',
+    color: '#1A1C1E',
     margin: '0 0 20px 0',
   },
   card: {
@@ -320,13 +320,13 @@ const styles = {
     gap: '12px',
     marginBottom: '20px',
     boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-    border: '1px solid #F3F4F6',
+    border: '1px solid #F2F2F7',
   },
   avatar: {
     width: '72px',
     height: '72px',
     borderRadius: '50%',
-    backgroundColor: '#2563EB',
+    backgroundColor: '#0064BC',
     color: '#ffffff',
     display: 'flex',
     alignItems: 'center',
@@ -336,7 +336,7 @@ const styles = {
   },
   email: {
     fontSize: '15px',
-    color: '#6B7280',
+    color: '#555555',
     margin: '0',
   },
   section: {
@@ -345,12 +345,12 @@ const styles = {
     padding: '20px',
     marginBottom: '16px',
     boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-    border: '1px solid #F3F4F6',
+    border: '1px solid #F2F2F7',
   },
   sectionTitle: {
     fontSize: '16px',
     fontWeight: '700',
-    color: '#1E2A3A',
+    color: '#1A1C1E',
     margin: '0 0 16px 0',
   },
   form: {
@@ -366,12 +366,12 @@ const styles = {
   label: {
     fontSize: '13px',
     fontWeight: '600',
-    color: '#374151',
+    color: '#1A1C1E',
   },
   input: {
     padding: '12px 14px',
     borderRadius: '8px',
-    border: '1.5px solid #E5E7EB',
+    border: '1.5px solid #E3E3E4',
     fontSize: '15px',
     outline: 'none',
     width: '100%',
@@ -380,7 +380,7 @@ const styles = {
   button: {
     padding: '13px',
     borderRadius: '8px',
-    backgroundColor: '#2563EB',
+    backgroundColor: '#0064BC',
     color: '#ffffff',
     fontSize: '15px',
     fontWeight: '600',
@@ -395,12 +395,12 @@ const styles = {
   },
   notificationLabel: {
     fontSize: '15px',
-    color: '#374151',
+    color: '#1A1C1E',
   },
   toggleDisabled: {
     fontSize: '12px',
-    color: '#9CA3AF',
-    backgroundColor: '#F3F4F6',
+    color: '#AAAAAA',
+    backgroundColor: '#F2F2F7',
     padding: '4px 10px',
     borderRadius: '20px',
   },
@@ -408,11 +408,11 @@ const styles = {
     width: '100%',
     padding: '14px',
     borderRadius: '12px',
-    backgroundColor: '#EFF6FF',
-    color: '#2563EB',
+    backgroundColor: '#E5EFF9',
+    color: '#0064BC',
     fontSize: '15px',
     fontWeight: '600',
-    border: '1px solid #BFDBFE',
+    border: '1px solid #B8D4EA',
     cursor: 'pointer',
     marginTop: '24px',
   },
@@ -453,17 +453,17 @@ const styles = {
     alignItems: 'center',
     textAlign: 'center',
     boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-    border: '1px solid #F3F4F6',
+    border: '1px solid #F2F2F7',
   },
   loginTitle: {
     fontSize: '20px',
     fontWeight: '700',
-    color: '#1E2A3A',
+    color: '#1A1C1E',
     margin: '0 0 12px 0',
   },
   loginText: {
     fontSize: '14px',
-    color: '#6B7280',
+    color: '#555555',
     lineHeight: '1.6',
     margin: '0 0 24px 0',
     maxWidth: '320px',
@@ -471,7 +471,7 @@ const styles = {
   loginButton: {
     padding: '14px 32px',
     borderRadius: '8px',
-    backgroundColor: '#2563EB',
+    backgroundColor: '#0064BC',
     color: '#ffffff',
     fontSize: '15px',
     fontWeight: '600',
@@ -490,17 +490,17 @@ const styles = {
   },
   toggleOff: {
     fontSize: '13px',
-    color: '#2563EB',
-    backgroundColor: '#EFF6FF',
+    color: '#0064BC',
+    backgroundColor: '#E5EFF9',
     padding: '6px 14px',
     borderRadius: '20px',
-    border: '1px solid #BFDBFE',
+    border: '1px solid #B8D4EA',
     cursor: 'pointer',
     fontWeight: '600',
   },
   hint: {
     fontSize: '13px',
-    color: '#9CA3AF',
+    color: '#AAAAAA',
     margin: '0',
   },
   followsList: {
@@ -513,7 +513,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '8px 0',
-    borderBottom: '1px solid #F3F4F6',
+    borderBottom: '1px solid #F2F2F7',
   },
   followInfo: {
     display: 'flex',
@@ -528,7 +528,7 @@ const styles = {
   },
   followName: {
     fontSize: '14px',
-    color: '#1E2A3A',
+    color: '#1A1C1E',
     fontWeight: '500',
   },
 }

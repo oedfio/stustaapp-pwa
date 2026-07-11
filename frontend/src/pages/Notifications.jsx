@@ -126,13 +126,13 @@ const styles = {
     heading: {
         fontSize: '22px',
         fontWeight: '700',
-        color: '#1E2A3A',
+        color: '#1A1C1E',
         margin: '0',
     },
     markAllButton: {
         background: 'none',
         border: 'none',
-        color: '#2563EB',
+        color: '#0064BC',
         fontSize: '13px',
         fontWeight: '600',
         cursor: 'pointer',
@@ -149,11 +149,11 @@ const styles = {
         padding: '14px',
         boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
         cursor: 'pointer',
-        border: '1px solid #F3F4F6',
+        border: '1px solid #F2F2F7',
     },
     unreadCard: {
-        borderLeft: '4px solid #2563EB',
-        backgroundColor: '#F9FAFB',
+        borderLeft: '4px solid #0064BC',
+        backgroundColor: '#F2F2F7',
     },
     cardHeader: {
         display: 'flex',
@@ -164,31 +164,31 @@ const styles = {
     title: {
         fontSize: '15px',
         fontWeight: '600',
-        color: '#1E2A3A',
+        color: '#1A1C1E',
         margin: '0',
     },
     dot: {
         width: '8px',
         height: '8px',
         borderRadius: '999px',
-        backgroundColor: '#2563EB',
+        backgroundColor: '#0064BC',
         flexShrink: 0,
     },
     body: {
         fontSize: '14px',
-        color: '#374151',
+        color: '#1A1C1E',
         margin: '4px 0 0 0',
     },
     time: {
         fontSize: '12px',
-        color: '#9CA3AF',
+        color: '#AAAAAA',
         margin: '6px 0 0 0',
     },
     center: {
         display: 'flex',
         justifyContent: 'center',
         padding: '40px 16px',
-        color: '#6B7280',
+        color: '#555555',
     },
     error: {
         padding: '16px',
@@ -202,12 +202,12 @@ const styles = {
     emptyText: {
         fontSize: '18px',
         fontWeight: '600',
-        color: '#1E2A3A',
+        color: '#1A1C1E',
         margin: '0 0 8px 0',
     },
     emptySubtext: {
         fontSize: '14px',
-        color: '#6B7280',
+        color: '#555555',
         margin: '0',
     },
 }

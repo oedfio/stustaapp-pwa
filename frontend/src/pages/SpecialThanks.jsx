@@ -26,7 +26,7 @@ export default function SpecialThanks() {
             </button>
 
             <div style={styles.header}>
-                <HeartHandshake size={48} color="#2563EB" style={{ marginBottom: '12px' }} />
+                <HeartHandshake size={48} color="#0064BC" style={{ marginBottom: '12px' }} />
                 <h1 style={styles.heading}>Special Thanks</h1>
                 <p style={styles.intro}>
                     StuStaApp would not exist without the support and help of some
@@ -62,7 +62,7 @@ const styles = {
     backButton: {
         background: 'none',
         border: 'none',
-        color: '#2563EB',
+        color: '#0064BC',
         fontSize: '16px',
         cursor: 'pointer',
         padding: '0 0 16px 0',
@@ -75,12 +75,12 @@ const styles = {
     heading: {
         fontSize: '28px',
         fontWeight: '700',
-        color: '#1E2A3A',
+        color: '#1A1C1E',
         margin: '0 0 16px 0',
     },
     intro: {
         fontSize: '15px',
-        color: '#6B7280',
+        color: '#555555',
         lineHeight: '1.7',
         margin: '0',
     },
@@ -97,14 +97,14 @@ const styles = {
         borderRadius: '16px',
         padding: '20px',
         boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-        border: '1px solid #F3F4F6',
+        border: '1px solid #F2F2F7',
     },
     avatar: {
         width: '52px',
         height: '52px',
         borderRadius: '50%',
-        backgroundColor: '#EFF6FF',
-        color: '#2563EB',
+        backgroundColor: '#E5EFF9',
+        color: '#0064BC',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -118,12 +118,12 @@ const styles = {
     name: {
         fontSize: '17px',
         fontWeight: '700',
-        color: '#1E2A3A',
+        color: '#1A1C1E',
         margin: '0 0 4px 0',
     },
     note: {
         fontSize: '14px',
-        color: '#6B7280',
+        color: '#555555',
         margin: '0',
         lineHeight: '1.5',
     },

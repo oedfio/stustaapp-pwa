@@ -148,7 +148,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#F2F2F7',
     padding: '20px',
   },
   card: {
@@ -171,12 +171,12 @@ const styles = {
   title: {
     fontSize: '24px',
     fontWeight: '700',
-    color: '#1E2A3A',
+    color: '#1A1C1E',
     margin: '0 0 4px 0',
   },
   subtitle: {
     fontSize: '14px',
-    color: '#6B7280',
+    color: '#555555',
     margin: '0 0 32px 0',
   },
   form: {
@@ -188,12 +188,12 @@ const styles = {
   label: {
     fontSize: '14px',
     fontWeight: '600',
-    color: '#374151',
+    color: '#1A1C1E',
   },
   input: {
     padding: '12px 16px',
     borderRadius: '8px',
-    border: '1.5px solid #E5E7EB',
+    border: '1.5px solid #E3E3E4',
     fontSize: '16px',
     outline: 'none',
     width: '100%',
@@ -202,7 +202,7 @@ const styles = {
   button: {
     padding: '14px',
     borderRadius: '8px',
-    backgroundColor: '#2563EB',
+    backgroundColor: '#0064BC',
     color: '#ffffff',
     fontSize: '16px',
     fontWeight: '600',
@@ -214,14 +214,14 @@ const styles = {
     padding: '12px',
     borderRadius: '8px',
     backgroundColor: 'transparent',
-    color: '#6B7280',
+    color: '#555555',
     fontSize: '14px',
-    border: '1.5px solid #E5E7EB',
+    border: '1.5px solid #E3E3E4',
     cursor: 'pointer',
   },
   hint: {
     fontSize: '14px',
-    color: '#6B7280',
+    color: '#555555',
     textAlign: 'center',
     margin: '0',
   },

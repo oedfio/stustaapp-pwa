@@ -15,7 +15,7 @@ export default function WhoCreatedThis() {
             x: Math.random() < 0.5 ? 0 : canvas.width,
             y: Math.random() * canvas.height,
             size: Math.random() * 8 + 4,
-            color: ['#2563EB', '#16A34A', '#D97706', '#DC2626', '#7C3AED', '#DB2777'][
+            color: ['#0064BC', '#16A34A', '#D97706', '#DC2626', '#7C3AED', '#DB2777'][
                 Math.floor(Math.random() * 6)
             ],
             speedX: Math.random() * 4 + 2,
@@ -95,7 +95,7 @@ export default function WhoCreatedThis() {
 const styles = {
     container: {
         minHeight: '100vh',
-        backgroundColor: '#1E2A3A',
+        backgroundColor: '#1A1C1E',
         position: 'relative',
         overflow: 'hidden',
     },
