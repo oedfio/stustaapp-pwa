@@ -93,7 +93,7 @@ export default function OrgInfoEditor({ membership }) {
                 />
                 <textarea
                     style={styles.textarea}
-                    placeholder="Full description"
+                    placeholder="Full description (supports **bold**, *italic*, links, lists)"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     rows={3}

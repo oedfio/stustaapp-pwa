@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getOrganization } from '../api/organizations'
 import { getOrgEvents } from '../api/events'
+import MarkdownText from '../components/MarkdownText'
 
 export default function OrganizationDetail() {
   const { id } = useParams()
@@ -82,7 +83,7 @@ export default function OrganizationDetail() {
         {/* Description */}
         {org.description && (
           <div style={styles.descriptionBox}>
-            <p style={styles.description}>{org.description}</p>
+            <MarkdownText style={styles.description}>{org.description}</MarkdownText>
           </div>
         )}
 

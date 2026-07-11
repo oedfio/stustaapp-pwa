@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getEvent } from '../api/events'
+import MarkdownText from '../components/MarkdownText'
 
 export default function EventDetail() {
   const { id } = useParams()
@@ -133,7 +134,7 @@ export default function EventDetail() {
         {/* Description */}
         {event.description && (
           <div style={styles.descriptionBox}>
-            <p style={styles.description}>{event.description}</p>
+            <MarkdownText style={styles.description}>{event.description}</MarkdownText>
           </div>
         )}
 
