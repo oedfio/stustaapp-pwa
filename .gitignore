@@ -10,3 +10,5 @@ build/
 logs/
 CLAUDE.md
 frontend/dev-dist/
+media/logos/
+media/events/
