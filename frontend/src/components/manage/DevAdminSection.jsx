@@ -164,7 +164,7 @@ function BroadcastForm() {
     const [showForm, setShowForm] = useState(false)
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
-    const [url, setUrl] = useState('/')
+    const [url, setUrl] = useState('')
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState(null)
     const [error, setError] = useState(null)
@@ -180,7 +180,7 @@ function BroadcastForm() {
             setMessage('Broadcast queued — it will reach everyone shortly.')
             setTitle('')
             setBody('')
-            setUrl('/')
+            setUrl('')
         } catch {
             setError('Failed to send broadcast.')
         } finally {
@@ -202,7 +202,7 @@ function BroadcastForm() {
 
             {showForm && (
                 <div style={styles.formBox}>
-                    <p style={styles.hint}>
+                    <p style={{ ...styles.hint, margin: '0 0 12px 0' }}>
                         Sends an in-app notification (and a push, for anyone with
                         notifications enabled) to every user — use sparingly.
                     </p>

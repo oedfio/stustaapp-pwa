@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Bell } from 'lucide-react'
 import { useAuth } from './AuthContext'
 import { getUnreadNotificationCount } from '../api/notifications'
 
@@ -40,7 +41,7 @@ export default function Header() {
                 onClick={() => navigate('/notifications')}
                 aria-label="Notifications"
             >
-                <span style={styles.bellIcon}>🔔</span>
+                <Bell size={20} color="#374151" />
                 {unreadCount > 0 && (
                     <span style={styles.badge}>{unreadCount > 9 ? '9+' : unreadCount}</span>
                 )}
@@ -77,9 +78,6 @@ const styles = {
         padding: '4px',
         display: 'flex',
         alignItems: 'center',
-    },
-    bellIcon: {
-        fontSize: '20px',
     },
     badge: {
         position: 'absolute',
