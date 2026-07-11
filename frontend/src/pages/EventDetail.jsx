@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { Repeat, Calendar, Circle, MapPin } from 'lucide-react'
 import { getEvent } from '../api/events'
 import MarkdownText from '../components/MarkdownText'
 
@@ -83,7 +84,8 @@ export default function EventDetail() {
         {/* Recurrence badge */}
         {event.recurrence !== 'none' && (
           <div style={styles.badge}>
-            🔁 {event.recurrence === 'weekly' ? 'Every week'
+            <Repeat size={14} style={{ verticalAlign: '-2px', marginRight: '4px' }} />
+            {event.recurrence === 'weekly' ? 'Every week'
               : event.recurrence === 'biweekly' ? 'Every two weeks'
                 : 'Every month'}
           </div>
@@ -91,7 +93,7 @@ export default function EventDetail() {
 
         {/* Date */}
         <div style={styles.infoRow}>
-          <span style={styles.infoIcon}>📅</span>
+          <Calendar size={18} color="#6B7280" style={{ flexShrink: 0 }} />
           <div>
             <span style={styles.infoText}>{formattedDate}</span>
             {event.ends_at && (
@@ -108,14 +110,15 @@ export default function EventDetail() {
         {/* Ongoing badge */}
         {event.ends_at && new Date(event.starts_at) <= new Date() && new Date(event.ends_at) >= new Date() && (
           <div style={{ ...styles.badge, backgroundColor: '#F0FDF4', color: '#16A34A' }}>
-            🟢 Happening now
+            <Circle size={10} fill="#16A34A" color="#16A34A" style={{ verticalAlign: '1px', marginRight: '4px' }} />
+            Happening now
           </div>
         )}
 
         {/* Location */}
         {event.location && (
           <div style={styles.infoRow}>
-            <span style={styles.infoIcon}>📍</span>
+            <MapPin size={18} color="#6B7280" style={{ flexShrink: 0 }} />
             {mapsUrl ? (
               <a
                 href={mapsUrl}
@@ -217,10 +220,6 @@ const styles = {
     alignItems: 'flex-start',
     gap: '10px',
     marginBottom: '10px',
-  },
-  infoIcon: {
-    fontSize: '18px',
-    flexShrink: 0,
   },
   infoText: {
     fontSize: '15px',

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Camera, Loader2 } from 'lucide-react'
 import { uploadEventPhoto } from '../../api/events'
 import { styles } from './styles'
 
@@ -20,7 +21,12 @@ export default function PhotoUploader({ membership, eventId }) {
 
     return (
         <label style={styles.iconButton}>
-            {loading ? '⏳' : '📷'}
+            {loading ? (
+                <Loader2 size={18} style={{ animation: 'spin 1s linear infinite' }} />
+            ) : (
+                <Camera size={18} />
+            )}
+            <style>{'@keyframes spin { to { transform: rotate(360deg); } }'}</style>
             <input
                 type="file"
                 accept="image/jpeg,image/png,image/webp"

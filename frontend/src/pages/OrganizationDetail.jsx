@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { MapPin } from 'lucide-react'
 import { getOrganization } from '../api/organizations'
 import { getOrgEvents } from '../api/events'
 import MarkdownText from '../components/MarkdownText'
@@ -64,7 +65,7 @@ export default function OrganizationDetail() {
         {/* Location */}
         {org.location_name && (
           <div style={styles.infoRow}>
-            <span style={styles.infoIcon}>📍</span>
+            <MapPin size={18} color="#6B7280" style={{ flexShrink: 0 }} />
             {mapsUrl ? (
               <a
                 href={mapsUrl}
@@ -112,7 +113,10 @@ export default function OrganizationDetail() {
                     })}
                   </p>
                   {event.location && (
-                    <p style={styles.eventLocation}>📍 {event.location}</p>
+                    <p style={styles.eventLocation}>
+                      <MapPin size={13} color="#6B7280" style={{ verticalAlign: '-2px', marginRight: '4px' }} />
+                      {event.location}
+                    </p>
                   )}
                 </div>
                 <span style={styles.arrow}>›</span>
@@ -170,10 +174,6 @@ const styles = {
     alignItems: 'flex-start',
     gap: '10px',
     marginBottom: '16px',
-  },
-  infoIcon: {
-    fontSize: '18px',
-    flexShrink: 0,
   },
   infoText: {
     fontSize: '15px',

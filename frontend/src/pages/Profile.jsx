@@ -1,6 +1,7 @@
 import { useAuth } from '../components/AuthContext'
 import { updateMe } from '../api/auth'
 import { useNavigate } from 'react-router-dom'
+import { LogIn } from 'lucide-react'
 import { getVapidPublicKey, subscribePush, unsubscribePush } from '../api/notifications'
 import { useState, useEffect } from 'react'
 import { getOrganizations, getMyFollows, followOrganization, unfollowOrganization } from '../api/organizations'
@@ -143,7 +144,7 @@ export default function Profile() {
       <div style={styles.container}>
         <h1 style={styles.heading}>Profile</h1>
         <div style={styles.loginPrompt}>
-          <span style={styles.loginIcon}>👋</span>
+          <LogIn size={48} color="#2563EB" style={{ marginBottom: '12px' }} />
           <h2 style={styles.loginTitle}>Welcome to StuStaApp</h2>
           <p style={styles.loginText}>
             Log in to manage your profile, save your preferences,
@@ -453,10 +454,6 @@ const styles = {
     textAlign: 'center',
     boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
     border: '1px solid #F3F4F6',
-  },
-  loginIcon: {
-    fontSize: '48px',
-    marginBottom: '12px',
   },
   loginTitle: {
     fontSize: '20px',

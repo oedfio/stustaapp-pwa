@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Circle, MapPin, Repeat } from 'lucide-react'
 import { getEvents } from '../api/events'
 
 export default function EventsList() {
@@ -71,7 +72,10 @@ export default function EventsList() {
               <div style={styles.info}>
                 <p style={styles.orgName}>{event.org_name}</p>
                 {isOngoing(event) && (
-                  <span style={styles.ongoingBadge}>🟢 Happening now</span>
+                  <span style={styles.ongoingBadge}>
+                    <Circle size={9} fill="#16A34A" color="#16A34A" style={{ verticalAlign: '1px', marginRight: '4px' }} />
+                    Happening now
+                  </span>
                 )}
                 <h2 style={styles.title}>{event.title}</h2>
                 <p style={styles.date}>
@@ -84,11 +88,15 @@ export default function EventsList() {
                   })}
                 </p>
                 {event.location && (
-                  <p style={styles.location}>📍 {event.location}</p>
+                  <p style={styles.location}>
+                    <MapPin size={13} color="#6B7280" style={{ verticalAlign: '-2px', marginRight: '4px' }} />
+                    {event.location}
+                  </p>
                 )}
                 {event.recurrence !== 'none' && (
                   <p style={styles.recurrence}>
-                    🔁 {event.recurrence === 'weekly' ? 'Every week'
+                    <Repeat size={12} style={{ verticalAlign: '-1px', marginRight: '4px' }} />
+                    {event.recurrence === 'weekly' ? 'Every week'
                       : event.recurrence === 'biweekly' ? 'Every two weeks'
                         : 'Every month'}
                   </p>

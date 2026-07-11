@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Pencil, Trash2 } from 'lucide-react'
 import { getOrgEventsForManage, deleteEvent } from '../../api/events'
 import EventForm from './EventForm'
 import PhotoUploader from './PhotoUploader'
@@ -95,14 +96,14 @@ export default function EventsManager({ membership }) {
                                     style={styles.iconButton}
                                     onClick={() => { setEditingEvent(event); setShowCreateForm(false) }}
                                 >
-                                    ✏️
+                                    <Pencil size={16} />
                                 </button>
                                 <PhotoUploader membership={membership} eventId={event.id} />
                                 <button
                                     style={{ ...styles.iconButton, color: '#DC2626' }}
                                     onClick={() => handleDelete(event.id)}
                                 >
-                                    🗑️
+                                    <Trash2 size={16} />
                                 </button>
                             </div>
                         </div>

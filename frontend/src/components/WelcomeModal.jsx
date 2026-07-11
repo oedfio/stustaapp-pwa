@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { PartyPopper } from 'lucide-react'
 
 const STORAGE_KEY = 'stustaapp_seen_welcome'
 
@@ -28,7 +29,7 @@ export default function WelcomeModal() {
     return (
         <div style={styles.overlay}>
             <div style={styles.modal}>
-                <span style={styles.emoji}>👋</span>
+                <PartyPopper size={40} color="#2563EB" />
                 <h2 style={styles.title}>Welcome to StuStaApp!</h2>
                 <p style={styles.text}>
                     Browse events and organisations across Studentenstadt, follow
@@ -66,9 +67,6 @@ const styles = {
         maxWidth: '360px',
         textAlign: 'center',
         boxShadow: '0 10px 40px rgba(0,0,0,0.2)',
-    },
-    emoji: {
-        fontSize: '40px',
     },
     title: {
         fontSize: '20px',

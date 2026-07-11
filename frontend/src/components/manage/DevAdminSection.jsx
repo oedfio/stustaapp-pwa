@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Trash2 } from 'lucide-react'
 import { createOrganization, updateOrganization, uploadLogo, inviteAdmin, removeAdmin, getOrganizations, getOrgMemberships, deleteOrganization } from '../../api/organizations'
 import { broadcastNotification } from '../../api/notifications'
 import { styles } from './styles'
@@ -381,7 +382,7 @@ function DevOrgItem({ org, onUpdated }) {
                     style={styles.deleteOrgButton}
                     onClick={(e) => { e.stopPropagation(); handleDelete() }}
                 >
-                    🗑️
+                    <Trash2 size={16} />
                 </button>
                 <span style={styles.arrow}>{expanded ? '∨' : '›'}</span>
             </div>

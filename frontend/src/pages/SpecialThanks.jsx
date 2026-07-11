@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { HeartHandshake } from 'lucide-react'
 
 const people = [
     {
@@ -25,7 +26,7 @@ export default function SpecialThanks() {
             </button>
 
             <div style={styles.header}>
-                <span style={styles.emoji}>🙏</span>
+                <HeartHandshake size={48} color="#2563EB" style={{ marginBottom: '12px' }} />
                 <h1 style={styles.heading}>Special Thanks</h1>
                 <p style={styles.intro}>
                     StuStaApp would not exist without the support and help of some
@@ -70,11 +71,6 @@ const styles = {
     header: {
         textAlign: 'center',
         marginBottom: '32px',
-    },
-    emoji: {
-        fontSize: '48px',
-        display: 'block',
-        marginBottom: '12px',
     },
     heading: {
         fontSize: '28px',

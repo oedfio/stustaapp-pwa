@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { MapPin } from 'lucide-react'
 import { getOrganizations } from '../api/organizations'
 
 export default function PlacesList() {
@@ -58,7 +59,10 @@ export default function PlacesList() {
                             <div style={styles.info}>
                                 <h2 style={styles.name}>{org.name}</h2>
                                 {org.location_name && (
-                                    <p style={styles.location}>📍 {org.location_name}</p>
+                                    <p style={styles.location}>
+                                        <MapPin size={13} color="#6B7280" style={{ verticalAlign: '-2px', marginRight: '4px' }} />
+                                        {org.location_name}
+                                    </p>
                                 )}
                                 {org.short_description && (
                                     <p style={styles.description}>{org.short_description}</p>
