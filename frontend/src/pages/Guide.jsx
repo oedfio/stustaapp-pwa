@@ -1,5 +1,18 @@
 import { useNavigate } from 'react-router-dom'
-import { Calendar, MapPin, Bell, User, Settings, ShieldCheck, Wrench } from 'lucide-react'
+import { Calendar, MapPin, Bell, User, Settings, ShieldCheck, Wrench, Smartphone, Share } from 'lucide-react'
+
+const INSTALL_SECTIONS = [
+    {
+        icon: Smartphone,
+        title: 'Android (Chrome)',
+        text: 'Open stustaapp.stusta.mhn.de in Chrome. Tap the menu (⋮) in the top right and choose "Add to Home screen" — or just wait for Chrome\'s install banner to pop up. It opens fullscreen from your home screen from then on, just like any other app.',
+    },
+    {
+        icon: Share,
+        title: 'iPhone / iPad (Safari)',
+        text: 'Open stustaapp.stusta.mhn.de in Safari — it has to be Safari, other browsers on iOS can\'t install it. Tap the Share button, scroll down, and choose "Add to Home Screen".',
+    },
+]
 
 const SECTIONS = [
     {
@@ -55,6 +68,26 @@ export default function Guide() {
             <p style={styles.subheading}>
                 A quick tour of what you can do in StuStaApp.
             </p>
+
+            <h2 style={{ ...styles.sectionHeading, margin: '0 0 4px 0' }}>Install the App</h2>
+            <p style={styles.subheading}>
+                StuStaApp works right in your browser, but installing it gives you a real
+                home-screen icon, a fullscreen view, and push notifications.
+            </p>
+
+            <div style={styles.list}>
+                {INSTALL_SECTIONS.map((section) => (
+                    <div key={section.title} style={styles.card}>
+                        <section.icon size={26} color="#0064BC" style={{ flexShrink: 0 }} />
+                        <div>
+                            <h2 style={styles.cardTitle}>{section.title}</h2>
+                            <p style={styles.cardText}>{section.text}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <h2 style={styles.sectionHeading}>Using the App</h2>
 
             <div style={styles.list}>
                 {SECTIONS.map((section) => (
