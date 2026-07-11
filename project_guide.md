@@ -21,9 +21,7 @@
 5. [Server Infrastructure](#5-server-infrastructure)
 6. [Local Development](#6-local-development)
 7. [Push Notifications & Notification Center](#7-push-notifications--notification-center)
-8. [Development Timeline (historical)](#8-development-timeline-historical)
-9. [Cost Breakdown](#9-cost-breakdown)
-10. [Quick Reference](#10-quick-reference)
+8. [Quick Reference](#8-quick-reference)
 
 ---
 
@@ -530,7 +528,7 @@ Web Push (via VAPID + `pywebpush`) and an in-app notification center are both dr
 
 ### In-app notification center
 
-`Header.jsx` shows a bell icon with an unread-count badge (polls `GET /api/notifications/unread-count` every 30s while logged in) and links to `/notifications` (`Notifications.jsx`), which lists recent notifications and supports marking one or all as read. See the Notifications endpoints in [§10 Quick Reference](#10-quick-reference).
+`Header.jsx` shows a bell icon with an unread-count badge (polls `GET /api/notifications/unread-count` every 30s while logged in) and links to `/notifications` (`Notifications.jsx`), which lists recent notifications and supports marking one or all as read. See the Notifications endpoints in [§8 Quick Reference](#8-quick-reference).
 
 ### Debugging
 
@@ -538,9 +536,122 @@ Web Push (via VAPID + `pywebpush`) and an in-app notification center are both dr
 
 ---
 
-## 8. Development Timeline (historical)
+## 8. Quick Reference
 
-> This section documents the original build plan and is kept for historical reference. The actual implementation has since diverged in places — e.g. push notifications, event recurrence labels, and org-follow were added, and the deployment approach described in §5/§10 (git-based, not rsync) reflects what's actually in use. Treat this section as "how it was planned," not "how it currently works."
+### Key URLs
+
+| URL | What it is |
+|---|---|
+| https://stustaapp.stusta.mhn.de | The live app (frontend) |
+| https://stustaapp.stusta.mhn.de/api/docs | Swagger UI — interactive API documentation |
+| https://stustaapp.stusta.mhn.de/api/health | Health check endpoint |
+
+### API Endpoints
+
+**Auth** (`app/routers/auth.py`)
+
+| Method | Path | Auth required | Description |
+|---|---|---|---|
+| POST | /api/auth/send-otp | None | Send a 6-digit login code to an email (rate-limited) |
+| POST | /api/auth/verify-otp | None | Verify the code, get a JWT |
+
+**Users** (`app/routers/users.py`)
+
+| Method | Path | Auth required | Description |
+|---|---|---|---|
+| GET | /api/users/me | Authenticated | Current user's profile |
+| PATCH | /api/users/me | Authenticated | Update first/last name |
+| GET | /api/users/me/memberships | Authenticated | Current user's org memberships and roles |
+
+**Organizations** (`app/routers/organizations.py`)
+
+| Method | Path | Auth required | Description |
+|---|---|---|---|
+| GET | /api/organizations | None | List all organisations |
+| GET | /api/organizations/{id} | None | Get one organisation |
+| POST | /api/organizations | Dev admin | Create organisation |
+| PATCH | /api/organizations/{id} | Boss admin | Edit org name, description, location |
+| DELETE | /api/organizations/{id} | Dev admin | Delete org (cascades memberships, follows, events) |
+| POST | /api/organizations/{id}/logo | Boss admin | Upload org logo image |
+| GET | /api/organizations/{id}/memberships | Boss admin | List the org's admins |
+| POST | /api/organizations/{id}/admins | Boss admin | Invite an admin (org_admin **or** boss_admin) by email |
+| DELETE | /api/organizations/{id}/admins/{user_id} | Boss admin | Remove an admin |
+| POST | /api/organizations/{id}/follow | Authenticated | Follow an org (for push notifications) |
+| DELETE | /api/organizations/{id}/follow | Authenticated | Unfollow an org |
+| GET | /api/organizations/me/follows | Authenticated | List orgs the current user follows |
+
+**Events** (`app/routers/events.py`)
+
+| Method | Path | Auth required | Description |
+|---|---|---|---|
+| GET | /api/events | None | Upcoming events (next 7 days) across all orgs |
+| GET | /api/events/{id} | None | Get one event |
+| GET | /api/organizations/{id}/events | None | Upcoming events for one org (next 7 days) |
+| GET | /api/organizations/{id}/events/manage | Org admin | **All** events for the org, unfiltered by date — used by the manage UI |
+| POST | /api/organizations/{id}/events | Org admin | Create event (triggers a push to followers) |
+| PATCH | /api/organizations/{id}/events/{event_id} | Org admin | Edit event |
+| DELETE | /api/organizations/{id}/events/{event_id} | Org admin | Delete event |
+| POST | /api/organizations/{id}/events/{event_id}/photo | Org admin | Upload event photo |
+
+**Notifications** (`app/routers/notifications.py`)
+
+| Method | Path | Auth required | Description |
+|---|---|---|---|
+| GET | /api/notifications/vapid-public-key | None | Public VAPID key for `pushManager.subscribe()` |
+| POST | /api/notifications/subscribe | Authenticated | Register a push subscription |
+| DELETE | /api/notifications/unsubscribe | Authenticated | Remove a push subscription |
+| GET | /api/notifications | Authenticated | List the current user's notifications (newest first, up to 50) |
+| GET | /api/notifications/unread-count | Authenticated | Unread notification count, polled by the header bell |
+| POST | /api/notifications/{id}/read | Authenticated | Mark one notification read |
+| POST | /api/notifications/read-all | Authenticated | Mark all of the current user's notifications read |
+| POST | /api/notifications/broadcast | Dev admin | Send a notification + push to **every** user (see §7) |
+| POST | /api/notifications/debug-send | Dev admin | Manually trigger a push to a hardcoded org's followers (see §7) |
+
+### requirements.txt
+
+Install with `pip install -r requirements.txt`. Key packages (see `backend/requirements.txt` for the full pinned list): `fastapi`, `uvicorn[standard]`, `sqlalchemy[asyncio]`, `asyncpg`, `alembic`, `pydantic-settings`, `PyJWT`, `redis`, `aiosmtplib`, `APScheduler`, `pywebpush`, `py-vapid`.
+
+### Useful Commands
+
+**Server management:**
+```bash
+# Restart FastAPI after code changes
+systemctl restart stustaapp
+
+# View live FastAPI logs
+journalctl -u stustaapp -f
+
+# Reload Nginx after config changes
+systemctl reload nginx
+
+# Renew SSL certificate manually
+certbot renew
+```
+
+**Database migrations:**
+```bash
+# After changing a SQLAlchemy model, generate a migration
+alembic revision --autogenerate -m "describe what changed"
+
+# Apply all pending migrations to the database
+alembic upgrade head
+
+# Check current migration version
+alembic current
+```
+
+**Deployment** — see `deploy.sh` at the repo root. Deploy is git-based, not a manual file copy: the server clones/pulls this repo over HTTPS (using a fine-grained PAT, since the StuSta proxy blocks SSH-over-443), then the script reinstalls dependencies, runs migrations, rebuilds the frontend, and restarts the service:
+```bash
+# Run on the server, from /srv/stustaapp
+./deploy.sh
+```
+which does, in order: `git pull` → `pip install -r backend/requirements.txt` → `alembic upgrade head` → `npm ci && npm run build` (frontend) → `chown -R stustaapp:stustaapp /srv/stustaapp` → `systemctl restart stustaapp`.
+
+---
+
+## Appendix A: Development Timeline (historical)
+
+> This section documents the original build plan and is kept for historical reference. The actual implementation has since diverged in places — e.g. push notifications, event recurrence labels, and org-follow were added, and the deployment approach described in §5 and the Quick Reference section (git-based, not rsync) reflects what's actually in use. Treat this section as "how it was planned," not "how it currently works."
 
 The total estimated timeline is 14 weeks at an average of 3 hours per week (your stated range is 2–4 hours). The timeline is divided into four phases. Do not worry if individual weeks slip — this is a side project and the phases are designed with some buffer built in.
 
@@ -731,7 +842,7 @@ Soft launch — share the URL with a small group of residents first rather than 
 
 ---
 
-## 9. Cost Breakdown
+## Appendix B: Cost Breakdown
 
 The entire project runs at zero cost. All software is open source, the server is provided by StuSta, and email goes through the StuSta SMTP server.
 
@@ -747,118 +858,3 @@ The entire project runs at zero cost. All software is open source, the server is
 | VM hosting | Free | Provided by StuSta infrastructure |
 | Domain name | Free | stustaapp.stusta.mhn.de provided by StuSta |
 | **Total** | **€0/month** | No ongoing costs |
-
----
-
-## 10. Quick Reference
-
-### Key URLs
-
-| URL | What it is |
-|---|---|
-| https://stustaapp.stusta.mhn.de | The live app (frontend) |
-| https://stustaapp.stusta.mhn.de/api/docs | Swagger UI — interactive API documentation |
-| https://stustaapp.stusta.mhn.de/api/health | Health check endpoint |
-
-### API Endpoints
-
-**Auth** (`app/routers/auth.py`)
-
-| Method | Path | Auth required | Description |
-|---|---|---|---|
-| POST | /api/auth/send-otp | None | Send a 6-digit login code to an email (rate-limited) |
-| POST | /api/auth/verify-otp | None | Verify the code, get a JWT |
-
-**Users** (`app/routers/users.py`)
-
-| Method | Path | Auth required | Description |
-|---|---|---|---|
-| GET | /api/users/me | Authenticated | Current user's profile |
-| PATCH | /api/users/me | Authenticated | Update first/last name |
-| GET | /api/users/me/memberships | Authenticated | Current user's org memberships and roles |
-
-**Organizations** (`app/routers/organizations.py`)
-
-| Method | Path | Auth required | Description |
-|---|---|---|---|
-| GET | /api/organizations | None | List all organisations |
-| GET | /api/organizations/{id} | None | Get one organisation |
-| POST | /api/organizations | Dev admin | Create organisation |
-| PATCH | /api/organizations/{id} | Boss admin | Edit org name, description, location |
-| DELETE | /api/organizations/{id} | Dev admin | Delete org (cascades memberships, follows, events) |
-| POST | /api/organizations/{id}/logo | Boss admin | Upload org logo image |
-| GET | /api/organizations/{id}/memberships | Boss admin | List the org's admins |
-| POST | /api/organizations/{id}/admins | Boss admin | Invite an admin (org_admin **or** boss_admin) by email |
-| DELETE | /api/organizations/{id}/admins/{user_id} | Boss admin | Remove an admin |
-| POST | /api/organizations/{id}/follow | Authenticated | Follow an org (for push notifications) |
-| DELETE | /api/organizations/{id}/follow | Authenticated | Unfollow an org |
-| GET | /api/organizations/me/follows | Authenticated | List orgs the current user follows |
-
-**Events** (`app/routers/events.py`)
-
-| Method | Path | Auth required | Description |
-|---|---|---|---|
-| GET | /api/events | None | Upcoming events (next 7 days) across all orgs |
-| GET | /api/events/{id} | None | Get one event |
-| GET | /api/organizations/{id}/events | None | Upcoming events for one org (next 7 days) |
-| GET | /api/organizations/{id}/events/manage | Org admin | **All** events for the org, unfiltered by date — used by the manage UI |
-| POST | /api/organizations/{id}/events | Org admin | Create event (triggers a push to followers) |
-| PATCH | /api/organizations/{id}/events/{event_id} | Org admin | Edit event |
-| DELETE | /api/organizations/{id}/events/{event_id} | Org admin | Delete event |
-| POST | /api/organizations/{id}/events/{event_id}/photo | Org admin | Upload event photo |
-
-**Notifications** (`app/routers/notifications.py`)
-
-| Method | Path | Auth required | Description |
-|---|---|---|---|
-| GET | /api/notifications/vapid-public-key | None | Public VAPID key for `pushManager.subscribe()` |
-| POST | /api/notifications/subscribe | Authenticated | Register a push subscription |
-| DELETE | /api/notifications/unsubscribe | Authenticated | Remove a push subscription |
-| GET | /api/notifications | Authenticated | List the current user's notifications (newest first, up to 50) |
-| GET | /api/notifications/unread-count | Authenticated | Unread notification count, polled by the header bell |
-| POST | /api/notifications/{id}/read | Authenticated | Mark one notification read |
-| POST | /api/notifications/read-all | Authenticated | Mark all of the current user's notifications read |
-| POST | /api/notifications/broadcast | Dev admin | Send a notification + push to **every** user (see §7) |
-| POST | /api/notifications/debug-send | Dev admin | Manually trigger a push to a hardcoded org's followers (see §7) |
-
-### requirements.txt
-
-Install with `pip install -r requirements.txt`. Key packages (see `backend/requirements.txt` for the full pinned list): `fastapi`, `uvicorn[standard]`, `sqlalchemy[asyncio]`, `asyncpg`, `alembic`, `pydantic-settings`, `PyJWT`, `redis`, `aiosmtplib`, `APScheduler`, `pywebpush`, `py-vapid`.
-
-### Useful Commands
-
-**Server management:**
-```bash
-# Restart FastAPI after code changes
-systemctl restart stustaapp
-
-# View live FastAPI logs
-journalctl -u stustaapp -f
-
-# Reload Nginx after config changes
-systemctl reload nginx
-
-# Renew SSL certificate manually
-certbot renew
-```
-
-**Database migrations:**
-```bash
-# After changing a SQLAlchemy model, generate a migration
-alembic revision --autogenerate -m "describe what changed"
-
-# Apply all pending migrations to the database
-alembic upgrade head
-
-# Check current migration version
-alembic current
-```
-
-**Deployment** — see `deploy.sh` at the repo root. Deploy is git-based, not a manual file copy: the server clones/pulls this repo over HTTPS (using a fine-grained PAT, since the StuSta proxy blocks SSH-over-443), then the script reinstalls dependencies, runs migrations, rebuilds the frontend, and restarts the service:
-```bash
-# Run on the server, from /srv/stustaapp
-./deploy.sh
-```
-which does, in order: `git pull` → `pip install -r backend/requirements.txt` → `alembic upgrade head` → `npm ci && npm run build` (frontend) → `chown -R stustaapp:stustaapp /srv/stustaapp` → `systemctl restart stustaapp`.
-
-> **Tip:** Always activate your virtual environment before running any Python commands: `source backend/venv/bin/activate` — you should see `(venv)` at the start of your terminal prompt.

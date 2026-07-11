@@ -46,7 +46,7 @@ Full local setup details (Docker Compose, `.env.local` reference, generating a l
 
 ## Deployment
 
-Deploys are git-based: the server pulls from GitHub over HTTPS and runs `deploy.sh`, which reinstalls dependencies, runs migrations, rebuilds the frontend, and restarts the service. See [project_guide.md §10](project_guide.md#10-quick-reference) for the exact commands, and [project_guide.md §5](project_guide.md#5-server-infrastructure) for server layout.
+Deploys are git-based: the server pulls from GitHub over HTTPS and runs `deploy.sh`, which reinstalls dependencies, runs migrations, rebuilds the frontend, and restarts the service. See [project_guide.md §8](project_guide.md#8-quick-reference) for the exact commands, and [project_guide.md §5](project_guide.md#5-server-infrastructure) for server layout.
 
 ```bash
 # On the server, from /srv/stustaapp
