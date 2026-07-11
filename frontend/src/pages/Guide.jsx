@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Calendar, MapPin, Bell, User, Settings } from 'lucide-react'
+import { Calendar, MapPin, Bell, User, Settings, ShieldCheck, Wrench } from 'lucide-react'
 
 const SECTIONS = [
     {
@@ -22,10 +22,23 @@ const SECTIONS = [
         title: 'Profile',
         text: 'Manage your name, notification settings, and which organisations you follow.',
     },
+]
+
+const ADMIN_SECTIONS = [
     {
         icon: Settings,
-        title: 'Manage (admins only)',
-        text: 'If you help run an organisation, a Manage tab appears where you can create and edit events, update your org\'s info, and manage other admins.',
+        title: 'Org Admin',
+        text: 'The Manage tab shows a section for each organisation you help run. Create, edit, and delete its events, and upload a photo for each one.',
+    },
+    {
+        icon: ShieldCheck,
+        title: 'Boss Admin',
+        text: 'Everything an org admin can do, plus edit your organisation\'s info and logo, and invite or remove other admins — including other boss admins — for your org.',
+    },
+    {
+        icon: Wrench,
+        title: 'Dev Admin',
+        text: 'Full access across every organisation: create new organisations and assign their first boss admin, edit or delete any organisation, and broadcast a notification to every user in the app.',
     },
 ]
 
@@ -45,6 +58,23 @@ export default function Guide() {
 
             <div style={styles.list}>
                 {SECTIONS.map((section) => (
+                    <div key={section.title} style={styles.card}>
+                        <section.icon size={26} color="#0064BC" style={{ flexShrink: 0 }} />
+                        <div>
+                            <h2 style={styles.cardTitle}>{section.title}</h2>
+                            <p style={styles.cardText}>{section.text}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <h2 style={styles.sectionHeading}>For Admins</h2>
+            <p style={styles.subheading}>
+                If you help run an organisation, a Manage tab appears with the tools below for your role.
+            </p>
+
+            <div style={styles.list}>
+                {ADMIN_SECTIONS.map((section) => (
                     <div key={section.title} style={styles.card}>
                         <section.icon size={26} color="#0064BC" style={{ flexShrink: 0 }} />
                         <div>
@@ -82,6 +112,12 @@ const styles = {
         fontSize: '14px',
         color: '#555555',
         margin: '0 0 20px 0',
+    },
+    sectionHeading: {
+        fontSize: '18px',
+        fontWeight: '700',
+        color: '#1A1C1E',
+        margin: '28px 0 4px 0',
     },
     list: {
         display: 'flex',

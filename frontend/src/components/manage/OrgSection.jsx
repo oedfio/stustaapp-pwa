@@ -16,10 +16,7 @@ export default function OrgSection({ membership }) {
             </div>
 
             {isBossAdmin && <OrgInfoEditor membership={membership} />}
-
-            {/* FUTURE UPDATE
             {isBossAdmin && <AdminManager membership={membership} />}
-            */}
             <EventsManager membership={membership} />
         </div>
     )
