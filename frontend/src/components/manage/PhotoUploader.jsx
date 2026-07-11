@@ -3,7 +3,7 @@ import { Camera, Loader2 } from 'lucide-react'
 import { uploadEventPhoto } from '../../api/events'
 import { styles } from './styles'
 
-export default function PhotoUploader({ membership, eventId }) {
+export default function PhotoUploader({ membership, eventId, onUploaded, onError }) {
     const [loading, setLoading] = useState(false)
 
     const handleUpload = async (e) => {
@@ -12,8 +12,9 @@ export default function PhotoUploader({ membership, eventId }) {
         setLoading(true)
         try {
             await uploadEventPhoto(membership.org_id, eventId, file)
+            onUploaded?.()
         } catch {
-            alert('Failed to upload photo.')
+            onError?.()
         } finally {
             setLoading(false)
         }

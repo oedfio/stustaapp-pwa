@@ -39,6 +39,17 @@ export default function EventsManager({ membership }) {
         }
     }
 
+    const handlePhotoUploaded = () => {
+        setError(null)
+        setMessage('Photo uploaded successfully.')
+        loadEvents()
+    }
+
+    const handlePhotoError = () => {
+        setMessage(null)
+        setError('Failed to upload photo.')
+    }
+
     return (
         <div style={styles.subSection}>
             <div style={styles.subSectionHeader}>
@@ -98,7 +109,12 @@ export default function EventsManager({ membership }) {
                                 >
                                     <Pencil size={16} />
                                 </button>
-                                <PhotoUploader membership={membership} eventId={event.id} />
+                                <PhotoUploader
+                                    membership={membership}
+                                    eventId={event.id}
+                                    onUploaded={handlePhotoUploaded}
+                                    onError={handlePhotoError}
+                                />
                                 <button
                                     style={{ ...styles.iconButton, color: '#DC2626' }}
                                     onClick={() => handleDelete(event.id)}
