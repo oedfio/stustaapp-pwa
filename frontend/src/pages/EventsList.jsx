@@ -126,6 +126,7 @@ const styles = {
   },
   card: {
     display: 'flex',
+    alignItems: 'center',
     gap: '12px',
     backgroundColor: '#ffffff',
     borderRadius: '12px',
