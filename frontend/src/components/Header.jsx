@@ -35,7 +35,10 @@ export default function Header() {
 
     return (
         <header style={styles.header}>
-            <span style={styles.appName}>StuStaApp</span>
+            <div style={styles.brand}>
+                <img src="/pwa-192x192.png" alt="" style={styles.appIcon} />
+                <span style={styles.appName}>StuStaApp</span>
+            </div>
             <button
                 style={styles.bellButton}
                 onClick={() => navigate('/notifications')}
@@ -64,6 +67,15 @@ const styles = {
         justifyContent: 'space-between',
         padding: '0 16px',
         zIndex: 100,
+    },
+    brand: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+    },
+    appIcon: {
+        width: '22px',
+        height: '22px',
     },
     appName: {
         fontSize: '15px',
