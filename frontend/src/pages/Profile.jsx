@@ -283,6 +283,11 @@ export default function Profile() {
         </div>
       )}
 
+      {/* Getting Started guide */}
+      <button style={styles.guideButton} onClick={() => navigate('/guide')}>
+        Getting Started
+      </button>
+
       {/* Logout */}
       <button style={styles.logoutButton} onClick={handleLogout}>
         Log out
@@ -397,6 +402,18 @@ const styles = {
     backgroundColor: '#F3F4F6',
     padding: '4px 10px',
     borderRadius: '20px',
+  },
+  guideButton: {
+    width: '100%',
+    padding: '14px',
+    borderRadius: '12px',
+    backgroundColor: '#EFF6FF',
+    color: '#2563EB',
+    fontSize: '15px',
+    fontWeight: '600',
+    border: '1px solid #BFDBFE',
+    cursor: 'pointer',
+    marginTop: '24px',
   },
   logoutButton: {
     width: '100%',

@@ -12,6 +12,8 @@ export default function Footer() {
                 Impressum & Datenschutz
             </a>
             <span style={styles.dot}>·</span>
+            <FooterLink to="/guide">Getting Started</FooterLink>
+            <span style={styles.dot}>·</span>
             <FooterLink to="/who-created-this">Who created this?</FooterLink>
             <span style={styles.dot}>·</span>
             <FooterLink to="/special-thanks">Special Thanks</FooterLink>

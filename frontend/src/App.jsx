@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './components/AuthContext'
 import Header from './components/Header'
 import TabBar from './components/TabBar'
+import WelcomeModal from './components/WelcomeModal'
 import EventsList from './pages/EventsList'
 import EventDetail from './pages/EventDetail'
 import PlacesList from './pages/PlacesList'
@@ -10,6 +11,7 @@ import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Manage from './pages/Manage'
 import Notifications from './pages/Notifications'
+import Guide from './pages/Guide'
 import WhoCreatedThis from './pages/WhoCreatedThis'
 import SpecialThanks from './pages/SpecialThanks'
 import Footer from './components/Footer'
@@ -44,6 +46,7 @@ function AppContent() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/who-created-this" element={<WhoCreatedThis />} />
           <Route path="/special-thanks" element={<SpecialThanks />} />
+          <Route path="/guide" element={<Guide />} />
 
           {/* Requires login */}
           <Route path="/notifications" element={
@@ -62,6 +65,7 @@ function AppContent() {
 
       <Footer />
       <TabBar />
+      <WelcomeModal />
     </div>
   )
 }
