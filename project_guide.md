@@ -20,7 +20,7 @@
 4. [Technology Stack](#4-technology-stack)
 5. [Server Infrastructure](#5-server-infrastructure)
 6. [Local Development](#6-local-development)
-7. [Push Notifications](#7-push-notifications)
+7. [Push Notifications & Notification Center](#7-push-notifications--notification-center)
 8. [Development Timeline (historical)](#8-development-timeline-historical)
 9. [Cost Breakdown](#9-cost-breakdown)
 10. [Quick Reference](#10-quick-reference)
@@ -49,6 +49,10 @@ The permission system has four levels. Roles are scoped per organisation — a u
 A Progressive Web App is a website that behaves like a native mobile app. When a user visits stustaapp.stusta.mhn.de on their phone, the browser will prompt them to add the app to their home screen. Once installed it opens fullscreen with no browser chrome, can cache content for offline use, and can receive push notifications. This approach means you only need to build one app — not separate iOS and Android versions — and there is no App Store approval process to deal with.
 
 > **Important:** PWAs require HTTPS to function. The browser will not allow installation over plain HTTP. Make sure SSL is configured before testing the PWA install flow.
+
+### Onboarding
+
+New users see a one-time welcome modal on first visit (`WelcomeModal.jsx`, gated by a `localStorage` flag) with a link into `/guide` (`Guide.jsx`) — a static walkthrough covering PWA install steps for Android/iOS, the main tabs, following orgs for notifications, and a role-specific "For Admins" section (Org Admin / Boss Admin / Dev Admin). Also linked from the Footer and Profile page for anyone who dismissed the modal and wants to revisit it.
 
 ---
 
@@ -87,7 +91,7 @@ A JWT is a self-contained token that encodes the user's identity and is cryptogr
 
 ## 3. Data Model
 
-The application uses PostgreSQL as its primary database. The schema is kept intentionally simple. There are four main tables.
+The application uses PostgreSQL as its primary database. The schema is kept intentionally simple.
 
 ### Table: users
 
@@ -136,11 +140,13 @@ The frontend builds a Google Maps link from the coordinates — `https://www.goo
 | starts_at | timestamp (tz-aware) | Event start date and time |
 | ends_at | timestamp (tz-aware), nullable | Optional event end time. See [Event visibility rules](#event-visibility-rules) below for how a missing value is handled. |
 | location | text | Location or room name |
-| photo_url | text | Optional event photo stored on the VM filesystem |
+| photo_url | text | Optional event photo stored on the VM filesystem. Automatically cleared ~30 days after the event ends — see [Media Cleanup](#media-cleanup) below |
 | recurrence | enum | `none` / `weekly` / `biweekly` / `monthly` — **display label only**, see note below |
 | start_notification_sent | boolean | Set once the "event starting now" push has been sent, so the scheduler doesn't resend it |
 
 > **`recurrence` is metadata, not a real recurring series.** Each `Event` row is a single occurrence with one `starts_at`. Marking an event `weekly` shows a "🔁 Every week" badge in the UI, but the backend does **not** generate future occurrences — if you want the event to actually reappear every week, you currently have to create a new row each time. This is a known simplification, not a bug; a proper recurring-series implementation (a `recurrence_parent_id` + generated occurrences, or an `RRULE`-style expansion) would be the natural next step if this is worth building out.
+
+> **`description` (and organizations' `description`) support Markdown.** The frontend renders them with `react-markdown`, restricted to a safe subset — bold, italic, links, lists. No raw HTML or headings/images; see `frontend/src/components/MarkdownText.jsx`.
 
 #### Event visibility rules
 
@@ -149,6 +155,15 @@ The frontend builds a Google Maps link from the coordinates — `https://www.goo
 - it has no `ends_at` at all, in which case it's treated as lasting 24 hours from `starts_at` (so it doesn't vanish from the list the instant its start time passes, but also doesn't stay listed forever).
 
 The **admin management view** (`GET /api/organizations/{id}/events/manage`, org-admin only) intentionally applies **no date filter** — it returns every event for the org, past and future, so admins can find and edit anything they've created regardless of when it happens. `EventsManager.jsx` on the frontend uses this endpoint, not the public one.
+
+#### Media Cleanup
+
+`cleanup_unused_media` (`app/tasks.py`, runs weekly via APScheduler) has two passes:
+
+1. **`purge_old_event_photos()`** — for any event whose `ends_at` (or `starts_at` if it has no end time) is more than **30 days** in the past, deletes its photo file *and* clears `photo_url` in the same transaction. Without the DB-clearing half, an old event's page would show a broken image once the file is gone. Org logos are intentionally excluded — an org doesn't "end" the way an event does, so there's no equivalent retention window.
+2. **Orphan sweep** — deletes any file in `media/logos/` or `media/events/` that isn't referenced by *any* row at all (covers deleted orgs/events, and old files left behind when a logo/photo gets replaced by a new upload).
+
+Both passes only run once a week, so a deleted/replaced file can linger up to ~7 days before actually being removed from disk — this is expected, not a bug.
 
 ### Table: org_follows
 
@@ -172,7 +187,21 @@ Lets a resident "follow" an organisation (`POST /api/organizations/{id}/follow` 
 | auth | text | Auth secret for the push subscription |
 | created_at | timestamp | Set automatically |
 
-One row per browser/device subscription. See [Push Notifications](#7-push-notifications) below.
+One row per browser/device subscription. See [Push Notifications & Notification Center](#7-push-notifications--notification-center) below.
+
+### Table: notifications
+
+| Column | Type | Notes |
+|---|---|---|
+| id | UUID | Primary key |
+| user_id | UUID FK | References users.id |
+| title | text | Notification title |
+| body | text | Notification body |
+| url | text, nullable | Where tapping the notification navigates to |
+| created_at | timestamp | Set automatically |
+| read_at | timestamp, nullable | Null until the user marks it read |
+
+The in-app notification center: whenever `send_push_to_all` fires (new event posted, event starting now, or a dev-admin broadcast), it writes one row per targeted user here — **regardless of whether that user has a push subscription** — so the bell icon and `/notifications` page work even for users who never granted browser notification permission. See [Push Notifications & Notification Center](#7-push-notifications--notification-center).
 
 ### How roles are stored
 
@@ -234,6 +263,14 @@ Every component in the stack is open source and free. Nothing requires a paid li
 | Axios | HTTP client for talking to the backend API (`frontend/src/api/client.js`). |
 | Vite | Dev server and production bundler. |
 | vite-plugin-pwa + Workbox | Generates the service worker (`frontend/src/sw.js`), app manifest, and offline caching; also handles push/notificationclick events. |
+| lucide-react | SVG icon set — every icon in the app (tab bar, buttons, badges) uses this instead of emoji. |
+| react-markdown + remark-breaks | Renders event/org descriptions as a restricted Markdown subset (see §3). |
+
+### Design System
+
+The color palette (`#0064BC` primary, `#F2F2F7` backgrounds, `#1A1C1E`/`#555555` text, `#E3E3E4` borders) is deliberately sourced from [tum-dev/campus_flutter](https://github.com/tum-dev/campus_flutter)'s light theme (`lib/base/theme/constants.dart`), not invented from scratch — the intent is visual consistency with other TUM-affiliated student apps. There's no shared theme/tokens file yet; colors are still hardcoded per-component in inline style objects, so a future palette change means a project-wide find-and-replace rather than editing one file.
+
+The app icon (`frontend/public/favicon.svg`, rasterized to `pwa-192x192.png`/`pwa-512x512.png`) is a hand-authored SVG recreation of the original PNG mark — four diagonal stripes in a rounded square, transparent outside it (not a flattened white background, which is what a naive screenshot-based rasterization produces).
 
 ### Infrastructure
 
@@ -331,6 +368,8 @@ Nginx
     └── /media/*    →  serves uploaded images directly from disk
 ```
 
+Locally there's no Nginx, so FastAPI itself serves `/media/*` via a `StaticFiles` mount in `main.py` (see §6). That route is unreachable in production since Nginx intercepts `/media/*` before it ever reaches the app socket.
+
 ### Project Folder Structure
 
 ```
@@ -348,7 +387,7 @@ stustaapp/
 │   │   │   ├── auth.py          # POST /api/auth/send-otp  +  /api/auth/verify-otp
 │   │   │   ├── events.py        # CRUD endpoints for events + photo upload
 │   │   │   ├── organizations.py # CRUD for orgs + logo upload + admin mgmt + follows
-│   │   │   ├── notifications.py # VAPID key, push subscribe/unsubscribe, debug-send
+│   │   │   ├── notifications.py # VAPID key, push subscribe/unsubscribe, notification center, broadcast
 │   │   │   └── users.py         # GET/PATCH /api/users/me + /api/users/me/memberships
 │   │   ├── models/              # SQLAlchemy ORM table definitions
 │   │   │   ├── user.py
@@ -356,7 +395,8 @@ stustaapp/
 │   │   │   ├── membership.py
 │   │   │   ├── event.py
 │   │   │   ├── org_follow.py
-│   │   │   └── push_subscription.py
+│   │   │   ├── push_subscription.py
+│   │   │   └── notification.py
 │   │   └── schemas/             # Pydantic request/response shapes
 │   │       ├── auth.py
 │   │       ├── event.py
@@ -374,8 +414,11 @@ stustaapp/
 └── frontend/                    # React PWA
     ├── public/
     │   └── manifest.json        # PWA manifest (name, icons, theme colour)
-    ├── .env.production          # VITE_API_BASE_URL for the production build
+    ├── .env.production          # VITE_API_BASE_URL / VITE_MEDIA_BASE_URL for the production build
     └── src/
+        ├── media.js              # mediaUrl() — env-driven media URL helper, see §6
+        └── components/
+            └── MarkdownText.jsx  # Restricted Markdown renderer for descriptions
 ```
 
 ---
@@ -426,11 +469,14 @@ uvicorn app.main:app --reload --port 8000
 
 ### Frontend config
 
-`frontend/src/api/client.js` reads `VITE_API_BASE_URL` (empty string by default) so local dev talks to the backend through Vite's dev-server proxy instead of hitting production and getting CORS-blocked. `frontend/.env.production` sets this explicitly for the real deployed build, so nothing needs to change there.
+`frontend/src/api/client.js` reads `VITE_API_BASE_URL` (empty string by default) so local dev talks to the backend through Vite's dev-server proxy instead of hitting production and getting CORS-blocked. `frontend/src/media.js`'s `mediaUrl()` does the same thing for uploaded images (`VITE_MEDIA_BASE_URL`) — every `<img>` in the app goes through this helper rather than hardcoding a host. `frontend/.env.production` sets both explicitly for the real deployed build, so nothing needs to change there.
 
-`vite.config.js` has two dev-only additions (they don't affect `vite build`/production, since Nginx serves the built static files and never runs `vite dev`):
+`vite.config.js` has three dev-only additions (they don't affect `vite build`/production, since Nginx serves the built static files and never runs `vite dev`):
 - `server.proxy['/api'] → http://localhost:8000` — so relative `/api/...` calls reach the local backend.
+- `server.proxy['/media'] → http://localhost:8000` — same idea for uploaded images, served locally by FastAPI's `StaticFiles` mount (§5) since there's no Nginx.
 - `VitePWA({ devOptions: { enabled: true, type: 'module' } })` — the service worker (needed to test push notifications) is normally only built in production; this flag makes it register under `vite dev` too.
+
+> **Service worker cache gotcha**: `frontend/src/sw.js` caches `/media/*` responses with a `NetworkFirst` strategy (deliberately not `CacheFirst` — that used to permanently cache a broken cross-origin image request from before this fix existed, which persisted even after unregistering the service worker, since Cache Storage isn't cleared by unregistering). If an uploaded image seems to vanish or never update while testing locally, check DevTools → Application → Clear site data, not just re-registering the service worker.
 
 Run the frontend:
 ```bash
@@ -467,19 +513,24 @@ Paste the output into `backend/.env.local`. This is a **local-only** keypair —
 
 ---
 
-## 7. Push Notifications
+## 7. Push Notifications & Notification Center
 
-Web Push (via VAPID + `pywebpush`) is used for two kinds of notifications, both triggered from the backend and delivered even when the PWA isn't open:
+Web Push (via VAPID + `pywebpush`) and an in-app notification center are both driven by the same function, `send_push_to_all` (`app/routers/notifications.py`). It's used for three kinds of notifications:
 
 1. **New event posted** — `create_event` (`events.py`) fires `send_push_to_all(..., org_id=org.id)` as a background task, which notifies everyone following that org (`org_follows` table).
 2. **Event starting now** — the `send_event_start_notifications` APScheduler job runs every 5 minutes, finds events where `starts_at <= now` and `start_notification_sent = False`, sends a push to that event's followers, and flips the flag so it isn't resent.
+3. **Dev-admin broadcast** — `POST /api/notifications/broadcast` (dev-admin only) calls `send_push_to_all(org_id=None)`, which targets **every user**. Has a confirm prompt in the UI (`DevAdminSection.jsx`) since it reaches everyone.
 
 ### Flow
 
-1. Frontend calls `GET /api/notifications/vapid-public-key` and passes it to `pushManager.subscribe()` (see `Profile.jsx`) after the user grants the browser's notification permission.
-2. The resulting subscription (`endpoint`, `p256dh`, `auth`) is sent to `POST /api/notifications/subscribe` and stored in `push_subscriptions`.
-3. `send_push_to_all` reads matching subscriptions, sends each via `pywebpush`, and prunes subscriptions that come back `404`/`410` (the browser unsubscribed or the endpoint expired).
+1. `send_push_to_all` first resolves the target user IDs (org followers, or literally every user for a broadcast) and writes one row per user into the `notifications` table — this happens **regardless of push subscription status**, so the in-app bell/`/notifications` page works even for users who never granted browser notification permission.
+2. It then looks up push subscriptions only for those same target users and sends each via `pywebpush`, pruning subscriptions that come back `404`/`410` (the browser unsubscribed or the endpoint expired).
+3. Separately, on the subscribe side: frontend calls `GET /api/notifications/vapid-public-key` and passes it to `pushManager.subscribe()` (see `Profile.jsx`) after the user grants the browser's notification permission. The resulting subscription (`endpoint`, `p256dh`, `auth`) is sent to `POST /api/notifications/subscribe` and stored in `push_subscriptions`.
 4. The service worker (`frontend/src/sw.js`) handles the `push` event (shows the OS notification) and `notificationclick` (focuses/opens the app to the relevant URL).
+
+### In-app notification center
+
+`Header.jsx` shows a bell icon with an unread-count badge (polls `GET /api/notifications/unread-count` every 30s while logged in) and links to `/notifications` (`Notifications.jsx`), which lists recent notifications and supports marking one or all as read. See the Notifications endpoints in [§10 Quick Reference](#10-quick-reference).
 
 ### Debugging
 
@@ -763,7 +814,12 @@ The entire project runs at zero cost. All software is open source, the server is
 | GET | /api/notifications/vapid-public-key | None | Public VAPID key for `pushManager.subscribe()` |
 | POST | /api/notifications/subscribe | Authenticated | Register a push subscription |
 | DELETE | /api/notifications/unsubscribe | Authenticated | Remove a push subscription |
-| POST | /api/notifications/debug-send | Dev admin | Manually trigger a push (see §7) |
+| GET | /api/notifications | Authenticated | List the current user's notifications (newest first, up to 50) |
+| GET | /api/notifications/unread-count | Authenticated | Unread notification count, polled by the header bell |
+| POST | /api/notifications/{id}/read | Authenticated | Mark one notification read |
+| POST | /api/notifications/read-all | Authenticated | Mark all of the current user's notifications read |
+| POST | /api/notifications/broadcast | Dev admin | Send a notification + push to **every** user (see §7) |
+| POST | /api/notifications/debug-send | Dev admin | Manually trigger a push to a hardcoded org's followers (see §7) |
 
 ### requirements.txt
 
