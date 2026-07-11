@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Circle, MapPin, Repeat } from 'lucide-react'
 import { getEvents } from '../api/events'
+import { mediaUrl } from '../media'
 
 export default function EventsList() {
   const [events, setEvents] = useState([])
@@ -57,7 +58,7 @@ export default function EventsList() {
               {event.org_logo_url && (
                 <div style={styles.logoContainer}>
                   <img
-                    src={`https://stustaapp.stusta.mhn.de${event.org_logo_url}`}
+                    src={mediaUrl(event.org_logo_url)}
                     alt={event.org_name}
                     style={styles.logo}
                   />

@@ -4,6 +4,7 @@ import { MapPin } from 'lucide-react'
 import { getOrganization } from '../api/organizations'
 import { getOrgEvents } from '../api/events'
 import MarkdownText from '../components/MarkdownText'
+import { mediaUrl } from '../media'
 
 export default function OrganizationDetail() {
   const { id } = useParams()
@@ -52,7 +53,7 @@ export default function OrganizationDetail() {
       <div style={styles.header}>
         {org.logo_url && (
           <img
-            src={`https://stustaapp.stusta.mhn.de${org.logo_url}`}
+            src={mediaUrl(org.logo_url)}
             alt={org.name}
             style={styles.logo}
           />

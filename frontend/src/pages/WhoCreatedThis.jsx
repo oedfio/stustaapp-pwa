@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { mediaUrl } from '../media'
 
 export default function WhoCreatedThis() {
     const canvasRef = useRef(null)
@@ -75,7 +76,7 @@ export default function WhoCreatedThis() {
                 <h1 style={styles.legend}>LEGEND!</h1>
 
                 <img
-                    src="https://stustaapp.stusta.mhn.de/media/legend.jpg"
+                    src={mediaUrl('/media/legend.jpg')}
                     alt="The Legend"
                     style={styles.photo}
                 />

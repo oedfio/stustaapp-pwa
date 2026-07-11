@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { updateOrganization, uploadLogo, getOrganization } from '../../api/organizations'
+import { mediaUrl } from '../../media'
 import { styles } from './styles'
 
 export default function OrgInfoEditor({ membership }) {
@@ -143,7 +144,7 @@ export default function OrgInfoEditor({ membership }) {
             </div>
             {membership.org_logo_url && (
                 <img
-                    src={`https://stustaapp.stusta.mhn.de${membership.org_logo_url}`}
+                    src={mediaUrl(membership.org_logo_url)}
                     alt="Current logo"
                     style={styles.currentLogo}
                 />

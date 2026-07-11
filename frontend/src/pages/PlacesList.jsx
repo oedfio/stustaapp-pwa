@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MapPin } from 'lucide-react'
 import { getOrganizations } from '../api/organizations'
+import { mediaUrl } from '../media'
 
 export default function PlacesList() {
     const [organizations, setOrganizations] = useState([])
@@ -48,7 +49,7 @@ export default function PlacesList() {
                             {org.logo_url && (
                                 <div style={styles.logoContainer}>
                                     <img
-                                        src={`https://stustaapp.stusta.mhn.de${org.logo_url}`}
+                                        src={mediaUrl(org.logo_url)}
                                         alt={org.name}
                                         style={styles.logo}
                                     />

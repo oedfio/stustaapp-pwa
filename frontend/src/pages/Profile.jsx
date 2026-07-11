@@ -5,6 +5,7 @@ import { LogIn } from 'lucide-react'
 import { getVapidPublicKey, subscribePush, unsubscribePush } from '../api/notifications'
 import { useState, useEffect } from 'react'
 import { getOrganizations, getMyFollows, followOrganization, unfollowOrganization } from '../api/organizations'
+import { mediaUrl } from '../media'
 
 function urlBase64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4)
@@ -259,7 +260,7 @@ export default function Profile() {
                   <div style={styles.followInfo}>
                     {org.logo_url && (
                       <img
-                        src={`https://stustaapp.stusta.mhn.de${org.logo_url}`}
+                        src={mediaUrl(org.logo_url)}
                         alt={org.name}
                         style={styles.followLogo}
                       />

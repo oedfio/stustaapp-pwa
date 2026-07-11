@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Repeat, Calendar, Circle, MapPin } from 'lucide-react'
 import { getEvent } from '../api/events'
 import MarkdownText from '../components/MarkdownText'
+import { mediaUrl } from '../media'
 
 export default function EventDetail() {
   const { id } = useParams()
@@ -54,7 +55,7 @@ export default function EventDetail() {
       {/* Event photo */}
       {event.photo_url && (
         <img
-          src={`https://stustaapp.stusta.mhn.de${event.photo_url}`}
+          src={mediaUrl(event.photo_url)}
           alt={event.title}
           style={styles.photo}
         />
@@ -66,7 +67,7 @@ export default function EventDetail() {
         <div style={styles.orgRow}>
           {event.org_logo_url ? (
             <img
-              src={`https://stustaapp.stusta.mhn.de${event.org_logo_url}`}
+              src={mediaUrl(event.org_logo_url)}
               alt={event.org_name}
               style={styles.orgLogo}
             />

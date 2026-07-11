@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from app.routers import auth, organizations, users, events
@@ -82,6 +83,10 @@ app.include_router(organizations.router)
 app.include_router(users.router)
 app.include_router(events.router)
 app.include_router(notifications.router)
+
+# In production, Nginx serves /media/* directly from disk and this route is
+# never reached. Locally there's no Nginx, so FastAPI serves it instead.
+app.mount("/media", StaticFiles(directory=settings.media_root), name="media")
 
 @app.get("/api/health")
 async def health():

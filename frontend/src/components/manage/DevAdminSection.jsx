@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Trash2 } from 'lucide-react'
 import { createOrganization, updateOrganization, uploadLogo, inviteAdmin, removeAdmin, getOrganizations, getOrgMemberships, deleteOrganization } from '../../api/organizations'
 import { broadcastNotification } from '../../api/notifications'
+import { mediaUrl } from '../../media'
 import { styles } from './styles'
 
 export default function DevAdminSection() {
@@ -372,7 +373,7 @@ function DevOrgItem({ org, onUpdated }) {
             >
                 {org.logo_url && (
                     <img
-                        src={`https://stustaapp.stusta.mhn.de${org.logo_url}`}
+                        src={mediaUrl(org.logo_url)}
                         alt={org.name}
                         style={styles.devOrgLogo}
                     />
@@ -428,7 +429,7 @@ function DevOrgItem({ org, onUpdated }) {
                                 </label>
                             </div>
                             {org.logo_url && (
-                                <img src={`https://stustaapp.stusta.mhn.de${org.logo_url}`} alt="Current logo" style={styles.currentLogo} />
+                                <img src={mediaUrl(org.logo_url)} alt="Current logo" style={styles.currentLogo} />
                             )}
                         </form>
                     )}
