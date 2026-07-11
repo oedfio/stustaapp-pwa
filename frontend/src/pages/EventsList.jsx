@@ -53,20 +53,16 @@ export default function EventsList() {
               }}
               onClick={() => navigate(`/events/${event.id}`)}
             >
-              {/* Org logo */}
-              <div style={styles.logoContainer}>
-                {event.org_logo_url ? (
+              {/* Org logo — only shown if the org actually has one */}
+              {event.org_logo_url && (
+                <div style={styles.logoContainer}>
                   <img
                     src={`https://stustaapp.stusta.mhn.de${event.org_logo_url}`}
                     alt={event.org_name}
                     style={styles.logo}
                   />
-                ) : (
-                  <div style={styles.logoPlaceholder}>
-                    {event.org_name.charAt(0)}
-                  </div>
-                )}
-              </div>
+                </div>
+              )}
 
               {/* Event info */}
               <div style={styles.info}>
@@ -145,18 +141,6 @@ const styles = {
     height: '52px',
     borderRadius: '10px',
     objectFit: 'cover',
-  },
-  logoPlaceholder: {
-    width: '52px',
-    height: '52px',
-    borderRadius: '10px',
-    backgroundColor: '#E5EFF9',
-    color: '#0064BC',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '22px',
-    fontWeight: '700',
   },
   info: {
     flex: 1,
