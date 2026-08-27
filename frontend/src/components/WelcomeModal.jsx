@@ -86,7 +86,7 @@ const styles = {
         justifyContent: 'center',
     },
     primaryButton: {
-        backgroundColor: '#0064BC',
+        backgroundColor: '#388e3c',
         color: '#ffffff',
         border: 'none',
         borderRadius: '10px',

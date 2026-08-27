@@ -44,7 +44,7 @@ export default function Header() {
                 onClick={() => navigate('/notifications')}
                 aria-label="Notifications"
             >
-                <Bell size={20} color="#1A1C1E" />
+                <Bell size={20} color="#f9a825" />
                 {unreadCount > 0 && (
                     <span style={styles.badge}>{unreadCount > 9 ? '9+' : unreadCount}</span>
                 )}

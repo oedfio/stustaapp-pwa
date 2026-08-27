@@ -132,7 +132,7 @@ const styles = {
     markAllButton: {
         background: 'none',
         border: 'none',
-        color: '#0064BC',
+        color: '#388e3c',
         fontSize: '13px',
         fontWeight: '600',
         cursor: 'pointer',

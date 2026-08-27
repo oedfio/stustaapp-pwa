@@ -202,7 +202,7 @@ const styles = {
   button: {
     padding: '14px',
     borderRadius: '8px',
-    backgroundColor: '#0064BC',
+    backgroundColor: '#388e3c',
     color: '#ffffff',
     fontSize: '16px',
     fontWeight: '600',

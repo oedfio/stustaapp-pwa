@@ -2,44 +2,54 @@ import { NavLink } from 'react-router-dom'
 import { MapPin, Calendar, Settings, User } from 'lucide-react'
 import { useAuth } from './AuthContext'
 
+// One bold color per tab (yellow/red/green/blue), echoing the app icon's
+// stripes. Active uses the full bold color; inactive is a lighter tint
+// of the same hue, kept saturated enough to still read clearly.
+const TAB_COLORS = {
+  places: { active: '#f9a825', inactive: '#fbc266' },
+  events: { active: '#d32f2f', inactive: '#e06d6d' },
+  manage: { active: '#388e3c', inactive: '#74b077' },
+  profile: { active: '#1976d2', inactive: '#5e9fe0' },
+}
+
 export default function TabBar() {
   const { user, isAdmin } = useAuth()
 
   return (
     <nav style={styles.nav}>
-      <NavLink to="/places" style={navStyle}>
+      <NavLink to="/places" style={navStyle('places')}>
         {({ isActive }) => (
           <>
-            <MapPin size={20} color={isActive ? '#0064BC' : '#555555'} />
+            <MapPin size={20} color={isActive ? TAB_COLORS.places.active : TAB_COLORS.places.inactive} />
             <span style={styles.label}>Places</span>
           </>
         )}
       </NavLink>
 
-      <NavLink to="/" style={navStyle} end>
+      <NavLink to="/" style={navStyle('events')} end>
         {({ isActive }) => (
           <>
-            <Calendar size={20} color={isActive ? '#0064BC' : '#555555'} />
+            <Calendar size={20} color={isActive ? TAB_COLORS.events.active : TAB_COLORS.events.inactive} />
             <span style={styles.label}>Events</span>
           </>
         )}
       </NavLink>
 
       {user && isAdmin && (
-        <NavLink to="/manage" style={navStyle}>
+        <NavLink to="/manage" style={navStyle('manage')}>
           {({ isActive }) => (
             <>
-              <Settings size={20} color={isActive ? '#0064BC' : '#555555'} />
+              <Settings size={20} color={isActive ? TAB_COLORS.manage.active : TAB_COLORS.manage.inactive} />
               <span style={styles.label}>Manage</span>
             </>
           )}
         </NavLink>
       )}
 
-      <NavLink to="/profile" style={navStyle}>
+      <NavLink to="/profile" style={navStyle('profile')}>
         {({ isActive }) => (
           <>
-            <User size={20} color={isActive ? '#0064BC' : '#555555'} />
+            <User size={20} color={isActive ? TAB_COLORS.profile.active : TAB_COLORS.profile.inactive} />
             <span style={styles.label}>Profile</span>
           </>
         )}
@@ -48,9 +58,9 @@ export default function TabBar() {
   )
 }
 
-const navStyle = ({ isActive }) => ({
+const navStyle = (tab) => ({ isActive }) => ({
   ...styles.link,
-  color: isActive ? '#0064BC' : '#555555',
+  color: isActive ? TAB_COLORS[tab].active : TAB_COLORS[tab].inactive,
 })
 
 const styles = {

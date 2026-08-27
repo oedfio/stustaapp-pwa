@@ -140,7 +140,8 @@ The frontend builds a Google Maps link from the coordinates — `https://www.goo
 | location | text | Location or room name |
 | photo_url | text | Optional event photo stored on the VM filesystem. Automatically cleared ~30 days after the event ends — see [Media Cleanup](#media-cleanup) below |
 | recurrence | enum | `none` / `weekly` / `biweekly` / `monthly` — **display label only**, see note below |
-| start_notification_sent | boolean | Set once the "event starting now" push has been sent, so the scheduler doesn't resend it |
+| day_before_notification_sent | boolean | Set once the "day before at 18:00 Europe/Berlin" reminder push has been sent, so the scheduler doesn't resend it |
+| hour_before_notification_sent | boolean | Set once the "one hour before start" reminder push has been sent, so the scheduler doesn't resend it |
 
 > **`recurrence` is metadata, not a real recurring series.** Each `Event` row is a single occurrence with one `starts_at`. Marking an event `weekly` shows a "🔁 Every week" badge in the UI, but the backend does **not** generate future occurrences — if you want the event to actually reappear every week, you currently have to create a new row each time. This is a known simplification, not a bug; a proper recurring-series implementation (a `recurrence_parent_id` + generated occurrences, or an `RRULE`-style expansion) would be the natural next step if this is worth building out.
 
@@ -199,7 +200,7 @@ One row per browser/device subscription. See [Push Notifications & Notification 
 | created_at | timestamp | Set automatically |
 | read_at | timestamp, nullable | Null until the user marks it read |
 
-The in-app notification center: whenever `send_push_to_all` fires (new event posted, event starting now, or a dev-admin broadcast), it writes one row per targeted user here — **regardless of whether that user has a push subscription** — so the bell icon and `/notifications` page work even for users who never granted browser notification permission. See [Push Notifications & Notification Center](#7-push-notifications--notification-center).
+The in-app notification center: whenever `send_push_to_all` fires (a day-before or hour-before event reminder, or a dev-admin broadcast), it writes one row per targeted user here — **regardless of whether that user has a push subscription** — so the bell icon and `/notifications` page work even for users who never granted browser notification permission. See [Push Notifications & Notification Center](#7-push-notifications--notification-center).
 
 ### How roles are stored
 
@@ -248,7 +249,7 @@ Every component in the stack is open source and free. Nothing requires a paid li
 | PyJWT | Creates and verifies JWT tokens for authentication. |
 | redis-py (async) | Python client for Redis. Used to store and retrieve OTP hashes. |
 | aiosmtplib | Async SMTP client. Sends OTP emails via mail.stusta.de port 25. |
-| APScheduler | In-process job scheduler — runs `cleanup_unused_media` (weekly) and `send_event_start_notifications` (every 5 min). |
+| APScheduler | In-process job scheduler — runs `cleanup_unused_media` (weekly) and `send_event_reminder_notifications` (every 5 min). |
 | pywebpush / py-vapid | Sends Web Push notifications and generates/handles VAPID key pairs. |
 | uvicorn | ASGI server that runs the FastAPI application as a process. |
 
@@ -269,6 +270,8 @@ Every component in the stack is open source and free. Nothing requires a paid li
 The color palette (`#0064BC` primary, `#F2F2F7` backgrounds, `#1A1C1E`/`#555555` text, `#E3E3E4` borders) is deliberately sourced from [tum-dev/campus_flutter](https://github.com/tum-dev/campus_flutter)'s light theme (`lib/base/theme/constants.dart`), not invented from scratch — the intent is visual consistency with other TUM-affiliated student apps. There's no shared theme/tokens file yet; colors are still hardcoded per-component in inline style objects, so a future palette change means a project-wide find-and-replace rather than editing one file.
 
 The app icon (`frontend/public/favicon.svg`, rasterized to `pwa-192x192.png`/`pwa-512x512.png`) is a hand-authored SVG recreation of the original PNG mark — four diagonal stripes in a rounded square, transparent outside it (not a flattened white background, which is what a naive screenshot-based rasterization produces).
+
+The bottom tab bar (`TabBar.jsx`) echoes those four icon stripes with one bold, saturated color per tab instead of the single primary blue: Places yellow (`#f9a825`), Events red (`#d32f2f`), Manage green (`#388e3c`), Profile blue (`#1976d2`) — each tab's active state uses the full color and its inactive state a lighter tint of the same hue (not gray). The Getting Started guide (`Guide.jsx`) reuses the same per-feature colors on its section icons so a section visually matches the tab/icon it explains, and the header's notification bell (`Header.jsx`) uses the same yellow as the Places tab. Primary action buttons across the app (Save/Login/submit-style buttons — not Back buttons, which stay the original blue, and not semantic-state buttons like delete/toggle) were also switched from the primary blue to the Manage-tab green (`#388e3c`). None of this lives in a shared tokens file yet either — same caveat as above, a future change to any of these means finding every occurrence by hand.
 
 ### Infrastructure
 
@@ -380,7 +383,7 @@ stustaapp/
 │   │   ├── config.py            # Settings loaded from .env / .env.local
 │   │   ├── auth.py              # JWT and OTP helper functions
 │   │   ├── uploads.py           # Shared image upload validation + async file write
-│   │   ├── tasks.py             # Background jobs (media cleanup, event-start pushes)
+│   │   ├── tasks.py             # Background jobs (media cleanup, event reminder pushes)
 │   │   ├── routers/
 │   │   │   ├── auth.py          # POST /api/auth/send-otp  +  /api/auth/verify-otp
 │   │   │   ├── events.py        # CRUD endpoints for events + photo upload
@@ -515,16 +518,19 @@ Paste the output into `backend/.env.local`. This is a **local-only** keypair —
 
 Web Push (via VAPID + `pywebpush`) and an in-app notification center are both driven by the same function, `send_push_to_all` (`app/routers/notifications.py`). It's used for three kinds of notifications:
 
-1. **New event posted** — `create_event` (`events.py`) fires `send_push_to_all(..., org_id=org.id)` as a background task, which notifies everyone following that org (`org_follows` table).
-2. **Event starting now** — the `send_event_start_notifications` APScheduler job runs every 5 minutes, finds events where `starts_at <= now` and `start_notification_sent = False`, sends a push to that event's followers, and flips the flag so it isn't resent.
-3. **Dev-admin broadcast** — `POST /api/notifications/broadcast` (dev-admin only) calls `send_push_to_all(org_id=None)`, which targets **every user**. Has a confirm prompt in the UI (`DevAdminSection.jsx`) since it reaches everyone.
+1. **Event reminders** — the `send_event_reminder_notifications` APScheduler job (`app/tasks.py`) runs every 5 minutes and sends up to two one-time reminder pushes per event to that event's followers:
+   - **Day before, 18:00 Europe/Berlin** — fires once `now >= (event's local start date − 1 day) at 18:00`, flips `day_before_notification_sent`.
+   - **One hour before start** — fires once `now >= starts_at − 1 hour`, flips `hour_before_notification_sent`.
+
+   Both checks run against the same query (events with `starts_at > now` and either flag still `False`); an event created after one of its trigger times has already passed simply gets that reminder sent on the next tick rather than skipped. There is no push on event creation — creating an event does not itself notify anyone.
+2. **Dev-admin broadcast** — `POST /api/notifications/broadcast` (dev-admin only) calls `send_push_to_all(org_id=None)`, which targets **every user**. Has a confirm prompt in the UI (`DevAdminSection.jsx`) since it reaches everyone.
 
 ### Flow
 
 1. `send_push_to_all` first resolves the target user IDs (org followers, or literally every user for a broadcast) and writes one row per user into the `notifications` table — this happens **regardless of push subscription status**, so the in-app bell/`/notifications` page works even for users who never granted browser notification permission.
 2. It then looks up push subscriptions only for those same target users and sends each via `pywebpush`, pruning subscriptions that come back `404`/`410` (the browser unsubscribed or the endpoint expired).
 3. Separately, on the subscribe side: frontend calls `GET /api/notifications/vapid-public-key` and passes it to `pushManager.subscribe()` (see `Profile.jsx`) after the user grants the browser's notification permission. The resulting subscription (`endpoint`, `p256dh`, `auth`) is sent to `POST /api/notifications/subscribe` and stored in `push_subscriptions`.
-4. The service worker (`frontend/src/sw.js`) handles the `push` event (shows the OS notification) and `notificationclick` (focuses/opens the app to the relevant URL).
+4. The service worker (`frontend/src/sw.js`) handles the `push` event (shows the OS notification) and `notificationclick` (focuses/opens the app to the relevant URL). `showNotification` is given two separate images: `icon` (`pwa-192x192.png`, the full-color app icon shown in the expanded notification) and `badge` (`frontend/public/notification-badge.png`, a white bell silhouette on a transparent background). Android renders `badge` in the status bar using only its alpha channel, so it has to be a monochrome/transparent asset — pointing it at a full-color, mostly-opaque icon (as it originally was) renders as a solid blob there. iOS Safari ignores `badge` entirely and always shows the installed app's icon.
 
 ### In-app notification center
 

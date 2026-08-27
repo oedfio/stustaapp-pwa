@@ -14,26 +14,33 @@ const INSTALL_SECTIONS = [
     },
 ]
 
+// Same colors as the tab bar (src/components/TabBar.jsx) and the
+// notification bell (src/components/Header.jsx), so a section here
+// visually matches the tab/icon it explains.
 const SECTIONS = [
     {
         icon: Calendar,
         title: 'Events',
         text: 'The Events tab shows what\'s happening in Studentenstadt over the next week, soonest first. Tap any event for the full details, location, and photo.',
+        color: '#d32f2f',
     },
     {
         icon: MapPin,
         title: 'Places',
         text: 'Browse every organisation and club in the dorm. Tap one to see its info, location on the map, and its upcoming events.',
+        color: '#f9a825',
     },
     {
         icon: Bell,
         title: 'Follow for notifications',
         text: 'Open an organisation\'s page and follow it to get notified whenever they post a new event. Enable push notifications in Profile to get them even when the app is closed.',
+        color: '#f9a825',
     },
     {
         icon: User,
         title: 'Profile',
         text: 'Manage your name, notification settings, and which organisations you follow.',
+        color: '#1976d2',
     },
 ]
 
@@ -42,16 +49,19 @@ const ADMIN_SECTIONS = [
         icon: Settings,
         title: 'Org Admin',
         text: 'The Manage tab shows a section for each organisation you help run. Create, edit, and delete its events, and upload a photo for each one.',
+        color: '#388e3c',
     },
     {
         icon: ShieldCheck,
         title: 'Boss Admin',
         text: 'Everything an org admin can do, plus edit your organisation\'s info and logo, and invite or remove other admins — including other boss admins — for your org.',
+        color: '#388e3c',
     },
     {
         icon: Wrench,
         title: 'Dev Admin',
         text: 'Full access across every organisation: create new organisations and assign their first boss admin, edit or delete any organisation, and broadcast a notification to every user in the app.',
+        color: '#388e3c',
     },
 ]
 
@@ -92,7 +102,7 @@ export default function Guide() {
             <div style={styles.list}>
                 {SECTIONS.map((section) => (
                     <div key={section.title} style={styles.card}>
-                        <section.icon size={26} color="#0064BC" style={{ flexShrink: 0 }} />
+                        <section.icon size={26} color={section.color} style={{ flexShrink: 0 }} />
                         <div>
                             <h2 style={styles.cardTitle}>{section.title}</h2>
                             <p style={styles.cardText}>{section.text}</p>
@@ -109,7 +119,7 @@ export default function Guide() {
             <div style={styles.list}>
                 {ADMIN_SECTIONS.map((section) => (
                     <div key={section.title} style={styles.card}>
-                        <section.icon size={26} color="#0064BC" style={{ flexShrink: 0 }} />
+                        <section.icon size={26} color={section.color} style={{ flexShrink: 0 }} />
                         <div>
                             <h2 style={styles.cardTitle}>{section.title}</h2>
                             <p style={styles.cardText}>{section.text}</p>

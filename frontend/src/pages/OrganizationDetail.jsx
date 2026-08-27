@@ -66,7 +66,7 @@ export default function OrganizationDetail() {
         {/* Location */}
         {org.location_name && (
           <div style={styles.infoRow}>
-            <MapPin size={18} color="#555555" style={{ flexShrink: 0 }} />
+            <MapPin size={18} color="#d32f2f" style={{ flexShrink: 0 }} />
             {mapsUrl ? (
               <a
                 href={mapsUrl}
@@ -193,7 +193,7 @@ const styles = {
     padding: '16px',
     backgroundColor: '#F2F2F7',
     borderRadius: '12px',
-    borderLeft: '4px solid #0064BC',
+    border: '4px solid #388e3c',
     marginBottom: '24px',
   },
   description: {
