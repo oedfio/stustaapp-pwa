@@ -1,8 +1,9 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from app.routers import auth, organizations, users, events
-from app.tasks import cleanup_unused_media, send_event_start_notifications
+from app.tasks import cleanup_unused_media, send_event_reminder_notifications
 import logging
 import logging.handlers
 from app.routers import auth, organizations, users, events, notifications
@@ -56,10 +57,10 @@ async def lifespan(app: FastAPI):
         id="cleanup_unused_media",
     )
     scheduler.add_job(
-        send_event_start_notifications,
+        send_event_reminder_notifications,
         trigger="interval",
         minutes=5,
-        id="send_event_start_notifications",
+        id="send_event_reminder_notifications",
     )
     scheduler.start()
     yield
@@ -82,6 +83,10 @@ app.include_router(organizations.router)
 app.include_router(users.router)
 app.include_router(events.router)
 app.include_router(notifications.router)
+
+# In production, Nginx serves /media/* directly from disk and this route is
+# never reached. Locally there's no Nginx, so FastAPI serves it instead.
+app.mount("/media", StaticFiles(directory=settings.media_root), name="media")
 
 @app.get("/api/health")
 async def health():

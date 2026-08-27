@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { MapPin } from 'lucide-react'
 import { getOrganization } from '../api/organizations'
 import { getOrgEvents } from '../api/events'
+import MarkdownText from '../components/MarkdownText'
+import { mediaUrl } from '../media'
 
 export default function OrganizationDetail() {
   const { id } = useParams()
@@ -50,7 +53,7 @@ export default function OrganizationDetail() {
       <div style={styles.header}>
         {org.logo_url && (
           <img
-            src={`https://stustaapp.stusta.mhn.de${org.logo_url}`}
+            src={mediaUrl(org.logo_url)}
             alt={org.name}
             style={styles.logo}
           />
@@ -63,7 +66,7 @@ export default function OrganizationDetail() {
         {/* Location */}
         {org.location_name && (
           <div style={styles.infoRow}>
-            <span style={styles.infoIcon}>📍</span>
+            <MapPin size={18} color="#d32f2f" style={{ flexShrink: 0 }} />
             {mapsUrl ? (
               <a
                 href={mapsUrl}
@@ -82,7 +85,7 @@ export default function OrganizationDetail() {
         {/* Description */}
         {org.description && (
           <div style={styles.descriptionBox}>
-            <p style={styles.description}>{org.description}</p>
+            <MarkdownText style={styles.description}>{org.description}</MarkdownText>
           </div>
         )}
 
@@ -111,7 +114,10 @@ export default function OrganizationDetail() {
                     })}
                   </p>
                   {event.location && (
-                    <p style={styles.eventLocation}>📍 {event.location}</p>
+                    <p style={styles.eventLocation}>
+                      <MapPin size={13} color="#555555" style={{ verticalAlign: '-2px', marginRight: '4px' }} />
+                      {event.location}
+                    </p>
                   )}
                 </div>
                 <span style={styles.arrow}>›</span>
@@ -134,7 +140,7 @@ const styles = {
   backButton: {
     background: 'none',
     border: 'none',
-    color: '#2563EB',
+    color: '#0064BC',
     fontSize: '16px',
     cursor: 'pointer',
     padding: '16px',
@@ -148,16 +154,18 @@ const styles = {
     gap: '16px',
   },
   logo: {
-    width: '128px',
-    height: '128px',
+    maxWidth: '160px',
+    maxHeight: '160px',
+    width: 'auto',
+    height: 'auto',
     borderRadius: '20px',
-    objectFit: 'cover',
+    objectFit: 'contain',
     boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
   },
   name: {
     fontSize: '26px',
     fontWeight: '700',
-    color: '#1E2A3A',
+    color: '#1A1C1E',
     margin: '0',
     textAlign: 'center',
   },
@@ -170,31 +178,27 @@ const styles = {
     gap: '10px',
     marginBottom: '16px',
   },
-  infoIcon: {
-    fontSize: '18px',
-    flexShrink: 0,
-  },
   infoText: {
     fontSize: '15px',
-    color: '#374151',
+    color: '#1A1C1E',
     lineHeight: '1.5',
   },
   locationLink: {
     fontSize: '15px',
-    color: '#2563EB',
+    color: '#0064BC',
     textDecoration: 'none',
     lineHeight: '1.5',
   },
   descriptionBox: {
     padding: '16px',
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#F2F2F7',
     borderRadius: '12px',
-    borderLeft: '4px solid #2563EB',
+    border: '4px solid #388e3c',
     marginBottom: '24px',
   },
   description: {
     fontSize: '15px',
-    color: '#374151',
+    color: '#1A1C1E',
     lineHeight: '1.7',
     margin: '0',
     whiteSpace: 'pre-wrap',
@@ -202,12 +206,12 @@ const styles = {
   sectionHeading: {
     fontSize: '18px',
     fontWeight: '700',
-    color: '#1E2A3A',
+    color: '#1A1C1E',
     margin: '0 0 12px 0',
   },
   noEvents: {
     fontSize: '14px',
-    color: '#6B7280',
+    color: '#555555',
     margin: '0',
   },
   eventsList: {
@@ -224,7 +228,7 @@ const styles = {
     padding: '14px',
     boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
     cursor: 'pointer',
-    border: '1px solid #F3F4F6',
+    border: '1px solid #F2F2F7',
   },
   eventInfo: {
     flex: 1,
@@ -233,29 +237,29 @@ const styles = {
   eventTitle: {
     fontSize: '15px',
     fontWeight: '600',
-    color: '#1E2A3A',
+    color: '#1A1C1E',
     margin: '0 0 4px 0',
   },
   eventDate: {
     fontSize: '13px',
-    color: '#2563EB',
+    color: '#0064BC',
     margin: '0 0 2px 0',
     fontWeight: '500',
   },
   eventLocation: {
     fontSize: '13px',
-    color: '#6B7280',
+    color: '#555555',
     margin: '0',
   },
   arrow: {
     fontSize: '24px',
-    color: '#D1D5DB',
+    color: '#AAAAAA',
     flexShrink: 0,
   },
   center: {
     display: 'flex',
     justifyContent: 'center',
     padding: '40px 16px',
-    color: '#6B7280',
+    color: '#555555',
   },
 }

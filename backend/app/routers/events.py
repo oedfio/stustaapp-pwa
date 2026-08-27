@@ -1,28 +1,32 @@
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from uuid import UUID
 from datetime import datetime, timezone, timedelta
-import shutil
 import os
 import time
 
+from app.config import settings
 from app.database import get_db
 from app.dependencies import get_current_user, require_org_admin
+from app.uploads import read_validated_image, save_image
 from app.models.event import Event
 from app.models.organization import Organization
 from app.models.user import User
-from app.schemas.event import EventCreate, EventUpdate, EventResponse, EventWithOrgResponse
-from app.routers.notifications import send_push_to_all
+from app.schemas.event import EventCreate, EventUpdate, EventResponse, EventWithOrgResponse, EventPhotoReuse, EventPhoto
 
 import logging
-from sqlalchemy import or_
+from sqlalchemy import or_, and_, func
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api", tags=["events"])
 
-EVENTS_MEDIA_DIR = "/srv/stustaapp/media/events"
+EVENTS_MEDIA_DIR = os.path.join(settings.media_root, "events")
+
+# How long a finished event stays visible in the Manage tab before it's
+# hidden from the list. Matches the event-photo retention window.
+MANAGE_EVENT_RETENTION = timedelta(days=30)
 
 
 @router.get("/events", response_model=list[EventWithOrgResponse])
@@ -31,21 +35,19 @@ async def list_events(
 ):
     now = datetime.now(timezone.utc)
     week_end = now + timedelta(days=7)
+    no_end_grace = now - timedelta(hours=24)
 
     result = await db.execute(
         select(Event, Organization)
         .join(Organization, Event.org_id == Organization.id)
         .where(
             Event.starts_at <= week_end,
-            # Show event if ends_at is not set and starts_at >= now
-            # OR if ends_at is set and ends_at >= now
+            # Show the event while it hasn't ended yet. Events without an
+            # explicit end time are treated as lasting 24h from their start
+            # so they don't vanish the instant starts_at passes.
             or_(
                 Event.ends_at >= now,
-                Event.ends_at == None,
-            ),
-            or_(
-                Event.starts_at >= now,
-                Event.ends_at >= now,
+                and_(Event.ends_at == None, Event.starts_at >= no_end_grace),
             ),
         )
         .order_by(Event.starts_at.asc())
@@ -115,6 +117,7 @@ async def list_org_events(
 ):
     now = datetime.now(timezone.utc)
     week_end = now + timedelta(days=7)
+    no_end_grace = now - timedelta(hours=24)
 
     result = await db.execute(
         select(Event)
@@ -123,22 +126,71 @@ async def list_org_events(
             Event.starts_at <= week_end,
             or_(
                 Event.ends_at >= now,
-                Event.ends_at == None,
-            ),
-            or_(
-                Event.starts_at >= now,
-                Event.ends_at >= now,
+                and_(Event.ends_at == None, Event.starts_at >= no_end_grace),
             ),
         )
         .order_by(Event.starts_at.asc())
     )
     return result.scalars().all()
 
+
+@router.get("/organizations/{org_id}/events/manage", response_model=list[EventResponse])
+async def list_org_events_for_management(
+    org_id: UUID,
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(require_org_admin),
+):
+    # Org admin only — unfiltered by the "next 7 days" window used by the
+    # public listing, so admins can find and edit events scheduled further
+    # out. Events that ended (or, with no ends_at, started) more than
+    # MANAGE_EVENT_RETENTION ago drop off the list — same cutoff as photo
+    # cleanup, so an event's photo and its Manage-tab visibility expire
+    # together.
+    cutoff = datetime.now(timezone.utc) - MANAGE_EVENT_RETENTION
+
+    result = await db.execute(
+        select(Event)
+        .where(
+            Event.org_id == org_id,
+            func.coalesce(Event.ends_at, Event.starts_at) >= cutoff,
+        )
+        .order_by(Event.starts_at.desc())
+    )
+    return result.scalars().all()
+
+
+@router.get("/organizations/{org_id}/events/photos", response_model=list[EventPhoto])
+async def list_org_event_photos(
+    org_id: UUID,
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(require_org_admin),
+):
+    # Org admin only — every photo the org has ever uploaded for an event
+    # (regardless of the event's own age/visibility), most recent first, so
+    # a new event can reuse one instead of uploading a duplicate file. Not
+    # filtered by MANAGE_EVENT_RETENTION: a photo stays reusable even after
+    # its original event has aged out of the Manage list.
+    result = await db.execute(
+        select(Event.id, Event.title, Event.photo_url)
+        .where(Event.org_id == org_id, Event.photo_url.is_not(None))
+        .order_by(Event.starts_at.desc())
+    )
+
+    seen_urls = set()
+    photos = []
+    for event_id, title, photo_url in result.all():
+        if photo_url in seen_urls:
+            continue
+        seen_urls.add(photo_url)
+        photos.append(EventPhoto(event_id=event_id, event_title=title, photo_url=photo_url))
+
+    return photos[:30]
+
+
 @router.post("/organizations/{org_id}/events", response_model=EventResponse, status_code=201)
 async def create_event(
     org_id: UUID,
     payload: EventCreate,
-    background_tasks: BackgroundTasks,
     db: AsyncSession = Depends(get_db),
     user: User = Depends(require_org_admin),
 ):
@@ -153,16 +205,6 @@ async def create_event(
 
     result = await db.execute(select(Organization).where(Organization.id == org_id))
     org = result.scalar_one_or_none()
-
-    # Send push notification to all subscribed users
-    # Send push notification in the background — don't block the response
-    background_tasks.add_task(
-        send_push_to_all,
-        title=f"New event: {event.title}",
-        body=f"{org.name} just posted a new event",
-        url=f"/events/{event.id}",
-        org_id=org.id,
-    )
 
     logger.info(f"Event created: {event.title} by {user.email} in the organization {org.name}")
     return event
@@ -233,21 +275,50 @@ async def upload_event_photo(
     if event is None:
         raise HTTPException(status_code=404, detail="Event not found")
 
-    if file.content_type not in ("image/jpeg", "image/png", "image/webp"):
-        raise HTTPException(status_code=400, detail="Only JPEG, PNG and WebP images are allowed")
-
+    data, extension = await read_validated_image(file)
 
     # Save file to disk using event ID + timestamp as filename
-    extension = file.filename.split(".")[-1]
     filename = f"{event_id}_{int(time.time())}.{extension}"
     filepath = os.path.join(EVENTS_MEDIA_DIR, filename)
 
-    with open(filepath, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
+    await save_image(filepath, data)
 
     event.photo_url = f"/media/events/{filename}"
     await db.commit()
     await db.refresh(event)
     
     logger.info(f"Event photo uploaded: {event.title} by {user.email} in the organization {org_id}")
+    return event
+
+
+@router.post("/organizations/{org_id}/events/{event_id}/photo/reuse", response_model=EventResponse)
+async def reuse_event_photo(
+    org_id: UUID,
+    event_id: UUID,
+    payload: EventPhotoReuse,
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(require_org_admin),
+):
+    result = await db.execute(
+        select(Event).where(Event.id == event_id, Event.org_id == org_id)
+    )
+    event = result.scalar_one_or_none()
+
+    if event is None:
+        raise HTTPException(status_code=404, detail="Event not found")
+
+    # The photo must belong to this org — i.e. some other event of theirs
+    # already uses this exact URL — so an admin can't point an event at an
+    # arbitrary/other-org media path.
+    result = await db.execute(
+        select(Event.id).where(Event.org_id == org_id, Event.photo_url == payload.photo_url)
+    )
+    if result.first() is None:
+        raise HTTPException(status_code=400, detail="Photo not found for this organisation")
+
+    event.photo_url = payload.photo_url
+    await db.commit()
+    await db.refresh(event)
+
+    logger.info(f"Event photo reused: {event.title} by {user.email} in the organization {org_id}")
     return event

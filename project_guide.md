@@ -19,8 +19,8 @@
 3. [Data Model](#3-data-model)
 4. [Technology Stack](#4-technology-stack)
 5. [Server Infrastructure](#5-server-infrastructure)
-6. [Development Timeline](#6-development-timeline)
-7. [Cost Breakdown](#7-cost-breakdown)
+6. [Local Development](#6-local-development)
+7. [Push Notifications & Notification Center](#7-push-notifications--notification-center)
 8. [Quick Reference](#8-quick-reference)
 
 ---
@@ -47,6 +47,10 @@ The permission system has four levels. Roles are scoped per organisation — a u
 A Progressive Web App is a website that behaves like a native mobile app. When a user visits stustaapp.stusta.mhn.de on their phone, the browser will prompt them to add the app to their home screen. Once installed it opens fullscreen with no browser chrome, can cache content for offline use, and can receive push notifications. This approach means you only need to build one app — not separate iOS and Android versions — and there is no App Store approval process to deal with.
 
 > **Important:** PWAs require HTTPS to function. The browser will not allow installation over plain HTTP. Make sure SSL is configured before testing the PWA install flow.
+
+### Onboarding
+
+New users see a one-time welcome modal on first visit (`WelcomeModal.jsx`, gated by a `localStorage` flag) with a link into `/guide` (`Guide.jsx`) — a static walkthrough covering PWA install steps for Android/iOS, the main tabs, following orgs for notifications, and a role-specific "For Admins" section (Org Admin / Boss Admin / Dev Admin). Also linked from the Footer and Profile page for anyone who dismissed the modal and wants to revisit it.
 
 ---
 
@@ -85,7 +89,7 @@ A JWT is a self-contained token that encodes the user's identity and is cryptogr
 
 ## 3. Data Model
 
-The application uses PostgreSQL as its primary database. The schema is kept intentionally simple. There are four main tables.
+The application uses PostgreSQL as its primary database. The schema is kept intentionally simple.
 
 ### Table: users
 
@@ -93,6 +97,8 @@ The application uses PostgreSQL as its primary database. The schema is kept inte
 |---|---|---|
 | id | UUID | Primary key, auto-generated |
 | email | text | Unique, used for login |
+| first_name | text | Optional, editable via `PATCH /api/users/me` |
+| last_name | text | Optional, editable via `PATCH /api/users/me` |
 | is_dev_admin | boolean | True only for superusers |
 | created_at | timestamp | Set automatically on insert |
 
@@ -129,14 +135,79 @@ The frontend builds a Google Maps link from the coordinates — `https://www.goo
 | created_by | UUID FK | References users.id |
 | title | text | Event title |
 | description | text | Full description |
-| starts_at | timestamp | Event start date and time |
+| starts_at | timestamp (tz-aware) | Event start date and time |
+| ends_at | timestamp (tz-aware), nullable | Optional event end time. See [Event visibility rules](#event-visibility-rules) below for how a missing value is handled. |
 | location | text | Location or room name |
-| photo_url | text | Optional event photo stored on the VM filesystem |
+| photo_url | text | Optional event photo stored on the VM filesystem. Automatically cleared ~30 days after the event ends — see [Media Cleanup](#media-cleanup) below |
+| recurrence | enum | `none` / `weekly` / `biweekly` / `monthly` — **display label only**, see note below |
+| day_before_notification_sent | boolean | Set once the "day before at 18:00 Europe/Berlin" reminder push has been sent, so the scheduler doesn't resend it |
+| hour_before_notification_sent | boolean | Set once the "one hour before start" reminder push has been sent, so the scheduler doesn't resend it |
+
+> **`recurrence` is metadata, not a real recurring series.** Each `Event` row is a single occurrence with one `starts_at`. Marking an event `weekly` shows a "🔁 Every week" badge in the UI, but the backend does **not** generate future occurrences — if you want the event to actually reappear every week, you currently have to create a new row each time. This is a known simplification, not a bug; a proper recurring-series implementation (a `recurrence_parent_id` + generated occurrences, or an `RRULE`-style expansion) would be the natural next step if this is worth building out.
+
+> **`description` (and organizations' `description`) support Markdown.** The frontend renders them with `react-markdown`, restricted to a safe subset — bold, italic, links, lists. No raw HTML or headings/images; see `frontend/src/components/MarkdownText.jsx`.
+
+#### Event visibility rules
+
+`GET /api/events` and `GET /api/organizations/{id}/events` only return events happening in the next 7 days. An event is visible if:
+- it hasn't ended yet (`ends_at >= now`), **or**
+- it has no `ends_at` at all, in which case it's treated as lasting 24 hours from `starts_at` (so it doesn't vanish from the list the instant its start time passes, but also doesn't stay listed forever).
+
+The **admin management view** (`GET /api/organizations/{id}/events/manage`, org-admin only) applies no "next 7 days" window — it returns future events regardless of how far out they are — but does drop events once they're past `MANAGE_EVENT_RETENTION` (**30 days**, same cutoff and same `coalesce(ends_at, starts_at)` logic as photo cleanup below), so the list doesn't grow forever with long-finished events. `EventsManager.jsx` on the frontend uses this endpoint, not the public one.
+
+#### Media Cleanup
+
+`cleanup_unused_media` (`app/tasks.py`, runs weekly via APScheduler) has two passes:
+
+1. **`purge_old_event_photos()`** — for any event whose `ends_at` (or `starts_at` if it has no end time) is more than **30 days** in the past, deletes its photo file *and* clears `photo_url` in the same transaction, **unless** that same `photo_url` is still referenced by a non-expired event (see photo reuse below) — in which case it's left alone entirely, since deleting the file would break the still-active event still pointing at it. Without the DB-clearing half, an old event's page would show a broken image once the file is gone. Org logos are intentionally excluded — an org doesn't "end" the way an event does, so there's no equivalent retention window.
+
+**Reusing an existing photo**: `GET /api/organizations/{id}/events/photos` (org admin) lists every distinct photo the org has ever uploaded for an event, most recent event first — including photos belonging to events that have themselves aged out of the Manage list. `POST .../events/{event_id}/photo/reuse` (body `{photo_url}`) points that event at an existing photo instead of uploading a new file, after checking the URL actually belongs to one of the org's own events (so an admin can't point at an arbitrary path). The frontend picker lives in `PhotoUploader.jsx` (the image-stack icon next to the camera icon in `EventsManager.jsx`). Because a photo can now be referenced by more than one event, cleanup treats `photo_url` as shared rather than 1:1 with the event that first uploaded it — see the retention note above.
+2. **Orphan sweep** — deletes any file in `media/logos/` or `media/events/` that isn't referenced by *any* row at all (covers deleted orgs/events, and old files left behind when a logo/photo gets replaced by a new upload).
+
+Both passes only run once a week, so a deleted/replaced file can linger up to ~7 days before actually being removed from disk — this is expected, not a bug.
+
+### Table: org_follows
+
+| Column | Type | Notes |
+|---|---|---|
+| id | UUID | Primary key |
+| user_id | UUID FK | References users.id |
+| org_id | UUID FK | References organizations.id |
+| created_at | timestamp | Set automatically |
+
+Lets a resident "follow" an organisation (`POST /api/organizations/{id}/follow` / `DELETE .../follow`) to receive push notifications when that org posts a new event. `GET /api/organizations/me/follows` lists the current user's follows.
+
+### Table: push_subscriptions
+
+| Column | Type | Notes |
+|---|---|---|
+| id | UUID | Primary key |
+| user_id | UUID FK | References users.id |
+| endpoint | text | Unique — the browser's push service URL |
+| p256dh | text | Public key for encrypting push payloads (Web Push spec) |
+| auth | text | Auth secret for the push subscription |
+| created_at | timestamp | Set automatically |
+
+One row per browser/device subscription. See [Push Notifications & Notification Center](#7-push-notifications--notification-center) below.
+
+### Table: notifications
+
+| Column | Type | Notes |
+|---|---|---|
+| id | UUID | Primary key |
+| user_id | UUID FK | References users.id |
+| title | text | Notification title |
+| body | text | Notification body |
+| url | text, nullable | Where tapping the notification navigates to |
+| created_at | timestamp | Set automatically |
+| read_at | timestamp, nullable | Null until the user marks it read |
+
+The in-app notification center: whenever `send_push_to_all` fires (a day-before or hour-before event reminder, or a dev-admin broadcast), it writes one row per targeted user here — **regardless of whether that user has a push subscription** — so the bell icon and `/notifications` page work even for users who never granted browser notification permission. See [Push Notifications & Notification Center](#7-push-notifications--notification-center).
 
 ### How roles are stored
 
 - **Dev admins** have `is_dev_admin = true` in the `users` table. They have no `org_memberships` row — they bypass all organisation checks.
-- **Boss admins** have one row in `org_memberships` with `role = 'boss_admin'` per organisation they manage. A user can have multiple boss admin rows for different organisations.
+- **Boss admins** have one row in `org_memberships` with `role = 'boss_admin'` per organisation they manage. A user can have multiple boss admin rows for different organisations. Boss admins can invite and remove **both** `org_admin` and `boss_admin` members within their own organisation(s) — this is not restricted to dev admins.
 - **Org admins** have one row in `org_memberships` with `role = 'org_admin'` per organisation they belong to. A user can have multiple org admin rows for different organisations.
 - **A user can mix roles across organisations** — for example, one row with `role = 'boss_admin'` for Egon's Underground and another row with `role = 'org_admin'` for Kade. Both rows belong to the same user.
 - **Common users** have no row in `org_memberships` at all.
@@ -176,17 +247,39 @@ Every component in the stack is open source and free. Nothing requires a paid li
 | SQLAlchemy (async) | ORM — defines database tables as Python classes and translates queries to SQL. |
 | asyncpg | The actual PostgreSQL driver. Async-native and very fast. |
 | Alembic | Migration tool. Tracks schema changes and generates SQL scripts to apply them. |
-| Pydantic v2 | Validates incoming request data and shapes outgoing responses. Built into FastAPI. |
+| Pydantic v2 / pydantic-settings | Validates incoming request data, shapes outgoing responses, and loads `Settings` from `.env`/`.env.local`. |
 | PyJWT | Creates and verifies JWT tokens for authentication. |
 | redis-py (async) | Python client for Redis. Used to store and retrieve OTP hashes. |
 | aiosmtplib | Async SMTP client. Sends OTP emails via mail.stusta.de port 25. |
+| APScheduler | In-process job scheduler — runs `cleanup_unused_media` (weekly) and `send_event_reminder_notifications` (every 5 min). |
+| pywebpush / py-vapid | Sends Web Push notifications and generates/handles VAPID key pairs. |
 | uvicorn | ASGI server that runs the FastAPI application as a process. |
+
+### Frontend Libraries
+
+| Library | Purpose |
+|---|---|
+| React 19 | UI framework. |
+| React Router | Client-side routing between pages/tabs. |
+| Axios | HTTP client for talking to the backend API (`frontend/src/api/client.js`). |
+| Vite | Dev server and production bundler. |
+| vite-plugin-pwa + Workbox | Generates the service worker (`frontend/src/sw.js`), app manifest, and offline caching; also handles push/notificationclick events. |
+| lucide-react | SVG icon set — every icon in the app (tab bar, buttons, badges) uses this instead of emoji. |
+| react-markdown + remark-breaks | Renders event/org descriptions as a restricted Markdown subset (see §3). |
+
+### Design System
+
+The color palette (`#0064BC` primary, `#F2F2F7` backgrounds, `#1A1C1E`/`#555555` text, `#E3E3E4` borders) is deliberately sourced from [tum-dev/campus_flutter](https://github.com/tum-dev/campus_flutter)'s light theme (`lib/base/theme/constants.dart`), not invented from scratch — the intent is visual consistency with other TUM-affiliated student apps. There's no shared theme/tokens file yet; colors are still hardcoded per-component in inline style objects, so a future palette change means a project-wide find-and-replace rather than editing one file.
+
+The app icon (`frontend/public/favicon.svg`, rasterized to `pwa-192x192.png`/`pwa-512x512.png`) is a hand-authored SVG recreation of the original PNG mark — four diagonal stripes in a rounded square, transparent outside it (not a flattened white background, which is what a naive screenshot-based rasterization produces).
+
+The bottom tab bar (`TabBar.jsx`) echoes those four icon stripes with one bold, saturated color per tab instead of the single primary blue: Places yellow (`#f9a825`), Events red (`#d32f2f`), Manage green (`#388e3c`), Profile blue (`#1976d2`) — each tab's active state uses the full color and its inactive state a lighter tint of the same hue (not gray). The Getting Started guide (`Guide.jsx`) reuses the same per-feature colors on its section icons so a section visually matches the tab/icon it explains, and the header's notification bell (`Header.jsx`) uses the same yellow as the Places tab. Primary action buttons across the app (Save/Login/submit-style buttons — not Back buttons, which stay the original blue, and not semantic-state buttons like delete/toggle) were also switched from the primary blue to the Manage-tab green (`#388e3c`). None of this lives in a shared tokens file yet either — same caveat as above, a future change to any of these means finding every occurrence by hand.
 
 ### Infrastructure
 
 | Component | Role |
 |---|---|
-| PostgreSQL | Primary relational database. Stores users, organisations, memberships, events. |
+| PostgreSQL | Primary relational database. Stores users, organisations, memberships, events, follows, push subscriptions. |
 | Redis | In-memory store for OTP codes. Auto-expiry via TTL means no cleanup needed. |
 | Nginx | Reverse proxy. Forwards /api/* to FastAPI and serves the React app as static files. |
 | certbot | Tool that obtains free SSL certificates from Let's Encrypt (a non-profit Certificate Authority trusted by all browsers) and auto-renews them before expiry. Required because PWAs only work over HTTPS and because sensitive data like OTP codes must be encrypted in transit. |
@@ -278,6 +371,8 @@ Nginx
     └── /media/*    →  serves uploaded images directly from disk
 ```
 
+Locally there's no Nginx, so FastAPI itself serves `/media/*` via a `StaticFiles` mount in `main.py` (see §6). That route is unreachable in production since Nginx intercepts `/media/*` before it ever reaches the app socket.
+
 ### Project Folder Structure
 
 ```
@@ -287,19 +382,24 @@ stustaapp/
 │   │   ├── main.py              # FastAPI app init, router registration, scheduler
 │   │   ├── database.py          # Async SQLAlchemy engine + session
 │   │   ├── dependencies.py      # Auth dependencies (require_org_admin, etc.)
-│   │   ├── config.py            # Settings loaded from .env file
+│   │   ├── config.py            # Settings loaded from .env / .env.local
 │   │   ├── auth.py              # JWT and OTP helper functions
-│   │   ├── tasks.py             # Background tasks (weekly media cleanup)
+│   │   ├── uploads.py           # Shared image upload validation + async file write
+│   │   ├── tasks.py             # Background jobs (media cleanup, event reminder pushes)
 │   │   ├── routers/
 │   │   │   ├── auth.py          # POST /api/auth/send-otp  +  /api/auth/verify-otp
 │   │   │   ├── events.py        # CRUD endpoints for events + photo upload
-│   │   │   ├── organizations.py # CRUD endpoints for orgs + logo upload + admin management
-│   │   │   └── users.py         # GET /api/users/me + /api/users/me/memberships
+│   │   │   ├── organizations.py # CRUD for orgs + logo upload + admin mgmt + follows
+│   │   │   ├── notifications.py # VAPID key, push subscribe/unsubscribe, notification center, broadcast
+│   │   │   └── users.py         # GET/PATCH /api/users/me + /api/users/me/memberships
 │   │   ├── models/              # SQLAlchemy ORM table definitions
 │   │   │   ├── user.py
 │   │   │   ├── organization.py
 │   │   │   ├── membership.py
-│   │   │   └── event.py
+│   │   │   ├── event.py
+│   │   │   ├── org_follow.py
+│   │   │   ├── push_subscription.py
+│   │   │   └── notification.py
 │   │   └── schemas/             # Pydantic request/response shapes
 │   │       ├── auth.py
 │   │       ├── event.py
@@ -307,19 +407,261 @@ stustaapp/
 │   ├── migrations/              # Alembic generated migration scripts
 │   ├── alembic.ini
 │   ├── requirements.txt
-│   └── .env                     # Secret keys, DB URL, Redis URL — never commit this
-├── media/                       # Uploaded images served by Nginx
+│   ├── .env                     # Production secrets — never commit this
+│   └── .env.local                # Local dev overrides — gitignored, see §6
+├── media/                       # Uploaded images (path configurable via MEDIA_ROOT)
 │   ├── logos/                   # Organisation logo files
 │   └── events/                  # Event photo files
+├── docker-compose.dev.yml       # Local Postgres + Redis for development, see §6
+├── deploy.sh                    # Server-side deploy script (git pull → migrate → build → restart)
 └── frontend/                    # React PWA
     ├── public/
     │   └── manifest.json        # PWA manifest (name, icons, theme colour)
+    ├── .env.production          # VITE_API_BASE_URL / VITE_MEDIA_BASE_URL for the production build
     └── src/
+        ├── media.js              # mediaUrl() — env-driven media URL helper, see §6
+        └── components/
+            └── MarkdownText.jsx  # Restricted Markdown renderer for descriptions
 ```
 
 ---
 
-## 6. Development Timeline
+## 6. Local Development
+
+Postgres and Redis run in Docker locally instead of being installed directly, so the dev machine doesn't need either service installed system-wide.
+
+```bash
+# Start Postgres + Redis (data persists across restarts)
+docker compose -f docker-compose.dev.yml up -d
+
+# Stop them (keeps data)
+docker compose -f docker-compose.dev.yml down
+
+# Stop and wipe all data
+docker compose -f docker-compose.dev.yml down -v
+```
+
+### Backend config: `.env.local`
+
+`Settings` (in `config.py`) loads `env_file = (".env", ".env.local")` — if both exist, `.env.local` wins. This means production's `backend/.env` never needs to change for local dev to work; instead, create a gitignored `backend/.env.local` with local-only values:
+
+```
+ENVIRONMENT=local
+DATABASE_URL=postgresql+asyncpg://stustaapp:devpassword@localhost:5432/stustaapp
+REDIS_URL=redis://localhost:6379/0
+JWT_SECRET_KEY=dev-secret-change-me
+LOG_PATH=../logs/app.log
+MEDIA_ROOT=../media
+VAPID_PRIVATE_KEY=<generate your own, see below>
+VAPID_PUBLIC_KEY=<generate your own, see below>
+VAPID_CLAIM_EMAIL=mailto:dev@localhost
+```
+
+Two settings exist specifically to make local dev behave differently from production, both defaulting to production-safe values so `backend/.env` on the server never needs to change:
+
+- **`ENVIRONMENT`** (default `"production"`) — when set to `"local"`, `POST /api/auth/send-otp` skips the real SMTP send (there's no route to `mail.stusta.de:25` from a laptop) and instead logs the OTP code: `logger.info(f"[local] OTP code for {email}: {code}")`. Check the uvicorn console for the code after requesting one.
+- **`MEDIA_ROOT`** (default `/srv/stustaapp/media`) — where uploaded logos/photos are read from and written to. Locally this should point at the repo's own `media/` folder (`MEDIA_ROOT=../media` when running uvicorn from `backend/`), since `/srv/stustaapp/media` doesn't exist on a laptop.
+
+Run the backend:
+```bash
+cd backend
+source venv/bin/activate
+alembic upgrade head
+uvicorn app.main:app --reload --port 8000
+```
+
+### Frontend config
+
+`frontend/src/api/client.js` reads `VITE_API_BASE_URL` (empty string by default) so local dev talks to the backend through Vite's dev-server proxy instead of hitting production and getting CORS-blocked. `frontend/src/media.js`'s `mediaUrl()` does the same thing for uploaded images (`VITE_MEDIA_BASE_URL`) — every `<img>` in the app goes through this helper rather than hardcoding a host. `frontend/.env.production` sets both explicitly for the real deployed build, so nothing needs to change there.
+
+`vite.config.js` has three dev-only additions (they don't affect `vite build`/production, since Nginx serves the built static files and never runs `vite dev`):
+- `server.proxy['/api'] → http://localhost:8000` — so relative `/api/...` calls reach the local backend.
+- `server.proxy['/media'] → http://localhost:8000` — same idea for uploaded images, served locally by FastAPI's `StaticFiles` mount (§5) since there's no Nginx.
+- `VitePWA({ devOptions: { enabled: true, type: 'module' } })` — the service worker (needed to test push notifications) is normally only built in production; this flag makes it register under `vite dev` too.
+
+> **Service worker cache gotcha**: `frontend/src/sw.js` caches `/media/*` responses with a `NetworkFirst` strategy (deliberately not `CacheFirst` — that used to permanently cache a broken cross-origin image request from before this fix existed, which persisted even after unregistering the service worker, since Cache Storage isn't cleared by unregistering). If an uploaded image seems to vanish or never update while testing locally, check DevTools → Application → Clear site data, not just re-registering the service worker.
+
+Run the frontend:
+```bash
+cd frontend
+npm run dev
+```
+
+### Generating a local VAPID keypair
+
+Push notifications require a real VAPID keypair (the placeholder `dummy-for-local-dev` value doesn't work with `pywebpush`). Generate one with `py-vapid` (already a backend dependency):
+
+```bash
+cd backend && source venv/bin/activate
+python - <<'EOF'
+from py_vapid import Vapid02
+import base64
+
+v = Vapid02()
+v.generate_keys()
+
+priv_raw = v.private_key.private_numbers().private_value.to_bytes(32, "big")
+from cryptography.hazmat.primitives import serialization
+pub_raw = v.public_key.public_bytes(
+    encoding=serialization.Encoding.X962,
+    format=serialization.PublicFormat.UncompressedPoint,
+)
+
+def b64url(b): return base64.urlsafe_b64encode(b).rstrip(b"=").decode()
+print("VAPID_PRIVATE_KEY=" + b64url(priv_raw))
+print("VAPID_PUBLIC_KEY=" + b64url(pub_raw))
+EOF
+```
+Paste the output into `backend/.env.local`. This is a **local-only** keypair — production has its own, already set in the server's `backend/.env`, and the two are unrelated (a browser's push subscription is tied to whichever public key served it).
+
+---
+
+## 7. Push Notifications & Notification Center
+
+Web Push (via VAPID + `pywebpush`) and an in-app notification center are both driven by the same function, `send_push_to_all` (`app/routers/notifications.py`). It's used for three kinds of notifications:
+
+1. **Event reminders** — the `send_event_reminder_notifications` APScheduler job (`app/tasks.py`) runs every 5 minutes and sends up to two one-time reminder pushes per event to that event's followers:
+   - **Day before, 18:00 Europe/Berlin** — fires once `now >= (event's local start date − 1 day) at 18:00`, flips `day_before_notification_sent`.
+   - **One hour before start** — fires once `now >= starts_at − 1 hour`, flips `hour_before_notification_sent`.
+
+   Both checks run against the same query (events with `starts_at > now` and either flag still `False`); an event created after one of its trigger times has already passed simply gets that reminder sent on the next tick rather than skipped. There is no push on event creation — creating an event does not itself notify anyone.
+2. **Dev-admin broadcast** — `POST /api/notifications/broadcast` (dev-admin only) calls `send_push_to_all(org_id=None)`, which targets **every user**. Has a confirm prompt in the UI (`DevAdminSection.jsx`) since it reaches everyone.
+
+### Flow
+
+1. `send_push_to_all` first resolves the target user IDs (org followers, or literally every user for a broadcast) and writes one row per user into the `notifications` table — this happens **regardless of push subscription status**, so the in-app bell/`/notifications` page works even for users who never granted browser notification permission.
+2. It then looks up push subscriptions only for those same target users and sends each via `pywebpush`, pruning subscriptions that come back `404`/`410` (the browser unsubscribed or the endpoint expired).
+3. Separately, on the subscribe side: frontend calls `GET /api/notifications/vapid-public-key` and passes it to `pushManager.subscribe()` (see `Profile.jsx`) after the user grants the browser's notification permission. The resulting subscription (`endpoint`, `p256dh`, `auth`) is sent to `POST /api/notifications/subscribe` and stored in `push_subscriptions`.
+4. The service worker (`frontend/src/sw.js`) handles the `push` event (shows the OS notification) and `notificationclick` (focuses/opens the app to the relevant URL). `showNotification` is given two separate images: `icon` (`pwa-192x192.png`, the full-color app icon shown in the expanded notification) and `badge` (`frontend/public/notification-badge.png`, a white bell silhouette on a transparent background). Android renders `badge` in the status bar using only its alpha channel, so it has to be a monochrome/transparent asset — pointing it at a full-color, mostly-opaque icon (as it originally was) renders as a solid blob there. iOS Safari ignores `badge` entirely and always shows the installed app's icon.
+
+### In-app notification center
+
+`Header.jsx` shows a bell icon with an unread-count badge (polls `GET /api/notifications/unread-count` every 30s while logged in) and links to `/notifications` (`Notifications.jsx`), which lists recent notifications and supports marking one or all as read. See the Notifications endpoints in [§8 Quick Reference](#8-quick-reference).
+
+Both `GET /api/notifications` and `/unread-count` only consider notifications created within `NOTIFICATION_RETENTION` (**30 days**) — older ones are excluded from the list and don't count toward the badge, though the rows themselves are never deleted from the `notifications` table.
+
+### Debugging
+
+`POST /api/notifications/debug-send` (dev-admin only) manually triggers a push to a hardcoded org's followers — useful for confirming the whole chain works end to end without waiting for a real event. See [Local Development](#6-local-development) for generating a local VAPID keypair, which is required before any push will actually send locally.
+
+---
+
+## 8. Quick Reference
+
+### Key URLs
+
+| URL | What it is |
+|---|---|
+| https://stustaapp.stusta.mhn.de | The live app (frontend) |
+| https://stustaapp.stusta.mhn.de/api/docs | Swagger UI — interactive API documentation |
+| https://stustaapp.stusta.mhn.de/api/health | Health check endpoint |
+
+### API Endpoints
+
+**Auth** (`app/routers/auth.py`)
+
+| Method | Path | Auth required | Description |
+|---|---|---|---|
+| POST | /api/auth/send-otp | None | Send a 6-digit login code to an email (rate-limited) |
+| POST | /api/auth/verify-otp | None | Verify the code, get a JWT |
+
+**Users** (`app/routers/users.py`)
+
+| Method | Path | Auth required | Description |
+|---|---|---|---|
+| GET | /api/users/me | Authenticated | Current user's profile |
+| PATCH | /api/users/me | Authenticated | Update first/last name |
+| GET | /api/users/me/memberships | Authenticated | Current user's org memberships and roles |
+
+**Organizations** (`app/routers/organizations.py`)
+
+| Method | Path | Auth required | Description |
+|---|---|---|---|
+| GET | /api/organizations | None | List all organisations |
+| GET | /api/organizations/{id} | None | Get one organisation |
+| POST | /api/organizations | Dev admin | Create organisation |
+| PATCH | /api/organizations/{id} | Boss admin | Edit org name, description, location |
+| DELETE | /api/organizations/{id} | Dev admin | Delete org (cascades memberships, follows, events) |
+| POST | /api/organizations/{id}/logo | Boss admin | Upload org logo image |
+| GET | /api/organizations/{id}/memberships | Boss admin | List the org's admins |
+| POST | /api/organizations/{id}/admins | Boss admin | Invite an admin (org_admin **or** boss_admin) by email |
+| DELETE | /api/organizations/{id}/admins/{user_id} | Boss admin | Remove an admin |
+| POST | /api/organizations/{id}/follow | Authenticated | Follow an org (for push notifications) |
+| DELETE | /api/organizations/{id}/follow | Authenticated | Unfollow an org |
+| GET | /api/organizations/me/follows | Authenticated | List orgs the current user follows |
+
+**Events** (`app/routers/events.py`)
+
+| Method | Path | Auth required | Description |
+|---|---|---|---|
+| GET | /api/events | None | Upcoming events (next 7 days) across all orgs |
+| GET | /api/events/{id} | None | Get one event |
+| GET | /api/organizations/{id}/events | None | Upcoming events for one org (next 7 days) |
+| GET | /api/organizations/{id}/events/manage | Org admin | **All** events for the org, unfiltered by date — used by the manage UI |
+| POST | /api/organizations/{id}/events | Org admin | Create event (triggers a push to followers) |
+| PATCH | /api/organizations/{id}/events/{event_id} | Org admin | Edit event |
+| DELETE | /api/organizations/{id}/events/{event_id} | Org admin | Delete event |
+| POST | /api/organizations/{id}/events/{event_id}/photo | Org admin | Upload event photo |
+
+**Notifications** (`app/routers/notifications.py`)
+
+| Method | Path | Auth required | Description |
+|---|---|---|---|
+| GET | /api/notifications/vapid-public-key | None | Public VAPID key for `pushManager.subscribe()` |
+| POST | /api/notifications/subscribe | Authenticated | Register a push subscription |
+| DELETE | /api/notifications/unsubscribe | Authenticated | Remove a push subscription |
+| GET | /api/notifications | Authenticated | List the current user's notifications (newest first, up to 50) |
+| GET | /api/notifications/unread-count | Authenticated | Unread notification count, polled by the header bell |
+| POST | /api/notifications/{id}/read | Authenticated | Mark one notification read |
+| POST | /api/notifications/read-all | Authenticated | Mark all of the current user's notifications read |
+| POST | /api/notifications/broadcast | Dev admin | Send a notification + push to **every** user (see §7) |
+| POST | /api/notifications/debug-send | Dev admin | Manually trigger a push to a hardcoded org's followers (see §7) |
+
+### requirements.txt
+
+Install with `pip install -r requirements.txt`. Key packages (see `backend/requirements.txt` for the full pinned list): `fastapi`, `uvicorn[standard]`, `sqlalchemy[asyncio]`, `asyncpg`, `alembic`, `pydantic-settings`, `PyJWT`, `redis`, `aiosmtplib`, `APScheduler`, `pywebpush`, `py-vapid`.
+
+### Useful Commands
+
+**Server management:**
+```bash
+# Restart FastAPI after code changes
+systemctl restart stustaapp
+
+# View live FastAPI logs
+journalctl -u stustaapp -f
+
+# Reload Nginx after config changes
+systemctl reload nginx
+
+# Renew SSL certificate manually
+certbot renew
+```
+
+**Database migrations:**
+```bash
+# After changing a SQLAlchemy model, generate a migration
+alembic revision --autogenerate -m "describe what changed"
+
+# Apply all pending migrations to the database
+alembic upgrade head
+
+# Check current migration version
+alembic current
+```
+
+**Deployment** — see `deploy.sh` at the repo root. Deploy is git-based, not a manual file copy: the server clones/pulls this repo over HTTPS (using a fine-grained PAT, since the StuSta proxy blocks SSH-over-443), then the script reinstalls dependencies, runs migrations, rebuilds the frontend, and restarts the service:
+```bash
+# Run on the server, from /srv/stustaapp
+./deploy.sh
+```
+which does, in order: `git pull` → `pip install -r backend/requirements.txt` → `alembic upgrade head` → `npm ci && npm run build` (frontend) → `chown -R stustaapp:stustaapp /srv/stustaapp` → `systemctl restart stustaapp`.
+
+---
+
+## Appendix A: Development Timeline (historical)
+
+> This section documents the original build plan and is kept for historical reference. The actual implementation has since diverged in places — e.g. push notifications, event recurrence labels, and org-follow were added, and the deployment approach described in §5 and the Quick Reference section (git-based, not rsync) reflects what's actually in use. Treat this section as "how it was planned," not "how it currently works."
 
 The total estimated timeline is 14 weeks at an average of 3 hours per week (your stated range is 2–4 hours). The timeline is divided into four phases. Do not worry if individual weeks slip — this is a side project and the phases are designed with some buffer built in.
 
@@ -510,7 +852,7 @@ Soft launch — share the URL with a small group of residents first rather than 
 
 ---
 
-## 7. Cost Breakdown
+## Appendix B: Cost Breakdown
 
 The entire project runs at zero cost. All software is open source, the server is provided by StuSta, and email goes through the StuSta SMTP server.
 
@@ -526,92 +868,3 @@ The entire project runs at zero cost. All software is open source, the server is
 | VM hosting | Free | Provided by StuSta infrastructure |
 | Domain name | Free | stustaapp.stusta.mhn.de provided by StuSta |
 | **Total** | **€0/month** | No ongoing costs |
-
----
-
-## 8. Quick Reference
-
-### Key URLs
-
-| URL | What it is |
-|---|---|
-| https://stustaapp.stusta.mhn.de | The live app (frontend) |
-| https://stustaapp.stusta.mhn.de/api/docs | Swagger UI — interactive API documentation |
-| https://stustaapp.stusta.mhn.de/api/health | Health check endpoint |
-
-### Key API Endpoints
-
-| Method | Path | Auth required | Description |
-|---|---|---|---|
-| GET | /api/users/me/memberships | Authenticated | Get current user's org memberships and roles |
-| POST | /api/auth/verify-otp | None | Verify OTP, get JWT |
-| GET | /api/events | None | List all upcoming events |
-| GET | /api/organizations | None | List all organisations with logo and location |
-| POST | /api/organizations | Dev admin | Create organisation |
-| PATCH | /api/organizations/{id} | Boss admin | Edit org name, description, location |
-| POST | /api/organizations/{id}/logo | Boss admin | Upload org logo image |
-| POST | /api/organizations/{id}/events | Org admin | Create event |
-| PATCH | /api/organizations/{id}/events/{event_id} | Org admin | Edit event |
-| DELETE | /api/organizations/{id}/events/{event_id} | Org admin | Delete event |
-| POST | /api/organizations/{id}/events/{event_id}/photo | Org admin | Upload event photo |
-| POST | /api/organizations/{id}/admins | Boss admin | Invite org admin |
-| DELETE | /api/organizations/{id}/admins/{user_id} | Boss admin | Remove org admin |
-
-### requirements.txt
-
-```
-fastapi
-uvicorn[standard]
-sqlalchemy[asyncio]
-asyncpg
-alembic
-pydantic-settings
-PyJWT
-redis
-aiosmtplib
-```
-
-Install with:
-```bash
-pip install -r requirements.txt
-```
-
-### Useful Commands
-
-**Server management:**
-```bash
-# Restart FastAPI after code changes
-systemctl restart stustaapp
-
-# View live FastAPI logs
-journalctl -u stustaapp -f
-
-# Reload Nginx after config changes
-systemctl reload nginx
-
-# Renew SSL certificate manually
-certbot renew
-```
-
-**Database migrations:**
-```bash
-# After changing a SQLAlchemy model, generate a migration
-alembic revision --autogenerate -m "describe what changed"
-
-# Apply all pending migrations to the database
-alembic upgrade head
-
-# Check current migration version
-alembic current
-```
-
-**Frontend deployment:**
-```bash
-# Build the React app for production
-npm run build
-
-# Copy the build output to the server (run from your local machine)
-rsync -av dist/ root@stustaapp.stusta.mhn.de:/var/www/stustaapp/
-```
-
-> **Tip:** Always activate your virtual environment before running any Python commands: `source backend/venv/bin/activate` — you should see `(venv)` at the start of your terminal prompt.

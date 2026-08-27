@@ -3,6 +3,12 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8000',
+      '/media': 'http://localhost:8000',
+    },
+  },
   plugins: [
     react(),
     VitePWA({
@@ -11,11 +17,15 @@ export default defineConfig({
       srcDir: 'src',
       filename: 'sw.js',
       includeAssets: ['pwa-192x192.png', 'pwa-512x512.png'],
+      devOptions: {
+        enabled: true,
+        type: 'module',
+      },
       manifest: {
         name: 'StuStaApp',
         short_name: 'StuStaApp',
         description: 'Events and places in Studentenstadt München',
-        theme_color: '#1E2A3A',
+        theme_color: '#1A1C1E',
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',

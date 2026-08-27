@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { Repeat, Calendar, Circle, MapPin } from 'lucide-react'
 import { getEvent } from '../api/events'
+import MarkdownText from '../components/MarkdownText'
+import { mediaUrl } from '../media'
 
 export default function EventDetail() {
   const { id } = useParams()
@@ -52,7 +55,7 @@ export default function EventDetail() {
       {/* Event photo */}
       {event.photo_url && (
         <img
-          src={`https://stustaapp.stusta.mhn.de${event.photo_url}`}
+          src={mediaUrl(event.photo_url)}
           alt={event.title}
           style={styles.photo}
         />
@@ -64,7 +67,7 @@ export default function EventDetail() {
         <div style={styles.orgRow}>
           {event.org_logo_url ? (
             <img
-              src={`https://stustaapp.stusta.mhn.de${event.org_logo_url}`}
+              src={mediaUrl(event.org_logo_url)}
               alt={event.org_name}
               style={styles.orgLogo}
             />
@@ -82,7 +85,8 @@ export default function EventDetail() {
         {/* Recurrence badge */}
         {event.recurrence !== 'none' && (
           <div style={styles.badge}>
-            🔁 {event.recurrence === 'weekly' ? 'Every week'
+            <Repeat size={14} style={{ verticalAlign: '-2px', marginRight: '4px' }} />
+            {event.recurrence === 'weekly' ? 'Every week'
               : event.recurrence === 'biweekly' ? 'Every two weeks'
                 : 'Every month'}
           </div>
@@ -90,7 +94,7 @@ export default function EventDetail() {
 
         {/* Date */}
         <div style={styles.infoRow}>
-          <span style={styles.infoIcon}>📅</span>
+          <Calendar size={18} color="#555555" style={{ flexShrink: 0 }} />
           <div>
             <span style={styles.infoText}>{formattedDate}</span>
             {event.ends_at && (
@@ -107,14 +111,15 @@ export default function EventDetail() {
         {/* Ongoing badge */}
         {event.ends_at && new Date(event.starts_at) <= new Date() && new Date(event.ends_at) >= new Date() && (
           <div style={{ ...styles.badge, backgroundColor: '#F0FDF4', color: '#16A34A' }}>
-            🟢 Happening now
+            <Circle size={10} fill="#16A34A" color="#16A34A" style={{ verticalAlign: '1px', marginRight: '4px' }} />
+            Happening now
           </div>
         )}
 
         {/* Location */}
         {event.location && (
           <div style={styles.infoRow}>
-            <span style={styles.infoIcon}>📍</span>
+            <MapPin size={18} color="#555555" style={{ flexShrink: 0 }} />
             {mapsUrl ? (
               <a
                 href={mapsUrl}
@@ -133,7 +138,7 @@ export default function EventDetail() {
         {/* Description */}
         {event.description && (
           <div style={styles.descriptionBox}>
-            <p style={styles.description}>{event.description}</p>
+            <MarkdownText style={styles.description}>{event.description}</MarkdownText>
           </div>
         )}
 
@@ -151,7 +156,7 @@ const styles = {
   backButton: {
     background: 'none',
     border: 'none',
-    color: '#2563EB',
+    color: '#0064BC',
     fontSize: '16px',
     cursor: 'pointer',
     padding: '16px',
@@ -160,7 +165,7 @@ const styles = {
   photo: {
     width: '100%',
     objectFit: 'contain',
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#F2F2F7',
   },
   content: {
     padding: '16px',
@@ -181,8 +186,8 @@ const styles = {
     width: '32px',
     height: '32px',
     borderRadius: '6px',
-    backgroundColor: '#EFF6FF',
-    color: '#2563EB',
+    backgroundColor: '#E5EFF9',
+    color: '#0064BC',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -191,21 +196,21 @@ const styles = {
   },
   orgName: {
     fontSize: '20px',
-    color: '#6B7280',
+    color: '#555555',
     textTransform: 'uppercase',
     letterSpacing: '0.5px',
   },
   title: {
     fontSize: '24px',
     fontWeight: '700',
-    color: '#1E2A3A',
+    color: '#1A1C1E',
     margin: '0 0 12px 0',
     lineHeight: '1.3',
   },
   badge: {
     display: 'inline-block',
-    backgroundColor: '#EFF6FF',
-    color: '#2563EB',
+    backgroundColor: '#E5EFF9',
+    color: '#0064BC',
     fontSize: '13px',
     padding: '4px 10px',
     borderRadius: '20px',
@@ -217,31 +222,27 @@ const styles = {
     gap: '10px',
     marginBottom: '10px',
   },
-  infoIcon: {
-    fontSize: '18px',
-    flexShrink: 0,
-  },
   infoText: {
     fontSize: '15px',
-    color: '#374151',
+    color: '#1A1C1E',
     lineHeight: '1.5',
   },
   locationLink: {
     fontSize: '15px',
-    color: '#2563EB',
+    color: '#0064BC',
     textDecoration: 'none',
     lineHeight: '1.5',
   },
   descriptionBox: {
     marginTop: '20px',
     padding: '16px',
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#F2F2F7',
     borderRadius: '12px',
-    borderLeft: '4px solid #2563EB',
+    borderLeft: '4px solid #0064BC',
   },
   description: {
     fontSize: '15px',
-    color: '#374151',
+    color: '#1A1C1E',
     lineHeight: '1.7',
     margin: '0',
     whiteSpace: 'pre-wrap',
@@ -250,10 +251,10 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     padding: '40px 16px',
-    color: '#6B7280',
+    color: '#555555',
   },
   endDate: {
     fontSize: '14px',
-    color: '#6B7280',
+    color: '#555555',
   },
 }

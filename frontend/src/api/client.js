@@ -1,8 +1,11 @@
 import axios from 'axios'
 
-// Create an axios instance with the base URL of our backend
+// Create an axios instance with the base URL of our backend.
+// In production this is set via VITE_API_BASE_URL (see .env.production).
+// Locally it's left empty so requests are relative and go through the
+// Vite dev server proxy to localhost:8000 (see vite.config.js).
 const client = axios.create({
-  baseURL: 'https://stustaapp.stusta.mhn.de',
+  baseURL: import.meta.env.VITE_API_BASE_URL || '',
 })
 
 // Automatically attach the JWT token to every request

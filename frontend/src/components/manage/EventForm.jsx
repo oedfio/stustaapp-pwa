@@ -78,7 +78,7 @@ export default function EventForm({ membership, event, onSaved, onCancel }) {
                 />
                 <textarea
                     style={styles.textarea}
-                    placeholder="Description"
+                    placeholder="Description (supports **bold**, *italic*, links, lists)"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     rows={3}

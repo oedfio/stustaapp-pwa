@@ -17,3 +17,18 @@ export const unfollowOrganization = (id) =>
 
 export const getMyFollows = () =>
     client.get('/api/organizations/me/follows')
+
+export const getNotifications = () =>
+    client.get('/api/notifications')
+
+export const getUnreadNotificationCount = () =>
+    client.get('/api/notifications/unread-count')
+
+export const markNotificationRead = (id) =>
+    client.post(`/api/notifications/${id}/read`)
+
+export const markAllNotificationsRead = () =>
+    client.post('/api/notifications/read-all')
+
+export const broadcastNotification = (data) =>
+    client.post('/api/notifications/broadcast', data)

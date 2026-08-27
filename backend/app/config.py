@@ -2,6 +2,9 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
+    # "local" skips sending real emails (see auth.py); anything else behaves as production
+    environment: str = "production"
+
     # Database
     database_url: str
 
@@ -23,6 +26,9 @@ class Settings(BaseSettings):
 
     # Logging
     log_path: str = "logs/app.log"
+
+    # Uploaded media (org logos, event photos)
+    media_root: str = "/srv/stustaapp/media"
 
     class Config:
         env_file = (".env", ".env.local")

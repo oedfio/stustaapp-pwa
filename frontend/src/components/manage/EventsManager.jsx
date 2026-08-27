@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { getOrgEvents, deleteEvent } from '../../api/events'
+import { Pencil, Trash2 } from 'lucide-react'
+import { getOrgEventsForManage, deleteEvent } from '../../api/events'
 import EventForm from './EventForm'
 import PhotoUploader from './PhotoUploader'
 import { styles } from './styles'
@@ -18,7 +19,7 @@ export default function EventsManager({ membership }) {
 
     const loadEvents = async () => {
         try {
-            const res = await getOrgEvents(membership.org_id)
+            const res = await getOrgEventsForManage(membership.org_id)
             setEvents(res.data)
         } catch {
             setError('Failed to load events.')
@@ -36,6 +37,17 @@ export default function EventsManager({ membership }) {
         } catch {
             setError('Failed to delete event.')
         }
+    }
+
+    const handlePhotoUploaded = () => {
+        setError(null)
+        setMessage('Photo uploaded successfully.')
+        loadEvents()
+    }
+
+    const handlePhotoError = () => {
+        setMessage(null)
+        setError('Failed to upload photo.')
     }
 
     return (
@@ -73,7 +85,7 @@ export default function EventsManager({ membership }) {
             {loading ? (
                 <p style={styles.hint}>Loading events...</p>
             ) : events.length === 0 ? (
-                <p style={styles.hint}>No upcoming events this week.</p>
+                <p style={styles.hint}>No events yet.</p>
             ) : (
                 <div style={styles.eventsList}>
                     {events.map((event) => (
@@ -95,14 +107,19 @@ export default function EventsManager({ membership }) {
                                     style={styles.iconButton}
                                     onClick={() => { setEditingEvent(event); setShowCreateForm(false) }}
                                 >
-                                    ✏️
+                                    <Pencil size={16} />
                                 </button>
-                                <PhotoUploader membership={membership} eventId={event.id} />
+                                <PhotoUploader
+                                    membership={membership}
+                                    eventId={event.id}
+                                    onUploaded={handlePhotoUploaded}
+                                    onError={handlePhotoError}
+                                />
                                 <button
                                     style={{ ...styles.iconButton, color: '#DC2626' }}
                                     onClick={() => handleDelete(event.id)}
                                 >
-                                    🗑️
+                                    <Trash2 size={16} />
                                 </button>
                             </div>
                         </div>

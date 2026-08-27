@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Circle, MapPin, Repeat } from 'lucide-react'
 import { getEvents } from '../api/events'
+import { mediaUrl } from '../media'
 
 export default function EventsList() {
   const [events, setEvents] = useState([])
@@ -52,26 +54,25 @@ export default function EventsList() {
               }}
               onClick={() => navigate(`/events/${event.id}`)}
             >
-              {/* Org logo */}
-              <div style={styles.logoContainer}>
-                {event.org_logo_url ? (
+              {/* Org logo — only shown if the org actually has one */}
+              {event.org_logo_url && (
+                <div style={styles.logoContainer}>
                   <img
-                    src={`https://stustaapp.stusta.mhn.de${event.org_logo_url}`}
+                    src={mediaUrl(event.org_logo_url)}
                     alt={event.org_name}
                     style={styles.logo}
                   />
-                ) : (
-                  <div style={styles.logoPlaceholder}>
-                    {event.org_name.charAt(0)}
-                  </div>
-                )}
-              </div>
+                </div>
+              )}
 
               {/* Event info */}
               <div style={styles.info}>
                 <p style={styles.orgName}>{event.org_name}</p>
                 {isOngoing(event) && (
-                  <span style={styles.ongoingBadge}>🟢 Happening now</span>
+                  <span style={styles.ongoingBadge}>
+                    <Circle size={9} fill="#16A34A" color="#16A34A" style={{ verticalAlign: '1px', marginRight: '4px' }} />
+                    Happening now
+                  </span>
                 )}
                 <h2 style={styles.title}>{event.title}</h2>
                 <p style={styles.date}>
@@ -84,11 +85,15 @@ export default function EventsList() {
                   })}
                 </p>
                 {event.location && (
-                  <p style={styles.location}>📍 {event.location}</p>
+                  <p style={styles.location}>
+                    <MapPin size={13} color="#555555" style={{ verticalAlign: '-2px', marginRight: '4px' }} />
+                    {event.location}
+                  </p>
                 )}
                 {event.recurrence !== 'none' && (
                   <p style={styles.recurrence}>
-                    🔁 {event.recurrence === 'weekly' ? 'Every week'
+                    <Repeat size={13} style={{ verticalAlign: '-2px', marginRight: '4px' }} />
+                    {event.recurrence === 'weekly' ? 'Every week'
                       : event.recurrence === 'biweekly' ? 'Every two weeks'
                         : 'Every month'}
                   </p>
@@ -111,7 +116,7 @@ const styles = {
   heading: {
     fontSize: '22px',
     fontWeight: '700',
-    color: '#1E2A3A',
+    color: '#1A1C1E',
     margin: '0 0 16px 0',
   },
   list: {
@@ -121,13 +126,14 @@ const styles = {
   },
   card: {
     display: 'flex',
+    alignItems: 'center',
     gap: '12px',
     backgroundColor: '#ffffff',
     borderRadius: '12px',
     padding: '14px',
     boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
     cursor: 'pointer',
-    border: '1px solid #F3F4F6',
+    border: '1px solid #F2F2F7',
   },
   logoContainer: {
     flexShrink: 0,
@@ -138,25 +144,13 @@ const styles = {
     borderRadius: '10px',
     objectFit: 'cover',
   },
-  logoPlaceholder: {
-    width: '52px',
-    height: '52px',
-    borderRadius: '10px',
-    backgroundColor: '#EFF6FF',
-    color: '#2563EB',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '22px',
-    fontWeight: '700',
-  },
   info: {
     flex: 1,
     minWidth: 0,
   },
   orgName: {
     fontSize: '12px',
-    color: '#6B7280',
+    color: '#555555',
     margin: '0 0 2px 0',
     textTransform: 'uppercase',
     letterSpacing: '0.5px',
@@ -164,7 +158,7 @@ const styles = {
   title: {
     fontSize: '16px',
     fontWeight: '600',
-    color: '#1E2A3A',
+    color: '#1A1C1E',
     margin: '0 0 4px 0',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -172,25 +166,25 @@ const styles = {
   },
   date: {
     fontSize: '13px',
-    color: '#2563EB',
+    color: '#0064BC',
     margin: '0 0 2px 0',
     fontWeight: '500',
   },
   location: {
     fontSize: '13px',
-    color: '#6B7280',
+    color: '#555555',
     margin: '0 0 2px 0',
   },
   recurrence: {
-    fontSize: '12px',
-    color: '#9CA3AF',
+    fontSize: '13px',
+    color: '#AAAAAA',
     margin: '0',
   },
   center: {
     display: 'flex',
     justifyContent: 'center',
     padding: '40px 16px',
-    color: '#6B7280',
+    color: '#555555',
   },
   error: {
     padding: '16px',
@@ -204,12 +198,12 @@ const styles = {
   emptyText: {
     fontSize: '18px',
     fontWeight: '600',
-    color: '#1E2A3A',
+    color: '#1A1C1E',
     margin: '0 0 8px 0',
   },
   emptySubtext: {
     fontSize: '14px',
-    color: '#6B7280',
+    color: '#555555',
     margin: '0',
   },
   ongoingCard: {

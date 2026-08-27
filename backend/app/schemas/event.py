@@ -29,6 +29,16 @@ class EventUpdate(BaseModel):
     recurrence: RecurrenceType | None = None
 
 
+class EventPhotoReuse(BaseModel):
+    photo_url: str
+
+
+class EventPhoto(BaseModel):
+    event_id: UUID
+    event_title: str
+    photo_url: str
+
+
 class EventResponse(BaseModel):
     id: UUID
     org_id: UUID
