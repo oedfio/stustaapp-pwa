@@ -1,5 +1,6 @@
 import os
 import logging
+import redis.asyncio as redis
 from sqlalchemy import select, text, func, or_
 from app.config import settings
 from app.database import AsyncSessionLocal
@@ -12,6 +13,28 @@ from app.routers.notifications import send_push_to_all
 logger = logging.getLogger(__name__)
 
 LOCAL_TZ = ZoneInfo("Europe/Berlin")
+
+# Production runs multiple uvicorn worker processes, each with its own
+# in-process APScheduler — without this lock, every worker's scheduler
+# fires the same job at the same tick and each sends its own duplicate
+# push. A short-lived Redis lock lets only one worker actually run a
+# given scheduled job; the rest see it's held and skip that tick.
+_redis_client: redis.Redis | None = None
+
+
+def _get_redis() -> redis.Redis:
+    global _redis_client
+    if _redis_client is None:
+        _redis_client = redis.from_url(settings.redis_url)
+    return _redis_client
+
+
+async def run_if_unlocked(lock_key: str, ttl_seconds: int, job) -> None:
+    acquired = await _get_redis().set(lock_key, "1", nx=True, ex=ttl_seconds)
+    if not acquired:
+        logger.info(f"Skipping {lock_key} — another worker already holds the lock")
+        return
+    await job()
 
 MEDIA_DIRS = {
     "logos": os.path.join(settings.media_root, "logos"),
@@ -170,3 +193,18 @@ async def send_event_reminder_notifications():
                 logger.info(f"Sent hour-before reminder for event {event.title}")
 
         await db.commit()
+
+
+async def cleanup_unused_media_locked() -> None:
+    """Scheduler entry point — see run_if_unlocked. TTL is generous since
+    this only needs to survive the multi-worker startup burst, not until
+    the next weekly run."""
+    await run_if_unlocked("lock:cleanup_unused_media", ttl_seconds=30 * 60, job=cleanup_unused_media)
+
+
+async def send_event_reminder_notifications_locked() -> None:
+    """Scheduler entry point — see run_if_unlocked. TTL is well under the
+    5-minute interval so it never blocks the next legitimate run."""
+    await run_if_unlocked(
+        "lock:send_event_reminder_notifications", ttl_seconds=120, job=send_event_reminder_notifications
+    )

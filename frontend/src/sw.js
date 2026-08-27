@@ -61,7 +61,10 @@ self.addEventListener('push', (event) => {
     event.waitUntil(
         self.registration.showNotification(data.title, {
             body: data.body,
-            icon: '/pwa-192x192.png',
+            // No explicit `icon` here — Android already shows a small
+            // app-identity avatar automatically (from the manifest icon),
+            // so adding our own `icon` just duplicates it as a second,
+            // near-identical square thumbnail next to the text.
             badge: '/notification-badge.png',
             data: { url: data.url || '/' },
         })

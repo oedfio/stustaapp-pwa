@@ -3,7 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from app.routers import auth, organizations, users, events
-from app.tasks import cleanup_unused_media, send_event_reminder_notifications
+from app.tasks import cleanup_unused_media_locked, send_event_reminder_notifications_locked
 import logging
 import logging.handlers
 from app.routers import auth, organizations, users, events, notifications
@@ -51,13 +51,13 @@ scheduler = AsyncIOScheduler()
 async def lifespan(app: FastAPI):
     logger.info("StuStaApp starting up")
     scheduler.add_job(
-        cleanup_unused_media,
+        cleanup_unused_media_locked,
         trigger="interval",
         weeks=1,
         id="cleanup_unused_media",
     )
     scheduler.add_job(
-        send_event_reminder_notifications,
+        send_event_reminder_notifications_locked,
         trigger="interval",
         minutes=5,
         id="send_event_reminder_notifications",
