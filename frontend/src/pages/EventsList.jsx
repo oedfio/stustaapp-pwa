@@ -142,7 +142,7 @@ const styles = {
     width: '52px',
     height: '52px',
     borderRadius: '10px',
-    objectFit: 'cover',
+    objectFit: 'contain',
   },
   info: {
     flex: 1,

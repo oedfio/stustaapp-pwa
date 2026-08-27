@@ -8,7 +8,7 @@ import time
 from app.config import settings
 from app.database import get_db
 from app.dependencies import get_current_user, require_dev_admin, require_boss_admin
-from app.uploads import read_validated_image, save_image
+from app.uploads import read_validated_image, save_image, trim_logo_whitespace
 from app.models.organization import Organization
 from app.models.membership import OrgMembership
 from app.models.user import User
@@ -140,6 +140,10 @@ async def upload_logo(
 
     # Validate type/size and derive a safe extension from the content type
     data, extension = await read_validated_image(file)
+
+    # Crop out uniform padding around the logo's visible content (common
+    # in logos exported on an oversized canvas) — see uploads.py.
+    data = await trim_logo_whitespace(data, extension)
 
     # Save the file to disk using org ID + timestamp as filename
     filename = f"{org_id}_{int(time.time())}.{extension}"
