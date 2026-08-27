@@ -153,13 +153,15 @@ The frontend builds a Google Maps link from the coordinates — `https://www.goo
 - it hasn't ended yet (`ends_at >= now`), **or**
 - it has no `ends_at` at all, in which case it's treated as lasting 24 hours from `starts_at` (so it doesn't vanish from the list the instant its start time passes, but also doesn't stay listed forever).
 
-The **admin management view** (`GET /api/organizations/{id}/events/manage`, org-admin only) intentionally applies **no date filter** — it returns every event for the org, past and future, so admins can find and edit anything they've created regardless of when it happens. `EventsManager.jsx` on the frontend uses this endpoint, not the public one.
+The **admin management view** (`GET /api/organizations/{id}/events/manage`, org-admin only) applies no "next 7 days" window — it returns future events regardless of how far out they are — but does drop events once they're past `MANAGE_EVENT_RETENTION` (**30 days**, same cutoff and same `coalesce(ends_at, starts_at)` logic as photo cleanup below), so the list doesn't grow forever with long-finished events. `EventsManager.jsx` on the frontend uses this endpoint, not the public one.
 
 #### Media Cleanup
 
 `cleanup_unused_media` (`app/tasks.py`, runs weekly via APScheduler) has two passes:
 
-1. **`purge_old_event_photos()`** — for any event whose `ends_at` (or `starts_at` if it has no end time) is more than **30 days** in the past, deletes its photo file *and* clears `photo_url` in the same transaction. Without the DB-clearing half, an old event's page would show a broken image once the file is gone. Org logos are intentionally excluded — an org doesn't "end" the way an event does, so there's no equivalent retention window.
+1. **`purge_old_event_photos()`** — for any event whose `ends_at` (or `starts_at` if it has no end time) is more than **30 days** in the past, deletes its photo file *and* clears `photo_url` in the same transaction, **unless** that same `photo_url` is still referenced by a non-expired event (see photo reuse below) — in which case it's left alone entirely, since deleting the file would break the still-active event still pointing at it. Without the DB-clearing half, an old event's page would show a broken image once the file is gone. Org logos are intentionally excluded — an org doesn't "end" the way an event does, so there's no equivalent retention window.
+
+**Reusing an existing photo**: `GET /api/organizations/{id}/events/photos` (org admin) lists every distinct photo the org has ever uploaded for an event, most recent event first — including photos belonging to events that have themselves aged out of the Manage list. `POST .../events/{event_id}/photo/reuse` (body `{photo_url}`) points that event at an existing photo instead of uploading a new file, after checking the URL actually belongs to one of the org's own events (so an admin can't point at an arbitrary path). The frontend picker lives in `PhotoUploader.jsx` (the image-stack icon next to the camera icon in `EventsManager.jsx`). Because a photo can now be referenced by more than one event, cleanup treats `photo_url` as shared rather than 1:1 with the event that first uploaded it — see the retention note above.
 2. **Orphan sweep** — deletes any file in `media/logos/` or `media/events/` that isn't referenced by *any* row at all (covers deleted orgs/events, and old files left behind when a logo/photo gets replaced by a new upload).
 
 Both passes only run once a week, so a deleted/replaced file can linger up to ~7 days before actually being removed from disk — this is expected, not a bug.
@@ -535,6 +537,8 @@ Web Push (via VAPID + `pywebpush`) and an in-app notification center are both dr
 ### In-app notification center
 
 `Header.jsx` shows a bell icon with an unread-count badge (polls `GET /api/notifications/unread-count` every 30s while logged in) and links to `/notifications` (`Notifications.jsx`), which lists recent notifications and supports marking one or all as read. See the Notifications endpoints in [§8 Quick Reference](#8-quick-reference).
+
+Both `GET /api/notifications` and `/unread-count` only consider notifications created within `NOTIFICATION_RETENTION` (**30 days**) — older ones are excluded from the list and don't count toward the badge, though the rows themselves are never deleted from the `notifications` table.
 
 ### Debugging
 

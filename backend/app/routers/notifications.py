@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from pydantic import BaseModel
@@ -20,6 +20,11 @@ from app.config import settings
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/notifications", tags=["notifications"])
+
+# How far back the notification center looks — older notifications are
+# hidden from the list (and don't count toward unread-count) but are not
+# deleted from the DB.
+NOTIFICATION_RETENTION = timedelta(days=30)
 
 
 class SubscriptionKeys(BaseModel):
@@ -109,9 +114,10 @@ async def list_notifications(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
 ):
+    cutoff = datetime.now(timezone.utc) - NOTIFICATION_RETENTION
     result = await db.execute(
         select(Notification)
-        .where(Notification.user_id == user.id)
+        .where(Notification.user_id == user.id, Notification.created_at >= cutoff)
         .order_by(Notification.created_at.desc())
         .limit(50)
     )
@@ -123,10 +129,15 @@ async def get_unread_count(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
 ):
+    cutoff = datetime.now(timezone.utc) - NOTIFICATION_RETENTION
     result = await db.execute(
         select(func.count())
         .select_from(Notification)
-        .where(Notification.user_id == user.id, Notification.read_at.is_(None))
+        .where(
+            Notification.user_id == user.id,
+            Notification.read_at.is_(None),
+            Notification.created_at >= cutoff,
+        )
     )
     return {"count": result.scalar_one()}
 

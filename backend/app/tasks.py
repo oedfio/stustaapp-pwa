@@ -28,11 +28,24 @@ async def purge_old_event_photos():
     Deletes the photo file for any event that ended (or, if it has no
     ends_at, started) more than EVENT_PHOTO_RETENTION ago, and clears
     photo_url so the DB never points at a file that's no longer there.
+
+    A photo can be reused across events (see the events/{id}/photo/reuse
+    endpoint), so a stale event's file is only actually deleted once no
+    still-active event references the same photo_url — otherwise this
+    would delete a file out from under an event that's still using it.
     """
     cutoff = datetime.now(timezone.utc) - EVENT_PHOTO_RETENTION
     purged_count = 0
 
     async with AsyncSessionLocal() as db:
+        result = await db.execute(
+            select(Event.photo_url).where(
+                Event.photo_url.is_not(None),
+                func.coalesce(Event.ends_at, Event.starts_at) >= cutoff,
+            )
+        )
+        active_photo_urls = {row[0] for row in result.all()}
+
         result = await db.execute(
             select(Event).where(
                 Event.photo_url.is_not(None),
@@ -42,6 +55,9 @@ async def purge_old_event_photos():
         stale_events = result.scalars().all()
 
         for event in stale_events:
+            if event.photo_url in active_photo_urls:
+                continue  # still in use by a non-expired event — leave it alone
+
             full_path = os.path.join(settings.media_root, event.photo_url.removeprefix("/media/"))
             if os.path.exists(full_path):
                 os.remove(full_path)

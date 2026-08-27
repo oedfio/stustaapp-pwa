@@ -32,3 +32,12 @@ export const uploadEventPhoto = (orgId, eventId, file) => {
         { headers: { 'Content-Type': 'multipart/form-data' } }
     )
 }
+
+// Every distinct photo the org has ever uploaded for an event, most
+// recent first — lets a new/existing event reuse one instead of
+// re-uploading a duplicate file.
+export const getOrgEventPhotos = (orgId) =>
+    client.get(`/api/organizations/${orgId}/events/photos`)
+
+export const reuseEventPhoto = (orgId, eventId, photoUrl) =>
+    client.post(`/api/organizations/${orgId}/events/${eventId}/photo/reuse`, { photo_url: photoUrl })
