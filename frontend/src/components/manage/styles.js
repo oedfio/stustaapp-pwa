@@ -161,7 +161,7 @@ export const styles = {
         width: '64px',
         height: '64px',
         borderRadius: '12px',
-        objectFit: 'cover',
+        objectFit: 'contain',
         marginTop: '12px',
     },
     eventsList: {
@@ -243,7 +243,7 @@ export const styles = {
         width: '32px',
         height: '32px',
         borderRadius: '6px',
-        objectFit: 'cover',
+        objectFit: 'contain',
     },
     devOrgName: {
         flex: 1,

@@ -525,7 +525,7 @@ const styles = {
     width: '28px',
     height: '28px',
     borderRadius: '6px',
-    objectFit: 'cover',
+    objectFit: 'contain',
   },
   followName: {
     fontSize: '14px',

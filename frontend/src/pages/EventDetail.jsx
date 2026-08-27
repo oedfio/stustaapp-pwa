@@ -180,7 +180,7 @@ const styles = {
     width: '32px',
     height: '32px',
     borderRadius: '6px',
-    objectFit: 'cover',
+    objectFit: 'contain',
   },
   orgLogoPlaceholder: {
     width: '32px',

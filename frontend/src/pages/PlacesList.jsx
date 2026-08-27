@@ -61,7 +61,7 @@ export default function PlacesList() {
                                 <h2 style={styles.name}>{org.name}</h2>
                                 {org.location_name && (
                                     <p style={styles.location}>
-                                        <MapPin size={13} color="#555555" style={{ verticalAlign: '-2px', marginRight: '4px' }} />
+                                        <MapPin size={13} color="#d32f2f" style={{ verticalAlign: '-2px', marginRight: '4px' }} />
                                         {org.location_name}
                                     </p>
                                 )}
@@ -115,7 +115,7 @@ const styles = {
         width: '56px',
         height: '56px',
         borderRadius: '12px',
-        objectFit: 'cover',
+        objectFit: 'contain',
     },
     logoPlaceholder: {
         width: '56px',
@@ -141,7 +141,7 @@ const styles = {
     },
     location: {
         fontSize: '13px',
-        color: '#555555',
+        color: '#d32f2f',
         margin: '0 0 4px 0',
     },
     description: {
