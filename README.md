@@ -55,7 +55,7 @@ Deploys are git-based: the server pulls from GitHub over HTTPS and runs `deploy.
 
 ## What NOT to commit
 
-`.env`, `.env.local`, `venv/`, `node_modules/`, `dist/`, `logs/`, `*.log`, `__pycache__/`, `media/logos/`, `media/events/` — all gitignored. The last two are user-uploaded content (org logos, event photos), not source — they're populated at runtime via the upload API, not by deploys, so tracking them in git was always just a stale snapshot. `media/legend.jpg` is the one exception, since it's a real static asset the app references directly. Everything else, including `docker-compose.dev.yml`, `deploy.sh`, and `frontend/.env.production`, is safe to commit (no real secrets).
+`.env`, `.env.local`, `venv/`, `node_modules/`, `dist/`, `logs/`, `*.log`, `__pycache__/`, `CLAUDE.md`, `media/logos/`, `media/events/` — all gitignored. The last two are user-uploaded content (org logos, event photos), not source — they're populated at runtime via the upload API, not by deploys, so tracking them in git was always just a stale snapshot. `media/legend.jpg` is the one exception, since it's a real static asset the app references directly. Everything else, including `docker-compose.dev.yml`, `deploy.sh`, and `frontend/.env.production`, is safe to commit (no real secrets).
 
 ## Known limitations
 
