@@ -25,7 +25,8 @@ class Event(Base):
     ends_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     location: Mapped[str | None] = mapped_column(String, nullable=True)
     photo_url: Mapped[str | None] = mapped_column(String, nullable=True)
-    start_notification_sent: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    day_before_notification_sent: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    hour_before_notification_sent: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     recurrence: Mapped[RecurrenceType] = mapped_column(
         Enum(RecurrenceType),
         default=RecurrenceType.none,

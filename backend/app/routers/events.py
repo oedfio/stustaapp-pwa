@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from uuid import UUID
@@ -14,7 +14,6 @@ from app.models.event import Event
 from app.models.organization import Organization
 from app.models.user import User
 from app.schemas.event import EventCreate, EventUpdate, EventResponse, EventWithOrgResponse
-from app.routers.notifications import send_push_to_all
 
 import logging
 from sqlalchemy import or_, and_
@@ -152,7 +151,6 @@ async def list_org_events_for_management(
 async def create_event(
     org_id: UUID,
     payload: EventCreate,
-    background_tasks: BackgroundTasks,
     db: AsyncSession = Depends(get_db),
     user: User = Depends(require_org_admin),
 ):
@@ -167,16 +165,6 @@ async def create_event(
 
     result = await db.execute(select(Organization).where(Organization.id == org_id))
     org = result.scalar_one_or_none()
-
-    # Send push notification to all subscribed users
-    # Send push notification in the background — don't block the response
-    background_tasks.add_task(
-        send_push_to_all,
-        title=f"New event: {event.title}",
-        body=f"{org.name} just posted a new event",
-        url=f"/events/{event.id}",
-        org_id=org.id,
-    )
 
     logger.info(f"Event created: {event.title} by {user.email} in the organization {org.name}")
     return event

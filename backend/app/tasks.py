@@ -1,14 +1,17 @@
 import os
 import logging
-from sqlalchemy import select, text, func
+from sqlalchemy import select, text, func, or_
 from app.config import settings
 from app.database import AsyncSessionLocal
 from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 from app.models.event import Event
 from app.models.organization import Organization
 from app.routers.notifications import send_push_to_all
 
 logger = logging.getLogger(__name__)
+
+LOCAL_TZ = ZoneInfo("Europe/Berlin")
 
 MEDIA_DIRS = {
     "logos": os.path.join(settings.media_root, "logos"),
@@ -98,12 +101,13 @@ async def cleanup_unused_media():
 
     logger.info(f"Media cleanup complete — {deleted_count} files deleted")
 
-async def send_event_start_notifications():
+async def send_event_reminder_notifications():
     """
-    Runs every few minutes. Finds events that have started
-    (starts_at <= now) and haven't had their start notification sent yet.
+    Runs every few minutes. Sends two one-time reminder pushes per event:
+    one the day before at 18:00 Europe/Berlin, and one an hour before the
+    event starts. Events past their start time are no longer candidates.
     """
-    logger.info("Checking for events starting now")
+    logger.info("Checking for event reminders to send")
 
     async with AsyncSessionLocal() as db:
         now = datetime.now(timezone.utc)
@@ -112,20 +116,41 @@ async def send_event_start_notifications():
             select(Event, Organization)
             .join(Organization, Event.org_id == Organization.id)
             .where(
-                Event.starts_at <= now,
-                Event.start_notification_sent == False,
+                Event.starts_at > now,
+                or_(
+                    Event.day_before_notification_sent == False,
+                    Event.hour_before_notification_sent == False,
+                ),
             )
         )
         rows = result.all()
 
         for event, org in rows:
-            await send_push_to_all(
-                title=f"{event.title} is starting now!",
-                body=f"{org.name} — {event.location or ''}".strip(" —"),
-                url=f"/events/{event.id}",
-                org_id=org.id,
-            )
-            event.start_notification_sent = True
-            logger.info(f"Sent start notification for event {event.title}")
+            local_start = event.starts_at.astimezone(LOCAL_TZ)
+            day_before_trigger = datetime(
+                local_start.year, local_start.month, local_start.day,
+                18, 0, tzinfo=LOCAL_TZ,
+            ) - timedelta(days=1)
+
+            if not event.day_before_notification_sent and now >= day_before_trigger:
+                await send_push_to_all(
+                    title=f"Tomorrow: {event.title}",
+                    body=f"{org.name} — {event.location or ''}".strip(" —"),
+                    url=f"/events/{event.id}",
+                    org_id=org.id,
+                )
+                event.day_before_notification_sent = True
+                logger.info(f"Sent day-before reminder for event {event.title}")
+
+            hour_before_trigger = event.starts_at - timedelta(hours=1)
+            if not event.hour_before_notification_sent and now >= hour_before_trigger:
+                await send_push_to_all(
+                    title=f"{event.title} starts in an hour",
+                    body=f"{org.name} — {event.location or ''}".strip(" —"),
+                    url=f"/events/{event.id}",
+                    org_id=org.id,
+                )
+                event.hour_before_notification_sent = True
+                logger.info(f"Sent hour-before reminder for event {event.title}")
 
         await db.commit()
